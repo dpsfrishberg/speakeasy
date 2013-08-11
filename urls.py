@@ -16,7 +16,8 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
-    (r'^$', 'speakeasy_core.views.index'),
+    (r'^$', 'speakeasy_core.views.splash'),
+    (r'^articles$', 'speakeasy_core.views.index'),
     (r'^article/(?P<slug>\w+)$', 'speakeasy_core.views.article'),
     (r'^tree.json$', speakeasy_core_views.tree),
     (r'^article/(?P<slug>\w+)/article-nodes.json$', 'speakeasy_core.views.article_nodes'),
