@@ -97,6 +97,9 @@ def login_begin(request, template_name='openid/login.html',
 
     return render_openid_request(request, openid_request, return_to)
 
+def splash(request):
+    return render_to_response("splash.html")
+
 def index(request):
     articles = Article.objects.all()
     return render_to_response("index.html", {"articles": articles})
