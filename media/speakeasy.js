@@ -232,6 +232,16 @@ function viewModel() {
 	$('#comments-in-isotope').isotope( 'appended', $(el) );
     };
     
+    self.showBreadcrumb = function() {
+	$("html").addClass("inactive");
+	$("#breadcrumb").removeClass("inactive");
+    };
+    
+    self.hideBreadcrumb = function() {
+	$("#breadcrumb").addClass("inactive");
+	$("html").removeClass("inactive");
+    }
+    
     self.activeNodeTextareaId = ko.observable();
     self.activeNodeSubmitId = ko.observable();
     
@@ -280,6 +290,7 @@ $(function() {
 		});
 	
 	$(document).on('click', '.node, .breadcrumb-node', function(e) {
+			vm.showBreadcrumb();
 			var $button = $(e.target);
 			if (!$button.hasClass('node-button-open')) {
 				var $node = $button.closest('.node, .breadcrumb-node');
@@ -288,7 +299,12 @@ $(function() {
 			}			
 		});
 	
-	
+	$(document).on('click', '#breadcrumb', function(e) {
+		if (e.target != $('#breadcrumb').get(0)) return;
+		console.info("foo");
+		console.info(e);
+		vm.hideBreadcrumb();
+	});
 });
 
 
