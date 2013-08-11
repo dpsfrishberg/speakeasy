@@ -1,0 +1,39 @@
+body {
+    width: 966px;
+    margin: 0 auto;
+}
+#content {
+    width: 600px;
+}
+.article p {
+    overflow: visible;
+}
+
+.comments-wrapper {
+    padding: 0 4px;
+    display: none;
+}
+
+.comments-wrapper {
+    margin-right: -500px;
+    float: right;
+    border: 1px solid #000;
+    display: none;
+    background-color: white;
+    width: 300px;
+}
+.comment .comment {
+    margin-left: 24px;
+}
+
+
+/*.node:hover .comments-wrapper {
+    display: block;
+}
+
+.node:hover .comments-wrapper:empty {
+    display: none;
+}*/
+.node:hover {
+    text-decoration:underline;
+}

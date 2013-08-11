@@ -1,0 +1,3509 @@
+[
+    {
+        "pk": 19, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_logentry", 
+            "name": "Can add log entry", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_logentry", 
+            "name": "Can change log entry", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_logentry", 
+            "name": "Can delete log entry", 
+            "content_type": 7
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_group", 
+            "name": "Can add group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_message", 
+            "name": "Can add message", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_permission", 
+            "name": "Can add permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_user", 
+            "name": "Can add user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_group", 
+            "name": "Can change group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_message", 
+            "name": "Can change message", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_permission", 
+            "name": "Can change permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_user", 
+            "name": "Can change user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_group", 
+            "name": "Can delete group", 
+            "content_type": 2
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_message", 
+            "name": "Can delete message", 
+            "content_type": 4
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_permission", 
+            "name": "Can delete permission", 
+            "content_type": 1
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_user", 
+            "name": "Can delete user", 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_comment", 
+            "name": "Can add comment", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_commentflag", 
+            "name": "Can add comment flag", 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "can_moderate", 
+            "name": "Can moderate comments", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_comment", 
+            "name": "Can change comment", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_commentflag", 
+            "name": "Can change comment flag", 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_comment", 
+            "name": "Can delete comment", 
+            "content_type": 8
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_commentflag", 
+            "name": "Can delete comment flag", 
+            "content_type": 9
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_contenttype", 
+            "name": "Can add content type", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_contenttype", 
+            "name": "Can change content type", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_contenttype", 
+            "name": "Can delete content type", 
+            "content_type": 5
+        }
+    }, 
+    {
+        "pk": 59, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_association", 
+            "name": "Can add association", 
+            "content_type": 20
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_nonce", 
+            "name": "Can add nonce", 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 62, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_useropenid", 
+            "name": "Can add user open id", 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 60, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_association", 
+            "name": "Can change association", 
+            "content_type": 20
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_nonce", 
+            "name": "Can change nonce", 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 63, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_useropenid", 
+            "name": "Can change user open id", 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_association", 
+            "name": "Can delete association", 
+            "content_type": 20
+        }
+    }, 
+    {
+        "pk": 58, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_nonce", 
+            "name": "Can delete nonce", 
+            "content_type": 19
+        }
+    }, 
+    {
+        "pk": 64, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_useropenid", 
+            "name": "Can delete user open id", 
+            "content_type": 21
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_session", 
+            "name": "Can add session", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_session", 
+            "name": "Can change session", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_session", 
+            "name": "Can delete session", 
+            "content_type": 6
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_site", 
+            "name": "Can add site", 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_site", 
+            "name": "Can change site", 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_site", 
+            "name": "Can delete site", 
+            "content_type": 18
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_article", 
+            "name": "Can add article", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_articlenode", 
+            "name": "Can add article node", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_commentnode", 
+            "name": "Can add comment node", 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_node", 
+            "name": "Can add node", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_speakeasycomment", 
+            "name": "Can add speakeasy comment", 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_article", 
+            "name": "Can change article", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_articlenode", 
+            "name": "Can change article node", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_commentnode", 
+            "name": "Can change comment node", 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_node", 
+            "name": "Can change node", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_speakeasycomment", 
+            "name": "Can change speakeasy comment", 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_article", 
+            "name": "Can delete article", 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_articlenode", 
+            "name": "Can delete article node", 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 52, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_commentnode", 
+            "name": "Can delete comment node", 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_node", 
+            "name": "Can delete node", 
+            "content_type": 11
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_speakeasycomment", 
+            "name": "Can delete speakeasy comment", 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "add_threadedcomment", 
+            "name": "Can add Threaded comment", 
+            "content_type": 15
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "change_threadedcomment", 
+            "name": "Can change Threaded comment", 
+            "content_type": 15
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "auth.permission", 
+        "fields": {
+            "codename": "delete_threadedcomment", 
+            "name": "Can delete Threaded comment", 
+            "content_type": 15
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "admin", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": 1, 
+            "is_superuser": 1, 
+            "is_staff": 1, 
+            "last_login": "2013-02-24 13:42:04", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$7f6ed$f8293642b5df332acc70014c114b49e5ee14b264", 
+            "email": "danielpfrishberg@gmail.com", 
+            "date_joined": "2012-09-16 15:59:49"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "user1", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": 1, 
+            "is_superuser": 0, 
+            "is_staff": 0, 
+            "last_login": "2012-12-02 09:40:42", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$c07dc$10cf23e2fa5f7f9eb500f3d0d7179048f19ac642", 
+            "email": "", 
+            "date_joined": "2012-12-02 09:40:42"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "danielpfrishberg@gmail.com", 
+            "first_name": "Daniel", 
+            "last_name": "Frishberg", 
+            "is_active": 1, 
+            "is_superuser": 0, 
+            "is_staff": 0, 
+            "last_login": "2013-02-24 11:18:54", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "", 
+            "email": "", 
+            "date_joined": "2013-02-10 11:16:43"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "openiduser", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": 1, 
+            "is_superuser": 0, 
+            "is_staff": 0, 
+            "last_login": "2013-02-10 10:17:18", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "!", 
+            "email": "", 
+            "date_joined": "2013-02-10 10:16:21"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "frishsticks@gmail.com", 
+            "first_name": "Daniel", 
+            "last_name": "Frishberg", 
+            "is_active": 1, 
+            "is_superuser": 0, 
+            "is_staff": 0, 
+            "last_login": "2013-02-10 12:19:09", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "", 
+            "email": "", 
+            "date_joined": "2013-02-10 12:19:09"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "igheyu@gmail.com", 
+            "first_name": "Isaac", 
+            "last_name": "Gendelman", 
+            "is_active": 1, 
+            "is_superuser": 0, 
+            "is_staff": 0, 
+            "last_login": "2013-02-24 13:00:34", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "", 
+            "email": "", 
+            "date_joined": "2013-02-10 13:55:44"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "article", 
+            "name": "article", 
+            "app_label": "speakeasy_core"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "articlenode", 
+            "name": "article node", 
+            "app_label": "speakeasy_core"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "association", 
+            "name": "association", 
+            "app_label": "django_openid_auth"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "comment", 
+            "name": "comment", 
+            "app_label": "comments"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "commentflag", 
+            "name": "comment flag", 
+            "app_label": "comments"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "commentnode", 
+            "name": "comment node", 
+            "app_label": "speakeasy_core"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "contenttype", 
+            "name": "content type", 
+            "app_label": "contenttypes"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "group", 
+            "name": "group", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "logentry", 
+            "name": "log entry", 
+            "app_label": "admin"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "message", 
+            "name": "message", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "node", 
+            "name": "node", 
+            "app_label": "speakeasy_core"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "nonce", 
+            "name": "nonce", 
+            "app_label": "django_openid_auth"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "permission", 
+            "name": "permission", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "session", 
+            "name": "session", 
+            "app_label": "sessions"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "site", 
+            "name": "site", 
+            "app_label": "sites"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "speakeasycomment", 
+            "name": "speakeasy comment", 
+            "app_label": "speakeasy_core"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "threadedcomment", 
+            "name": "Threaded comment", 
+            "app_label": "threadedcomments"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "user", 
+            "name": "user", 
+            "app_label": "auth"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "contenttypes.contenttype", 
+        "fields": {
+            "model": "useropenid", 
+            "name": "user open id", 
+            "app_label": "django_openid_auth"
+        }
+    }, 
+    {
+        "pk": "19a70c16be74bb5fa516ca5432b05b0d", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-23 17:19:42", 
+            "session_data": "gAJ9cQEoVQZPUEVOSURxAn1xA1UhX3lhZGlzX3NlcnZpY2VzX19vcGVuaWRfY29uc3VtZXJfcQRj\nb3BlbmlkLnlhZGlzLm1hbmFnZXIKWWFkaXNTZXJ2aWNlTWFuYWdlcgpxBSmBcQZ9cQcoVQhzZXJ2\naWNlc3EIXXEJVQl5YWRpc191cmxxClUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHELVQxzdGFydGluZ191cmxxDFUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHENVQtzZXNzaW9uX2tleXEOaARVCF9jdXJyZW50cQ9jb3BlbmlkLmNvbnN1bWVyLmRpc2Nv\ndmVyCk9wZW5JRFNlcnZpY2VFbmRwb2ludApxECmBcRF9cRIoVQpjbGFpbWVkX2lkcRNOVRJkaXNw\nbGF5X2lkZW50aWZpZXJxFE5VCnNlcnZlcl91cmxxFVUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9h\nY2NvdW50cy9vOC91ZHEWVQtjYW5vbmljYWxJRHEXTlUIbG9jYWxfaWRxGE5VCXR5cGVfdXJpc3EZ\nXXEaKFUnaHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvYXV0aC8yLjAvc2VydmVycRtVHGh0dHA6Ly9v\ncGVuaWQubmV0L3Nydi9heC8xLjBxHFU0aHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvZXh0ZW5zaW9u\ncy91aS8xLjAvbW9kZS9wb3B1cHEdVS5odHRwOi8vc3BlY3Mub3BlbmlkLm5ldC9leHRlbnNpb25z\nL3VpLzEuMC9pY29ucR5VK2h0dHA6Ly9zcGVjcy5vcGVuaWQubmV0L2V4dGVuc2lvbnMvcGFwZS8x\nLjBxH2VVCnVzZWRfeWFkaXNxIIh1YnVic1UKdGVzdGNvb2tpZXEhVQZ3b3JrZWRxInUuYmNhOWU1\nMGE5YjVhY2Q3NjAzMzFkMDFjOGJlNDBlMDI=\n"
+        }
+    }, 
+    {
+        "pk": "3522dab6078eae7173b798eb3deacaaf", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2012-09-30 16:04:08", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEEigEBdS5hNjA0MzQxMWRkMzA3OWVjZGVj\nM2Y0OGY5MDY1ZjExOA==\n"
+        }
+    }, 
+    {
+        "pk": "9549d1d8eff728e533faf4109264edbc", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2012-11-28 20:55:08", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEEigEBdS5hNjA0MzQxMWRkMzA3OWVjZGVj\nM2Y0OGY5MDY1ZjExOA==\n"
+        }
+    }, 
+    {
+        "pk": "b8fb9152c0dc30b8ae51a52081d0b7c0", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2012-12-16 09:40:23", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEEigEBdS5hNjA0MzQxMWRkMzA3OWVjZGVj\nM2Y0OGY5MDY1ZjExOA==\n"
+        }
+    }, 
+    {
+        "pk": "c9103255fbc93dcb50743b7ded333a70", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2012-12-27 18:54:37", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEEigEBdS5hNjA0MzQxMWRkMzA3OWVjZGVj\nM2Y0OGY5MDY1ZjExOA==\n"
+        }
+    }, 
+    {
+        "pk": "f55571fc5080b15a8d5642c22e26a3ec", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-01-27 10:09:37", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEEigEBdS5hNjA0MzQxMWRkMzA3OWVjZGVj\nM2Y0OGY5MDY1ZjExOA==\n"
+        }
+    }, 
+    {
+        "pk": "c41736ff5dd169b0c0532f8a0915b759", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-23 17:23:47", 
+            "session_data": "gAJ9cQEoVQZPUEVOSURxAn1xA1UKdGVzdGNvb2tpZXEEVQZ3b3JrZWRxBXUuNzEzZTc2NWU1MjY3\nNDAwNzk4MGM4OWY4ODZlZjgyZTM=\n"
+        }
+    }, 
+    {
+        "pk": "82f24273256b8f545be2615075d9f914", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-23 17:29:56", 
+            "session_data": "gAJ9cQFVBk9QRU5JRHECfXEDKFUhX3lhZGlzX3NlcnZpY2VzX19vcGVuaWRfY29uc3VtZXJfcQRj\nb3BlbmlkLnlhZGlzLm1hbmFnZXIKWWFkaXNTZXJ2aWNlTWFuYWdlcgpxBSmBcQZ9cQcoVQhzZXJ2\naWNlc3EIXXEJVQl5YWRpc191cmxxClUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHELVQxzdGFydGluZ191cmxxDFUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHENVQtzZXNzaW9uX2tleXEOaARVCF9jdXJyZW50cQ9jb3BlbmlkLmNvbnN1bWVyLmRpc2Nv\ndmVyCk9wZW5JRFNlcnZpY2VFbmRwb2ludApxECmBcRF9cRIoVQpjbGFpbWVkX2lkcRNOVRJkaXNw\nbGF5X2lkZW50aWZpZXJxFE5VCnNlcnZlcl91cmxxFVUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9h\nY2NvdW50cy9vOC91ZHEWVQtjYW5vbmljYWxJRHEXTlUIbG9jYWxfaWRxGE5VCXR5cGVfdXJpc3EZ\nXXEaKFUnaHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvYXV0aC8yLjAvc2VydmVycRtVHGh0dHA6Ly9v\ncGVuaWQubmV0L3Nydi9heC8xLjBxHFU0aHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvZXh0ZW5zaW9u\ncy91aS8xLjAvbW9kZS9wb3B1cHEdVS5odHRwOi8vc3BlY3Mub3BlbmlkLm5ldC9leHRlbnNpb25z\nL3VpLzEuMC9pY29ucR5VK2h0dHA6Ly9zcGVjcy5vcGVuaWQubmV0L2V4dGVuc2lvbnMvcGFwZS8x\nLjBxH2VVCnVzZWRfeWFkaXNxIIh1YnViVRtfb3BlbmlkX2NvbnN1bWVyX2xhc3RfdG9rZW5xIWgR\ndXMuMGNhZDg5NTBkNmI1ZjQ2NTJiYjhiMWVkMzA0MGQ1YTE=\n"
+        }
+    }, 
+    {
+        "pk": "c1b2e803e52629a6d9e0f6d50aba6d19", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-25 15:20:03", 
+            "session_data": "gAJ9cQFVBk9QRU5JRHECfXEDKFUhX3lhZGlzX3NlcnZpY2VzX19vcGVuaWRfY29uc3VtZXJfcQRj\nb3BlbmlkLnlhZGlzLm1hbmFnZXIKWWFkaXNTZXJ2aWNlTWFuYWdlcgpxBSmBcQZ9cQcoVQhzZXJ2\naWNlc3EIXXEJVQl5YWRpc191cmxxClUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHELVQxzdGFydGluZ191cmxxDFUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHENVQtzZXNzaW9uX2tleXEOaARVCF9jdXJyZW50cQ9jb3BlbmlkLmNvbnN1bWVyLmRpc2Nv\ndmVyCk9wZW5JRFNlcnZpY2VFbmRwb2ludApxECmBcRF9cRIoVQpjbGFpbWVkX2lkcRNOVRJkaXNw\nbGF5X2lkZW50aWZpZXJxFE5VCnNlcnZlcl91cmxxFVUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9h\nY2NvdW50cy9vOC91ZHEWVQtjYW5vbmljYWxJRHEXTlUIbG9jYWxfaWRxGE5VCXR5cGVfdXJpc3EZ\nXXEaKFUnaHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvYXV0aC8yLjAvc2VydmVycRtVHGh0dHA6Ly9v\ncGVuaWQubmV0L3Nydi9heC8xLjBxHFU0aHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvZXh0ZW5zaW9u\ncy91aS8xLjAvbW9kZS9wb3B1cHEdVS5odHRwOi8vc3BlY3Mub3BlbmlkLm5ldC9leHRlbnNpb25z\nL3VpLzEuMC9pY29ucR5VK2h0dHA6Ly9zcGVjcy5vcGVuaWQubmV0L2V4dGVuc2lvbnMvcGFwZS8x\nLjBxH2VVCnVzZWRfeWFkaXNxIIh1YnViVRtfb3BlbmlkX2NvbnN1bWVyX2xhc3RfdG9rZW5xIWgR\ndXMuMGNhZDg5NTBkNmI1ZjQ2NTJiYjhiMWVkMzA0MGQ1YTE=\n"
+        }
+    }, 
+    {
+        "pk": "0e9c5945234ff55be839eeb7541831e4", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-24 12:19:13", 
+            "session_data": "gAJ9cQEuZGQxYjViMzRkNzBkMTk0OTQwNmU3ZjBmODM5ODRkNWQ=\n"
+        }
+    }, 
+    {
+        "pk": "c558070fab82347762c391c3a61fa476", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-24 13:56:13", 
+            "session_data": "gAJ9cQEuZGQxYjViMzRkNzBkMTk0OTQwNmU3ZjBmODM5ODRkNWQ=\n"
+        }
+    }, 
+    {
+        "pk": "4d6b57e95301374e498bb57b46fd999b", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-24 16:13:41", 
+            "session_data": "gAJ9cQFVBk9QRU5JRHECfXEDKFUhX3lhZGlzX3NlcnZpY2VzX19vcGVuaWRfY29uc3VtZXJfcQRj\nb3BlbmlkLnlhZGlzLm1hbmFnZXIKWWFkaXNTZXJ2aWNlTWFuYWdlcgpxBSmBcQZ9cQcoVQhzZXJ2\naWNlc3EIXXEJVQl5YWRpc191cmxxClUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHELVQxzdGFydGluZ191cmxxDFUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHENVQtzZXNzaW9uX2tleXEOaARVCF9jdXJyZW50cQ9jb3BlbmlkLmNvbnN1bWVyLmRpc2Nv\ndmVyCk9wZW5JRFNlcnZpY2VFbmRwb2ludApxECmBcRF9cRIoVQpjbGFpbWVkX2lkcRNOVRJkaXNw\nbGF5X2lkZW50aWZpZXJxFE5VCnNlcnZlcl91cmxxFVUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9h\nY2NvdW50cy9vOC91ZHEWVQtjYW5vbmljYWxJRHEXTlUIbG9jYWxfaWRxGE5VCXR5cGVfdXJpc3EZ\nXXEaKFUnaHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvYXV0aC8yLjAvc2VydmVycRtVHGh0dHA6Ly9v\ncGVuaWQubmV0L3Nydi9heC8xLjBxHFU0aHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvZXh0ZW5zaW9u\ncy91aS8xLjAvbW9kZS9wb3B1cHEdVS5odHRwOi8vc3BlY3Mub3BlbmlkLm5ldC9leHRlbnNpb25z\nL3VpLzEuMC9pY29ucR5VK2h0dHA6Ly9zcGVjcy5vcGVuaWQubmV0L2V4dGVuc2lvbnMvcGFwZS8x\nLjBxH2VVCnVzZWRfeWFkaXNxIIh1YnViVRtfb3BlbmlkX2NvbnN1bWVyX2xhc3RfdG9rZW5xIWgR\ndXMuMGNhZDg5NTBkNmI1ZjQ2NTJiYjhiMWVkMzA0MGQ1YTE=\n"
+        }
+    }, 
+    {
+        "pk": "b8caa03a9b93d2675fe924d168f1b82a", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-02-25 18:20:28", 
+            "session_data": "gAJ9cQEoVQZPUEVOSURxAn1xA1USX2F1dGhfdXNlcl9iYWNrZW5kcQRVIXNwZWFrZWFzeV9jb3Jl\nLmF1dGguR29vZ2xlQmFja2VuZHEFVQ1fYXV0aF91c2VyX2lkcQaKAQZ1LmRiOWQ4MmJmZThmZWFh\nODU2YjMyOGRjM2JjNWMwYmUy\n"
+        }
+    }, 
+    {
+        "pk": "5c0d5b444b5664b070e7a27e11aa6ec9", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-03-05 21:45:41", 
+            "session_data": "gAJ9cQFVBk9QRU5JRHECfXEDKFUhX3lhZGlzX3NlcnZpY2VzX19vcGVuaWRfY29uc3VtZXJfcQRj\nb3BlbmlkLnlhZGlzLm1hbmFnZXIKWWFkaXNTZXJ2aWNlTWFuYWdlcgpxBSmBcQZ9cQcoVQhzZXJ2\naWNlc3EIXXEJVQl5YWRpc191cmxxClUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHELVQxzdGFydGluZ191cmxxDFUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHENVQtzZXNzaW9uX2tleXEOaARVCF9jdXJyZW50cQ9jb3BlbmlkLmNvbnN1bWVyLmRpc2Nv\ndmVyCk9wZW5JRFNlcnZpY2VFbmRwb2ludApxECmBcRF9cRIoVQpjbGFpbWVkX2lkcRNOVRJkaXNw\nbGF5X2lkZW50aWZpZXJxFE5VCnNlcnZlcl91cmxxFVUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9h\nY2NvdW50cy9vOC91ZHEWVQtjYW5vbmljYWxJRHEXTlUIbG9jYWxfaWRxGE5VCXR5cGVfdXJpc3EZ\nXXEaKFUnaHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvYXV0aC8yLjAvc2VydmVycRtVHGh0dHA6Ly9v\ncGVuaWQubmV0L3Nydi9heC8xLjBxHFU0aHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvZXh0ZW5zaW9u\ncy91aS8xLjAvbW9kZS9wb3B1cHEdVS5odHRwOi8vc3BlY3Mub3BlbmlkLm5ldC9leHRlbnNpb25z\nL3VpLzEuMC9pY29ucR5VK2h0dHA6Ly9zcGVjcy5vcGVuaWQubmV0L2V4dGVuc2lvbnMvcGFwZS8x\nLjBxH2VVCnVzZWRfeWFkaXNxIIh1YnViVRtfb3BlbmlkX2NvbnN1bWVyX2xhc3RfdG9rZW5xIWgR\ndXMuMGNhZDg5NTBkNmI1ZjQ2NTJiYjhiMWVkMzA0MGQ1YTE=\n"
+        }
+    }, 
+    {
+        "pk": "bd7e87246da6fb4861d8ce200bb5d269", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-03-02 16:15:20", 
+            "session_data": "gAJ9cQEoVQZPUEVOSURxAn1xA1USX2F1dGhfdXNlcl9iYWNrZW5kcQRVIXNwZWFrZWFzeV9jb3Jl\nLmF1dGguR29vZ2xlQmFja2VuZHEFVQ1fYXV0aF91c2VyX2lkcQaKAQZ1LmRiOWQ4MmJmZThmZWFh\nODU2YjMyOGRjM2JjNWMwYmUy\n"
+        }
+    }, 
+    {
+        "pk": "e06f885b88a18ea19e31164a3506e62c", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-03-09 00:34:29", 
+            "session_data": "gAJ9cQFVBk9QRU5JRHECfXEDKFUhX3lhZGlzX3NlcnZpY2VzX19vcGVuaWRfY29uc3VtZXJfcQRj\nb3BlbmlkLnlhZGlzLm1hbmFnZXIKWWFkaXNTZXJ2aWNlTWFuYWdlcgpxBSmBcQZ9cQcoVQhzZXJ2\naWNlc3EIXXEJVQl5YWRpc191cmxxClUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHELVQxzdGFydGluZ191cmxxDFUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9hY2NvdW50cy9v\nOC9pZHENVQtzZXNzaW9uX2tleXEOaARVCF9jdXJyZW50cQ9jb3BlbmlkLmNvbnN1bWVyLmRpc2Nv\ndmVyCk9wZW5JRFNlcnZpY2VFbmRwb2ludApxECmBcRF9cRIoVQpjbGFpbWVkX2lkcRNOVRJkaXNw\nbGF5X2lkZW50aWZpZXJxFE5VCnNlcnZlcl91cmxxFVUlaHR0cHM6Ly93d3cuZ29vZ2xlLmNvbS9h\nY2NvdW50cy9vOC91ZHEWVQtjYW5vbmljYWxJRHEXTlUIbG9jYWxfaWRxGE5VCXR5cGVfdXJpc3EZ\nXXEaKFUnaHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvYXV0aC8yLjAvc2VydmVycRtVHGh0dHA6Ly9v\ncGVuaWQubmV0L3Nydi9heC8xLjBxHFU0aHR0cDovL3NwZWNzLm9wZW5pZC5uZXQvZXh0ZW5zaW9u\ncy91aS8xLjAvbW9kZS9wb3B1cHEdVS5odHRwOi8vc3BlY3Mub3BlbmlkLm5ldC9leHRlbnNpb25z\nL3VpLzEuMC9pY29ucR5VK2h0dHA6Ly9zcGVjcy5vcGVuaWQubmV0L2V4dGVuc2lvbnMvcGFwZS8x\nLjBxH2VVCnVzZWRfeWFkaXNxIIh1YnViVRtfb3BlbmlkX2NvbnN1bWVyX2xhc3RfdG9rZW5xIWgR\ndXMuMGNhZDg5NTBkNmI1ZjQ2NTJiYjhiMWVkMzA0MGQ1YTE=\n"
+        }
+    }, 
+    {
+        "pk": "b517aa08e5058b9246eda70fecd8ea7a", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-03-10 13:36:18", 
+            "session_data": "gAJ9cQFVCnRlc3Rjb29raWVxAlUGd29ya2VkcQNzLmZhMjcyMWY2NGEwOGYxNTBkNTZkMmY0ZjIy\nYzc1MmFm\n"
+        }
+    }, 
+    {
+        "pk": "b8bf7c569c1f263b75e06c48c49f17cc", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-03-10 13:36:58", 
+            "session_data": "gAJ9cQFVCnRlc3Rjb29raWVxAlUGd29ya2VkcQNzLmZhMjcyMWY2NGEwOGYxNTBkNTZkMmY0ZjIy\nYzc1MmFm\n"
+        }
+    }, 
+    {
+        "pk": "0acef3b455b41ba939505c4596168fb6", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-03-10 13:42:04", 
+            "session_data": "gAJ9cQEoVRJfYXV0aF91c2VyX2JhY2tlbmRxAlUpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5k\ncy5Nb2RlbEJhY2tlbmRxA1UNX2F1dGhfdXNlcl9pZHEEigEBdS5hNjA0MzQxMWRkMzA3OWVjZGVj\nM2Y0OGY5MDY1ZjExOA==\n"
+        }
+    }, 
+    {
+        "pk": "f11f15817a2a5bf74a49d004fb253eb5", 
+        "model": "sessions.session", 
+        "fields": {
+            "expire_date": "2013-03-10 13:00:34", 
+            "session_data": "gAJ9cQEoVQZPUEVOSURxAn1xA1USX2F1dGhfdXNlcl9iYWNrZW5kcQRVIXNwZWFrZWFzeV9jb3Jl\nLmF1dGguR29vZ2xlQmFja2VuZHEFVQ1fYXV0aF91c2VyX2lkcQaKAQZ1LmRiOWQ4MmJmZThmZWFh\nODU2YjMyOGRjM2JjNWMwYmUy\n"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "sites.site", 
+        "fields": {
+            "domain": "example.com", 
+            "name": "example.com"
+        }
+    }, 
+    {
+        "pk": 84, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "100", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 85, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "99", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 86, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "98", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 87, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "97", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 88, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "96", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 89, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "95", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 90, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "94", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 91, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "93", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 92, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "92", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 93, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "91", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 94, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "90", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 95, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "89", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 96, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "88", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 97, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "87", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 98, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "86", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 99, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "85", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 100, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "84", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 101, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "83", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 102, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "82", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 103, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "81", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 104, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "80", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 105, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "79", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 106, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "78", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 107, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "77", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 108, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "76", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 109, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "75", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 110, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "74", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 111, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "73", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 112, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "72", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 113, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "71", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 114, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "70", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 115, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "69", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 116, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "68", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 117, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "67", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 118, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "66", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 119, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "65", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 120, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "64", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 121, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "63", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 122, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "62", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 123, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "61", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 124, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "60", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 125, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "59", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 126, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "58", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 127, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "57", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 128, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "56", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 129, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "55", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 130, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "54", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 131, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "53", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 132, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "52", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 133, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "51", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 134, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "50", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 135, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "49", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 136, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "48", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 137, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "47", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 138, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "46", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 139, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "45", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 140, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "44", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 141, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "43", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 142, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "42", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 143, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "41", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 144, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "40", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 145, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "39", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 146, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "38", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 147, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "37", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 148, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "36", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 149, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "35", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 150, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-02-24 13:44:07", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "34", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 83, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-01-13 10:48:52", 
+            "object_repr": "CommentNode object", 
+            "object_id": "44", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 82, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-01-13 10:47:54", 
+            "object_repr": "CommentNode object", 
+            "object_id": "43", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 81, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-01-13 10:47:33", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "36", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 80, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-01-13 10:19:01", 
+            "object_repr": "CommentNode object", 
+            "object_id": "42", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 79, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:18:35", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "35", 
+            "change_message": "Changed node.", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 78, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-01-13 10:18:09", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "35", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 77, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-01-13 10:17:45", 
+            "object_repr": "CommentNode object", 
+            "object_id": "41", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 76, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2013-01-13 10:17:22", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "34", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 75, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:16:38", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "16", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 74, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:16:28", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "15", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 73, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:16:21", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "14", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 72, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:16:11", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "13", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 71, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:15:50", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "12", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 70, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:15:42", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "11", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 69, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:15:31", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "2", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:15:23", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "1", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:14:49", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "1", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:14:36", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "2", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 65, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:14:24", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "11", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 64, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:14:14", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "12", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 63, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:14:01", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "13", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 62, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:13:40", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "14", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:13:30", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "15", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 60, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2013-01-13 10:12:46", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "16", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "33", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "32", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "31", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "30", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "29", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "28", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "27", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "26", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "25", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "24", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "23", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "22", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "21", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "20", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "19", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "18", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "17", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "16", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "15", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "14", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 52, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "13", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "12", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "11", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "9", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "8", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "3", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 58, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "2", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 59, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2013-01-13 10:09:59", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "1", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-12-13 21:09:51", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "10", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-12-13 21:09:35", 
+            "object_repr": "CommentNode object", 
+            "object_id": "17", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-12-13 20:16:18", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "16", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2012-12-13 20:16:14", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "15", 
+            "change_message": "No fields changed.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-12-13 20:16:01", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "15", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-12-13 20:15:43", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "14", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-12-13 20:15:19", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "13", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-12-13 20:15:07", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "12", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-12-13 20:14:45", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "11", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2012-12-13 20:14:24", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "2", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2012-12-13 20:14:10", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "1", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 2, 
+            "action_time": "2012-12-12 22:05:59", 
+            "object_repr": "CommentNode object", 
+            "object_id": "9", 
+            "change_message": "Changed content.", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-12-12 21:54:40", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "4", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-12-12 21:54:13", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "7", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-12-12 21:54:13", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "6", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-12-12 21:54:13", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "5", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-12-12 21:53:11", 
+            "object_repr": "CommentNode object", 
+            "object_id": "8", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 3, 
+            "action_time": "2012-12-12 21:53:11", 
+            "object_repr": "CommentNode object", 
+            "object_id": "7", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-12-02 09:40:42", 
+            "object_repr": "user1", 
+            "object_id": "2", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 3
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:03:06", 
+            "object_repr": "CommentNode object", 
+            "object_id": "6", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:02:56", 
+            "object_repr": "CommentNode object", 
+            "object_id": "5", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:02:45", 
+            "object_repr": "CommentNode object", 
+            "object_id": "4", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:02:29", 
+            "object_repr": "CommentNode object", 
+            "object_id": "3", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 17
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:02:08", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "3", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:02:04", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "2", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:02:00", 
+            "object_repr": "SpeakeasyComment object", 
+            "object_id": "1", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 16
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:01:46", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "2", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:01:39", 
+            "object_repr": "ArticleNode object", 
+            "object_id": "1", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 12
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 21:01:34", 
+            "object_repr": "Article object", 
+            "object_id": "1", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 20:58:18", 
+            "object_repr": "Article object", 
+            "object_id": "1", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "admin.logentry", 
+        "fields": {
+            "action_flag": 1, 
+            "action_time": "2012-11-14 20:55:54", 
+            "object_repr": "Article object", 
+            "object_id": "1", 
+            "change_message": "", 
+            "user": 1, 
+            "content_type": 10
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360452140, 
+            "salt": "CP4zIaKT2KvBCA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360452161, 
+            "salt": "q7tzCksQF7W0rg", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360452210, 
+            "salt": "7plZFbEbVkHWpQ", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360452356, 
+            "salt": "2Xu1iV9WYZImxA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360452392, 
+            "salt": "rG_4jhz15wkFRw", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360452417, 
+            "salt": "GoI33bvYbtPLfg", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360452652, 
+            "salt": "vMsijSSooR-s8A", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360453034, 
+            "salt": "8e78dIDPSfyZ2Q", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360453065, 
+            "salt": "clVHtx1YAIWGUQ", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360453334, 
+            "salt": "UMnQFOUVpGhCRg", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360453478, 
+            "salt": "cn4NDGrvRyfATA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360453741, 
+            "salt": "rfhQrnH2klF9sw", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360453760, 
+            "salt": "otQfzqPva1M07g", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360453967, 
+            "salt": "-XI-uO9yHao1Ew", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360511891, 
+            "salt": "Fdc4AAznktfsjw", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360512001, 
+            "salt": "rZLptIax6DtnzA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360512014, 
+            "salt": "cf2O1y4KDxKs4g", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360512561, 
+            "salt": "9OGyvsV-sb0TsA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360512574, 
+            "salt": "jlRdjp5Y5hHOTA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360512631, 
+            "salt": "oeSef2IfkZIsuA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360512999, 
+            "salt": "8PEjSLbkFhAAnQ", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360513091, 
+            "salt": "3CZq2QH23tQM6A", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360513159, 
+            "salt": "mVswsy68HrwT0A", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360513197, 
+            "salt": "dtmJsD0Z9cX5ww", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360513217, 
+            "salt": "B39yvDxNIyDQmg", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 33, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360513238, 
+            "salt": "UYJXMK9uCczn_A", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360514672, 
+            "salt": "KJzKijwaulhSNA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360514947, 
+            "salt": "-nv_KrMg9FuSpA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360515012, 
+            "salt": "9aoSkiHtK8kgfA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360515628, 
+            "salt": "FZtLpFg_ultiXg", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360515686, 
+            "salt": "REOUp2H7bg5Ylg", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360515706, 
+            "salt": "d1Jqgs-fOD61zg", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 40, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360515936, 
+            "salt": "BQB9P84cJinx2g", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360516020, 
+            "salt": "ypulSVVryQs81Q", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360516196, 
+            "salt": "o6suzPF6MTwS1Q", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360516512, 
+            "salt": "Qt7j-4JcCjpqbA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360516759, 
+            "salt": "rgDW6uEdCewZfw", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360516824, 
+            "salt": "3hjuTye9dxn83g", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360519916, 
+            "salt": "zi6cC40-NEJNxQ", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360519942, 
+            "salt": "ov0SowRhGApUVw", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360525737, 
+            "salt": "UnD21bMJs7MaDA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360534639, 
+            "salt": "SylYy4nkv0JncA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360536762, 
+            "salt": "0PMimjoddEoK5w", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360621838, 
+            "salt": "uviuptDIG8H40A", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 52, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1360628019, 
+            "salt": "0703OXHanUwd2Q", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1361035055, 
+            "salt": "AAlYYYuVETvPDQ", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1361052505, 
+            "salt": "s5JfZOvJknlkwQ", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 55, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1361331407, 
+            "salt": "bZgo8pf3RUHY7Q", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1361725910, 
+            "salt": "_bF-Ppv0hm_3xA", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "django_openid_auth.nonce", 
+        "fields": {
+            "timestamp": 1361732010, 
+            "salt": "yXiPM8Pg-YoiIg", 
+            "server_url": "https://www.google.com/accounts/o8/ud"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "django_openid_auth.association", 
+        "fields": {
+            "handle": "AMlYA9WRo4EPT75ewAeoVbcLOJg70MUoz4Si4x9efOboFt4mQtn-L7kF", 
+            "issued": 1361726330, 
+            "server_url": "https://www.google.com/accounts/o8/ud", 
+            "assoc_type": "HMAC-SHA1", 
+            "secret": "l8fWb0BLl5E2MfdT325luC5XeGI=\n", 
+            "lifetime": 46800
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "django_openid_auth.useropenid", 
+        "fields": {
+            "display_id": "https://www.google.com/accounts/o8/id?id=AItOawnSwiFyrF4IE0DRUM0F2Iwsdg7v0mxwr6M", 
+            "claimed_id": "https://www.google.com/accounts/o8/id?id=AItOawnSwiFyrF4IE0DRUM0F2Iwsdg7v0mxwr6M", 
+            "user": 3
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "speakeasy_core.article", 
+        "fields": {}
+    }, 
+    {
+        "pk": 1, 
+        "model": "speakeasy_core.node", 
+        "fields": {
+            "content": "CAIRO\u2014An Egyptian court Sunday ordered a retrial of ousted president Hosni Mubarak, granting an appeal of the former autocrat\u2019s life sentence for failing to prevent the killing of more than 900 protesters during the 2011 uprising that ended his rule.\r\n\r\nSunday\u2019s court ruling also overturned convictions for Mubarak\u2019s former interior minister Habib al-Adly and six other security officials who stood trial alongside Mubarak last year. The latter six were acquitted,k but all will now be retried.\r\n"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "speakeasy_core.node", 
+        "fields": {
+            "content": "Many Egyptians have complained that the ousted president\u2019s earlier trial was deeply flawed, marred by political loyalties within the court and an inept prosecution. And some activists hailed the retrial order as a small victory.\r\n\r\n\u201cThe court\u2019s ruling is a resuscitation of the revolution,\u201d said Mohamed Adel, a leader of the 6th of April youth movement and one of the key organizers of the 2011 protests that led to Mubarak\u2019s fall.\r\n"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "speakeasy_core.node", 
+        "fields": {
+            "content": "The ruling is unlikely to spark a public outcry. None of the defendants will go free, due to other cases that are pending against them. And both the defense and the prosecution had appealed the sentences.\r\n"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "speakeasy_core.node", 
+        "fields": {
+            "content": "Egypt\u2019s first democratically elected president, Mohamed Morsi, called on the attorney general\u2019s office in November to open new investigations and trials for Mubarak, Adly and other ex-regime officials whose sentencing\u2014and for some, acquittals\u2014drew public anger for being too light.\r\n"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "speakeasy_core.node", 
+        "fields": {
+            "content": "Activists and legal experts said retrials present an important opportunity to examine broader evidence that they say was neglected during last year\u2019s trial by a prosecution that was headed by a Mubarak appointee.\r\n\r\nAn Egyptian fact-finding mission ordered by Morsi concluded earlier this month that Mubarak had watched the uprising unfold on a live TV feed from his palace.\r\n"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "speakeasy_core.node", 
+        "fields": {
+            "content": "But others complained that a retrial could open the door to even lighter sentencing for the former autocrat and his cronies. \u201cThis is an attempt to escape punishment because the general prosecution did not spend enough effort examining evidence,\u201d said Ahmed Ezzat, a lawyer with the Association for Freedom of Thought and Expression, an Egyptian legal NGO. \u201cIt means the criminal court\u2019s verdict against Mubarak and Adly was deficient,\u201d he said.\r\n"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "speakeasy_core.node", 
+        "fields": {
+            "content": "The state news agency MENA reported that upon hearing the verdict, \u201ca state of joy\u201d spread amongst Mubarak supporters who had gathered in the court\u2019s lobby for Sunday\u2019s proceedings.\r\n"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "speakeasy_core.node", 
+        "fields": {
+            "content": "Judge Ahmed Ali Abdel-Rahman also overturned convictions against Mubarak, his sons, and a close associate, Hussein Salem, on corruption charges.\r\n\r\nMubarak\u2019s sons Alaa and Gamal are also on trial for corruption.\r\n\r\n\r\n\r\nIngy Hassieb contributed to this report.\r\n\r\n"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "speakeasy_core.articlenode", 
+        "fields": {
+            "article": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "speakeasy_core.articlenode", 
+        "fields": {
+            "article": 1
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "speakeasy_core.articlenode", 
+        "fields": {
+            "article": 1
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "speakeasy_core.articlenode", 
+        "fields": {
+            "article": 1
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "speakeasy_core.articlenode", 
+        "fields": {
+            "article": 1
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "speakeasy_core.articlenode", 
+        "fields": {
+            "article": 1
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "speakeasy_core.articlenode", 
+        "fields": {
+            "article": 1
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "speakeasy_core.articlenode", 
+        "fields": {
+            "article": 1
+        }
+    }
+]

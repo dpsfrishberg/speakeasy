@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+    "http://www.w3.org/TR/html4/strict.dtd"
+    >
+<html lang="en">
+<head>
+    <link href ="/media/speakeasyhome.css" rel= "stylesheet" type= "text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+    <script type= "text/javascript" src="jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="isotopeuse.js"></script>
+
+		
+    <title> Speakeasy</title>
+</head>
+<body>
+    <div id="header">
+        <img id= "Sletter" src="http://i.imgur.com/XtqDmB2.png"/>
+        <span id="title">peakeasy</span>
+    </div>
+
+        <!--    <div class= "circle">
+		<!--<p>Make</p>
+		<p>Conversations</p>
+		<p>Dynamic!</p>-->
+	    <!--</div>-->-->
+	   
+	    
+
+
+
+    <div id= "buffer"></div>
+<div id= "left">
+    <div id="content">
+        <h2> What is Speakeasy?</h1>
+        <p>Welcome!</p>
+        <p>Speakeasy lets you   discuss as you read and work your way through a text, unlike normal comment systems that dump all the comments into one giant bucket at the end. </p>
+        <p>Additionally, when you comment using Speakeasy you can type just like you talk and think with your friends. Press 'enter' whenever you finish a thought and the opportunity to respond in a new tangent is created, just like a normal conversation.</p> 
+        <p>We don't have conversations in real life in a line, why should we online? Great conversations can't be contained or mapped into a structure - they are organic and complex. Speakeasy lets you comment in a way that makes room for conversations that can take the twists, tangents and asides that make great conversations memorable.</p>
+    </div>
+</div>
+<div id="right">
+    <div id="sorter" class="up">
+        <div class= "button">
+            newest
+        </div>
+        <div class= "button">
+            last name
+        </div>
+        <div class= "button">
+            first name
+        </div>
+        <div class= "button">
+            genre
+        </div>
+        <div class= "button">
+            comments
+        </div>
+    </div>
+    <div id="container" class="up">
+	{% for article in articles %}
+	    <div class="item">
+		<p style= "font-size: small;"> &nbsp;</p>
+	        <a href="/article/{{article.slug}}"><h3>{{article.slug}}</h3></a>
+		<p>***</p>
+	    </div>
+	{% endfor %}
+    </div>
+</div>
+    
+    
+  
+
+  <div id= "footer">
+  </div>
+</body>
+
+<script>
+    var vx = 6;
+var vy = 3;
+
+$(document).ready(function(){
+ $('.circle').each(function(e){
+    var height = 500;
+    var width = 500;
+    var top = Math.floor(Math.random()*height);
+    var left = Math.floor(Math.random()*width);
+    $(this).css('top', top);
+    $(this).css('left', left);
+    mover($(this)[0], $('body')[0]);
+});
+});
+
+function hitLR(el, bounding) {
+    if (el.offsetLeft <= 0 && vx < 0) {
+        vx = -1 * vx;
+    }
+    if ((el.offsetLeft + el.offsetWidth) >= bounding.offsetWidth) {
+        vx = -1 * vx;
+    }
+    if (el.offsetTop <= 0 && vy < 0) {
+        vy = -1 * vy;
+    }
+    if ((el.offsetTop + el.offsetHeight) >= bounding.offsetHeight) {
+        vy = -1 * vy;
+    }
+}
+
+function mover(el, bounding) {
+    hitLR(el, bounding);
+    el.style.left = el.offsetLeft + vx + 'px';
+    el.style.top = el.offsetTop + vy + 'px';
+    setTimeout(function() {
+        mover(el, bounding);
+    }, 50);
+}
+
+
+</script>
+
+<script> 
+//$(document).ready(function(){
+  //$("#Sletter").click(function(){
+    $("#content").slideDown(2500);
+//  });
+//});
+$("#sorter").slideDown(500);
+$("#container").slideDown(2000);
+</script>
+</html>
