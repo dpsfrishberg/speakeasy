@@ -1,7 +1,7 @@
-html {
+/*html {
     -moz-box-shadow: 0 0 40px 5px rgba(0,0,0,0.2)inset;
     -webkit-box-shadow: 0 0 40px 5px rgba(0,0,0,0.2)inset;
-    box-shadow: 0 0 40px 5px rgba(0,0,0,0.2) inset;
+    box-shadow: 0 0 40px 5px rgba(0,0,0,0.2) inset;*/
   
 }
 html.inactive, html.inactive body {
@@ -17,14 +17,14 @@ body {
     background-color: #669;
 }
 #content {
-    width: 400px;
+    width: 80%;
+    height: auto !important;
     color: #000;
     font-size: 12px;
     line-height: 15px;
     margin-right: 20px;
     padding-left: 12px;
     padding-right: 12px;
-    overflow-x:hidden !important ;
     border-right:  dashed grey 2px;
     
 }
@@ -264,10 +264,12 @@ a.node-button.node-button-open {
 
 }
 .node-num-comments {
-    font-size: 12px;
+    font-size: 14px;
     font-family: Copperplate;
     text-transform: uppercase;
     text-align: left;
+    font-weight: bold;
+    color: blue;
 }
 
 .node-num-comments-0 {
@@ -354,7 +356,8 @@ h2 {
 }
 
 #main {
-    width: 966px;
+    height: auto;
+    width: 700px;
     margin: 0 auto;
     background-color: #f3f2ee;
     position: relative;
@@ -365,6 +368,10 @@ h2 {
     -moz-box-shadow: -30px 0px 30px 0 rgba(0,0,0,0.5),30px 0px 30px 0 rgba(0,0,0,0.5);
     -webkit-box-shadow: -30px 0px 30px 0 rgba(0,0,0,0.5),30px 0px 30px 0 rgba(0,0,0,0.5);
     box-shadow: -30px 0px 30px 0 rgba(0,0,0,0.5),30px 0px 30px 0 rgba(0,0,0,0.5);
+    margin-top: 0px;
+    padding: 35px;
+    padding-top: 0px;
+    border-bottom: 20px solid black;
 
 
 }
@@ -376,14 +383,12 @@ h1, h2 {
 #header {
     background-color: black;
     font-size: 35px;
-    width: 968px;
+    width: 770px;
     height: 90px;
     color: white;
     text-align: center;
     text-transform: uppercase;
     font-family: Copperplate, sans-serif;
-    position: relative;
-    margin-left: -2px ;
     top: 0;
     /*border-bottom: 1px solid white;*/
     -moz-box-shadow: 0 -10px 60px 10px rgba(0,0,0,0.2);
@@ -391,6 +396,9 @@ h1, h2 {
     box-shadow: 0 -10px 60px 10px rgba(0,0,0,0.2);
 /*    border-right: 1px solid #666;
     border-left: 1px solid #666;*/
+    z-index: 98;
+    left: -1px;
+    margin: auto;
 }
 
 #Sletter {
@@ -407,6 +415,7 @@ h1, h2 {
     font-size: 60px;
     position: relative;
     top: -10px;
+    color: white;
     
 }
 
@@ -1161,6 +1170,10 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     width: 10px;
 }
 
+#innerwrap {
+    position: relative;
+}
+
 #breadcrumb {
     position: fixed;
     left: 0;
@@ -1169,6 +1182,8 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     height: 85%;
     padding: 15% 15%;
     background-color: rgba(0, 0, 0, 0.5);
+
+ 
 }
 
 #breadcrumb.inactive {
@@ -1177,4 +1192,53 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
 
 #comments-in-isotope, .comment-submit-form {
     width: 70%;
+}
+
+#right {
+    height: 22px;
+    width: 770px;
+    margin: auto;
+    opacity: .8;
+}
+
+#one {  background: #C09;}
+#two {  background: #90C;}
+#three {  background: #0C9;}
+#four {background: #843EED;}
+#five { background: #3DF596;}
+#six { background: #E5F2AE;}
+#seven { background: #AEF2E6;}
+#eight {  background: white;}
+#nine {  background: #C09;}
+#ten {  background: #90C;}
+#eleven {  background: #0C9;}
+#twelve {background: #843EED;}
+#thirteen { background: #3DF596;}
+#fourteen { background: #E5F2AE;}
+#fifteen { background: #AEF2E6;}
+#sixteen {  background: white;}
+
+.columncontainer {
+    display: inline !important;
+    height: 100%;
+    width: 6.25%;
+    margin: 0px;
+    position: relative;
+    float: left;
+}
+
+.a {
+    height: 100%;
+    width: 100%;
+    background: blue;
+    margin: 0px;
+    left: -2px;
+    z-index: 4;
+}
+
+.b {
+    height: 100%;
+    width: 100%;
+    background: black;
+    margin: 0px;
 }

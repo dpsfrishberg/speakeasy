@@ -14,19 +14,68 @@
 
 	</head>
 	<body>
-		
-		<div id="main">
-			 
+				 <div id="right">
+    <div class= "columncontainer">
+            <div id= "one" class= "a" ></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "two" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "three" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "four" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "five" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "six" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "seven" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "eight" class= "b"></div>
+    </div>
+        <div class= "columncontainer">
+            <div id= "nine" class= "a" ></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "ten" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "eleven" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "twelve" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "thirteen" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "fourteen" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "fifteen" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "sixteen" class= "b"></div>
+    </div>
+</div>
 		<div id="header">
-			<img alt="S" id= "Sletter" src="http://i.imgur.com/XtqDmB2.png"/>
-			<span id="title">peakeasy</span>
+			<a href= "http://www.speakeasycomments.com/articles"><img alt="S" id= "Sletter" src="http://i.imgur.com/XtqDmB2.png"/>
+			<span id="title">peakeasy</span></a>
 			{% if anonymous %}
 				<a id="login_button" href="/login?next=/article/{{article_slug}}">Log in</a>
 			{% else %}
 				<a id="logout_button" href="/logout?next=/article/{{article_slug}}">Log out</a>
 			{% endif %}
-			<a id= "backbutton" href= "http://www.speakeasycomments.com/"> Home </a>
+			
 		</div>
+		<div id="main">
+
 		
 		<div id="content">
 			<h2>Article Title</h2>
@@ -44,7 +93,7 @@
 			
 		</div>
 			<div class="clear"></div>
-			<div id= "footer"></div>
+			<!--<div id= "footer"></div>-->
 		</div>
   		
 		
@@ -98,7 +147,7 @@
   </script>
 
 			<div id="breadcrumb" class="inactive">
-			
+			<div id= "innerwrap">
 			<div id="comments-in-isotope" data-bind="template: {name: 'comment-template', foreach: activeNodeComments, afterAdd: commentAdded}">
 					
 					
@@ -110,7 +159,7 @@
 							<div class="node" data-bind="attr: {id: node_display_id}">
 								<p class="node-content" data-bind="text: content">
 								</p>
-								<a class="node-button" href="#"><span class="node-num-comments" data-bind="text: num_comments"></span></a>
+								<a class="node-button" href="#"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()}, text: num_comments"></span></a>
 								<div class="clear"></div>
 							</div>
 						</div>
@@ -119,13 +168,14 @@
 		</script>
 
 				<div class="comment-submit-form" data-bind="with: _activeNode">
-					<label data-bind="attr: {for: node_textarea_id}">Leave a response</label>
-					<p class="help">Separate your thoughts using the enter button. Your comment will be split up for others to respond to.</p>
+					<label data-bind="attr: {for: node_textarea_id}">Leave A Response</label>
+					<!--<p class="help">Separate your thoughts using the enter button. Your comment will be split up for others to respond to.</p>-->
 					<a href="http://www.igendelman.com/art/Speakeasy.gif">HELP!</a>
-					<textarea data-bind="attr: {id: node_textarea_id, name: node_textarea_id}" ></textarea>
+					<textarea placeholder= "Enter your text and separate your thoughts by pressing the 'enter' button" data-bind="attr: {id: node_textarea_id, name: node_textarea_id}" ></textarea>
 					<input type="submit" data-bind="attr: {id: node_submit_id, name: node_submit_id}" value="Submit"/>
 					<div class="clear"></div>
-				</div>						
+				</div>
+			</div>
 		</div>
 
 		

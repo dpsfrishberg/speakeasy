@@ -13,10 +13,7 @@
     <title> Speakeasy</title>
 </head>
 <body>
-    <div id="header">
-        <img id= "Sletter" src="http://i.imgur.com/XtqDmB2.png"/>
-        <span id="title">peakeasy</span>
-    </div>
+
 
         <!--    <div class= "circle">
 		<!--<p>Make</p>
@@ -28,17 +25,117 @@
 
 
 
-    <div id= "buffer"></div>
-<div id= "left">
-    <div id="content">
-        <h2> What is Speakeasy?</h1>
-        <p>Welcome!</p>
-        <p>Speakeasy lets you   discuss as you read and work your way through a text, unlike normal comment systems that dump all the comments into one giant bucket at the end. </p>
-        <p>Additionally, when you comment using Speakeasy you can type just like you talk and think with your friends. Press 'enter' whenever you finish a thought and the opportunity to respond in a new tangent is created, just like a normal conversation.</p> 
-        <p>We don't have conversations in real life in a line, why should we online? Great conversations can't be contained or mapped into a structure - they are organic and complex. Speakeasy lets you comment in a way that makes room for conversations that can take the twists, tangents and asides that make great conversations memorable.</p>
+   <!-- <div id= "buffer"></div>-->
+<div id= "colors">
+<div id="right">
+    <div class= "columncontainer">
+            <div id= "one" class= "a" ></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "two" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "three" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "four" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "five" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "six" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "seven" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "eight" class= "b"></div>
+    </div>
+        <div class= "columncontainer">
+            <div id= "nine" class= "a" ></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "ten" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "eleven" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "twelve" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "thirteen" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "fourteen" class= "b"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "fifteen" class= "a"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "sixteen" class= "b"></div>
     </div>
 </div>
-<div id="right">
+<div id= "mainagainagain">
+    <div class= "columncontainer">
+            <div id= "sevenc" class= "e" ></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "sixc" class= "f"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "fivec" class= "e"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "fourc" class= "f"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "threec" class= "e"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "twoc" class= "f"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "onec" class= "e"></div>
+    </div>
+            <div class= "columncontainer">
+            <div id= "ninec" class= "f" ></div>
+    </div>
+            <div class= "columncontainer">
+            <div id= "eightc" class= "e"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "tenc" class= "e"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "elevenc" class= "f"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "twelvec" class= "e"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "thirteenc" class= "f"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "fourteenc" class= "e"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "fifteenc" class= "e"></div>
+    </div>
+    <div class= "columncontainer">
+            <div id= "sixteenc" class= "f"></div>
+    </div>
+</div>
+</div>
+    <div id="header">
+<!--        <img id= "Sletter" src="http://i.imgur.com/XtqDmB2.png"/>-->
+    <div id= "whatis"> &nbsp; &nbsp; What is Speakeasy?</div>
+        <div id="title"><strong>Speakeasy:</strong> make conversations dynamic &nbsp;</div>
+    </div>
+   <!-- <div id= "left">
+    </div>-->
+    
     <div id="sorter" class="up">
         <div class= "button">
             newest
@@ -56,7 +153,14 @@
             comments
         </div>
     </div>
+    <div id= "content">
+	<p>Speakeasy lets you discuss as you read through a text, unlike normal comment systems that dump all the comments into one giant bucket at the end.</p>
+	<p>When you comment using Speakeasy you can type just like you talk and think with your friends. Press 'enter' whenever you finish a thought and the opportunity to respond in a new tangent is created.</p>
+	<p>Great conversations can't be mapped onto a structure - they are organic and complex. Speakeasy lets you comment in a way that makes room for the twists, tangents and asides that make great conversations memorable.</p>
+	<p>We don't have conversations in real life in a line, why should we online?</p>
+      </div>
     <div id="container" class="up">
+
 	{% for article in articles %}
 	    <div class="item">
 		<p style= "font-size: small;"> &nbsp;</p>
@@ -65,59 +169,16 @@
 	    </div>
 	{% endfor %}
     </div>
-</div>
+
     
     
   
 
-  <div id= "footer">
-  </div>
+<!--  <div id= "footer">
+  </div>-->
 </body>
 
-<script>
-    var vx = 6;
-var vy = 3;
-
-$(document).ready(function(){
- $('.circle').each(function(e){
-    var height = 500;
-    var width = 500;
-    var top = Math.floor(Math.random()*height);
-    var left = Math.floor(Math.random()*width);
-    $(this).css('top', top);
-    $(this).css('left', left);
-    mover($(this)[0], $('body')[0]);
-});
-});
-
-function hitLR(el, bounding) {
-    if (el.offsetLeft <= 0 && vx < 0) {
-        vx = -1 * vx;
-    }
-    if ((el.offsetLeft + el.offsetWidth) >= bounding.offsetWidth) {
-        vx = -1 * vx;
-    }
-    if (el.offsetTop <= 0 && vy < 0) {
-        vy = -1 * vy;
-    }
-    if ((el.offsetTop + el.offsetHeight) >= bounding.offsetHeight) {
-        vy = -1 * vy;
-    }
-}
-
-function mover(el, bounding) {
-    hitLR(el, bounding);
-    el.style.left = el.offsetLeft + vx + 'px';
-    el.style.top = el.offsetTop + vy + 'px';
-    setTimeout(function() {
-        mover(el, bounding);
-    }, 50);
-}
-
-
-</script>
-
-<script> 
+<!--<!--<script> 
 //$(document).ready(function(){
   //$("#Sletter").click(function(){
     $("#content").slideDown(2500);
@@ -125,5 +186,46 @@ function mover(el, bounding) {
 //});
 $("#sorter").slideDown(500);
 $("#container").slideDown(2000);
+</script>-->
+
+<script>
+    $("#whatis").click(function () {
+      $("#content").slideToggle("slow");
+    });
+    
+    $("#one").slideDown(500);
+    $("#two").slideDown(1000);
+    $("#three").slideDown(700);
+    $("#four").slideDown(1000);
+    $("#five").slideDown(500);
+    $("#six").slideDown(1500);
+    $("#seven").slideDown(700);
+    $("#eight").slideDown(1000);
+    $("#nine").slideDown(500);
+    $("#ten").slideDown(1500);
+    $("#eleven").slideDown(500);
+    $("#twelve").slideDown(1000);
+    $("#thirteen").slideDown(500);
+    $("#fourteen").slideDown(1500);
+    $("#fifteen").slideDown(700);
+    $("#sixteen").slideDown(500);
+    
+    $("#onec").slideUp(1500);
+    $("#twoc").slideUp(2000);
+    $("#threec").slideUp(1500);
+    $("#fourc").slideUp(2000);
+    $("#fivec").slideUp(1000);
+    $("#sixc").slideUp(2500);
+    $("#sevenc").slideUp(1500);
+    $("#eightc").slideUp(2000);
+    $("#ninec").slideUp(2500);
+    $("#tenc").slideUp(2000);
+    $("#elevenc").slideUp(1000);
+    $("#twelvec").slideUp(2000);
+    $("#thirteenc").slideUp(1000);
+    $("#fourteenc").slideUp(2500);
+    $("#fifteenc").slideUp(2000);
+    $("#sixteenc").slideUp(1500);
 </script>
+
 </html>
