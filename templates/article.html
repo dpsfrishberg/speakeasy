@@ -2,15 +2,14 @@
 	<head>
 		<title>Speakeasy</title>
 		<link rel="stylesheet" type="text/css" href="/media/speakeasy.css" />
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="/media/knockout-2.1.0.js"></script>
-		<script type="text/javascript">
+                <script type="text/javascript">
 			article_slug = '{{article_slug}}'  // Used by speakeasy.js; must be placed before speakeasy.js is included
 		</script>
 		<script type="text/javascript" src="/media/speakeasy.js"></script>
-		<script type= "text/javascript" src="/media/jquery.isotope.min.js"></script>
-		
+		<script type= "text/javascript" src="/media/jquery.isotope.min.js"></script>	
 
 	</head>
 	<body>
@@ -147,7 +146,6 @@
   </script>
 
 			<div id="breadcrumb" class="inactive">
-			<div id= "innerwrap">
 			<div id="comments-in-isotope" data-bind="template: {name: 'comment-template', foreach: activeNodeComments, afterAdd: commentAdded}">
 					
 					
@@ -169,16 +167,13 @@
 
 				<div class="comment-submit-form" data-bind="with: _activeNode">
 					<label data-bind="attr: {for: node_textarea_id}">Leave A Response</label>
-					<!--<p class="help">Separate your thoughts using the enter button. Your comment will be split up for others to respond to.</p>-->
 					<a href="http://www.igendelman.com/art/Speakeasy.gif">HELP!</a>
 					<textarea placeholder= "Enter your text and separate your thoughts by pressing the 'enter' button" data-bind="attr: {id: node_textarea_id, name: node_textarea_id}" ></textarea>
 					<input type="submit" data-bind="attr: {id: node_submit_id, name: node_submit_id}" value="Submit"/>
 					<div class="clear"></div>
-				</div>
 			</div>
-		</div>
+	</div>
 
-		
 		
 		
 	</body>

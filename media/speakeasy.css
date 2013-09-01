@@ -220,7 +220,7 @@ a.node-button.node-button-open {
     background-color: #669;
     border-radius: 8px;
     margin-top: 4px;
-    margin-bottom: 100px;
+    margin-bottom: 10%;
 }
 
 .comment-submit-form label, .comment-submit-form textarea, .comment-submit-form input {
@@ -502,7 +502,7 @@ h1, h2 {
 /* required for containers to inherit vertical size from window */
 html,
 body {
-  height: 100%;
+/*  height: 100%;*/
 }
 
 #container {
@@ -1179,11 +1179,13 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     left: 0;
     top: 0;
     width: 100%;
-    height: 85%;
-    padding: 15% 15%;
+    height: 100%;
+    padding: 0 15%;
     background-color: rgba(0, 0, 0, 0.5);
-
- 
+    z-index: 99999999;
+    overflow: scroll;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
 }
 
 #breadcrumb.inactive {
