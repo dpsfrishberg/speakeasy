@@ -26,6 +26,13 @@ class Node(models.Model):
             for node in CommentNode.objects.filter(comment=comment):
                 total += node.num_comments()
         return total
+    def content_teaser(self):
+        #return self.content
+        content = self.content
+        teaser = content[0:140]
+        if len(teaser) < len(content):
+            teaser += "..."
+        return teaser
 
 class ArticleNode(Node):
     pass

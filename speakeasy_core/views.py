@@ -184,7 +184,7 @@ def node_ancestors(request, slug=None):
             
             
             num_comments = node.num_comments()
-            obj['ancestors'].insert(0, {'id': parent_node.id, 'content': parent_node.content, 'num_comments': num_comments, 'user': user})
+            obj['ancestors'].insert(0, {'id': parent_node.id, 'content': parent_node.content_teaser(), 'num_comments': num_comments, 'user': user})
             node_id = parent_node.id
     return HttpResponse(json.dumps(obj), mimetype='application/javascript')
 
