@@ -389,11 +389,12 @@ h1, h2 {
     text-align: center;
     text-transform: uppercase;
     font-family: Copperplate, sans-serif;
+    text-decoration: none;
     top: 0;
     /*border-bottom: 1px solid white;*/
-    -moz-box-shadow: 0 -10px 60px 10px rgba(0,0,0,0.2);
-    -webkit-box-shadow: 0 -10px 60px 10px rgba(0,0,0,0.2);
-    box-shadow: 0 -10px 60px 10px rgba(0,0,0,0.2);
+    -moz-box-shadow: -30px 0px 30px 0 rgba(0,0,0,0.5),30px 0px 30px 0 rgba(0,0,0,0.5);
+    -webkit-box-shadow: -30px 0px 30px 0 rgba(0,0,0,0.5),30px 0px 30px 0 rgba(0,0,0,0.5);
+    box-shadow: -30px 0px 30px 0 rgba(0,0,0,0.5),30px 0px 30px 0 rgba(0,0,0,0.5);
 /*    border-right: 1px solid #666;
     border-left: 1px solid #666;*/
     z-index: 98;
@@ -406,6 +407,7 @@ h1, h2 {
     width: auto;
     position: relative;
     top: 10px;
+    text-decoration: none !important;
 }
 
 #title {
@@ -416,6 +418,7 @@ h1, h2 {
     position: relative;
     top: -10px;
     color: white;
+    text-decoration: none !important;
     
 }
 
@@ -1201,6 +1204,9 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     width: 770px;
     margin: auto;
     opacity: .8;
+    -moz-box-shadow: -30px 0px 30px 0 rgba(0,0,0,0.5),30px 0px 30px 0 rgba(0,0,0,0.5);
+    -webkit-box-shadow: -30px 0px 30px 0 rgba(0,0,0,0.5),30px 0px 30px 0 rgba(0,0,0,0.5);
+    box-shadow: -30px 0px 30px 0 rgba(0,0,0,0.5),30px 0px 30px 0 rgba(0,0,0,0.5);
 }
 
 #one {  background: #C09;}
