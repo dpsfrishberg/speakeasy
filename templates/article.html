@@ -13,56 +13,56 @@
 
 	</head>
 	<body>
-				 <div id="right">
-    <div class= "columncontainer">
-            <div id= "one" class= "a" ></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "two" class= "b"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "three" class= "a"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "four" class= "b"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "five" class= "a"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "six" class= "b"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "seven" class= "a"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "eight" class= "b"></div>
-    </div>
-        <div class= "columncontainer">
-            <div id= "nine" class= "a" ></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "ten" class= "b"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "eleven" class= "a"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "twelve" class= "b"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "thirteen" class= "a"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "fourteen" class= "b"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "fifteen" class= "a"></div>
-    </div>
-    <div class= "columncontainer">
-            <div id= "sixteen" class= "b"></div>
-    </div>
-</div>
+		<div id="colors">
+			<div class= "columncontainer">
+				<div id= "one" class= "a" ></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "two" class= "b"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "three" class= "a"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "four" class= "b"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "five" class= "a"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "six" class= "b"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "seven" class= "a"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "eight" class= "b"></div>
+			</div>
+			    <div class= "columncontainer">
+				<div id= "nine" class= "a" ></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "ten" class= "b"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "eleven" class= "a"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "twelve" class= "b"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "thirteen" class= "a"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "fourteen" class= "b"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "fifteen" class= "a"></div>
+			</div>
+			<div class= "columncontainer">
+				<div id= "sixteen" class= "b"></div>
+			</div>
+		</div> <!--end colors-->
 		<div id="header">
 			<a href= "http://www.speakeasycomments.com/articles"><img alt="S" id= "Sletter" src="http://i.imgur.com/XtqDmB2.png"/>
 			<span id="title">peakeasy</span></a>
@@ -74,8 +74,6 @@
 			
 		</div>
 		<div id="main">
-
-		
 		<div id="content">
 			<h2>Article Title</h2>
 			<hr>
@@ -92,16 +90,12 @@
 			
 		</div>
 			<div class="clear"></div>
-			<!--<div id= "footer"></div>-->
 		</div>
   		
 		
   <script>
     $(function(){
-    
       var $container = $('#comments-in-isotope');
-      
-    
       $container.isotope({
         masonry: {
           columnWidth: 10
@@ -145,11 +139,11 @@
     });
   </script>
 
-			<div id="breadcrumb" class="inactive">
-			<div id="comments-in-isotope" data-bind="template: {name: 'comment-template', foreach: activeNodeComments, afterAdd: commentAdded}">
-					
-					
-				</div>
+	<div id="breadcrumb" class="inactive"> <!--content for breadcrumb popup-->
+		<!--adding the comments-->
+		<div id="comments-in-isotope" data-bind="template: {name: 'comment-template', foreach: activeNodeComments, afterAdd: commentAdded}">
+		</div>
+		
 		<script type="text/html" id="comment-template">
 			<div data-bind="attr: {id: display_id, class: display_class}">
 						<div class="comment-user" data-bind="foreach: user"><span data-bind="text: first_name + '&#151;'"></span></div>
@@ -164,15 +158,15 @@
 						<div class="clear"></div>
 					</div>
 		</script>
-
-				<div class="comment-submit-form" data-bind="with: _activeNode">
+		<!--adding the submit box-->
+		<div class="comment-submit-form" data-bind="with: _activeNode">
 					<label data-bind="attr: {for: node_textarea_id}">Leave A Response</label>
 					<a href="http://www.igendelman.com/art/Speakeasy.gif">HELP!</a>
 					<textarea placeholder= "Enter your text and separate your thoughts by pressing the 'enter' button" data-bind="attr: {id: node_textarea_id, name: node_textarea_id}" ></textarea>
 					<input type="submit" data-bind="attr: {id: node_submit_id, name: node_submit_id}" value="Submit"/>
 					<div class="clear"></div>
-			</div>
-	</div>
+		</div>
+	</div> <!--end breadcrumb stuff-->
 
 		
 		
