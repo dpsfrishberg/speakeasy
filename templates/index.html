@@ -1,119 +1,19 @@
+{% load static %}
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
     "http://www.w3.org/TR/html4/strict.dtd"
     >
 <html lang="en">
 <head>
-    <link href ="/media/speakeasyhome.css" rel= "stylesheet" type= "text/css">
+    <link href ="{% static 'speakeasyhome.css' %}" rel= "stylesheet" type= "text/css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-    <script type= "text/javascript" src="jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="isotopeuse.js"></script>
+    <script src="{% static 'colors.js' %}" type="text/javascript"></script>
+    <script type= "text/javascript" src="{% static 'jquery.isotope.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'isotopeuse.js' %}"></script>
     <title> Speakeasy</title>
 </head>
 <body>
-<div id= "colors">
-    <div id="colorsdown">
-	<div class= "columncontainer">
-		<div id= "one" class= "a" ></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "two" class= "b"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "three" class= "a"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "four" class= "b"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "five" class= "a"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "six" class= "b"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "seven" class= "a"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "eight" class= "b"></div>
-	</div>
-	    <div class= "columncontainer">
-		<div id= "nine" class= "a" ></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "ten" class= "b"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "eleven" class= "a"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "twelve" class= "b"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "thirteen" class= "a"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "fourteen" class= "b"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "fifteen" class= "a"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "sixteen" class= "b"></div>
-	</div>
-    </div>  <!--end of colorsdown-->
-    <div id= "colorsup">
-	<div class= "columncontainer">
-		<div id= "sevenc" class= "e" ></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "sixc" class= "f"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "fivec" class= "e"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "fourc" class= "f"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "threec" class= "e"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "twoc" class= "f"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "onec" class= "e"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "ninec" class= "f" ></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "eightc" class= "e"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "tenc" class= "e"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "elevenc" class= "f"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "twelvec" class= "e"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "thirteenc" class= "f"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "fourteenc" class= "e"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "fifteenc" class= "e"></div>
-	</div>
-	<div class= "columncontainer">
-		<div id= "sixteenc" class= "f"></div>
-	</div>
-    </div> <!--end of colorsup-->
-</div>  <!--end of colors-->
-
+    {% include 'colors.html' %}
 <div id="banner">
     <div id="title"><strong>Speakeasy:</strong> make conversations dynamic &nbsp;</div>
 </div>
@@ -175,40 +75,4 @@
 </div> <!--end of pagebody-->
 </body>
 
-<!--code for color animation-->
-<script>
-    $("#one").slideDown(500);
-    $("#two").slideDown(1000);
-    $("#three").slideDown(700);
-    $("#four").slideDown(1000);
-    $("#five").slideDown(500);
-    $("#six").slideDown(1500);
-    $("#seven").slideDown(700);
-    $("#eight").slideDown(1000);
-    $("#nine").slideDown(500);
-    $("#ten").slideDown(1500);
-    $("#eleven").slideDown(500);
-    $("#twelve").slideDown(1000);
-    $("#thirteen").slideDown(500);
-    $("#fourteen").slideDown(1500);
-    $("#fifteen").slideDown(700);
-    $("#sixteen").slideDown(500);
-    
-    $("#onec").slideUp(1500);
-    $("#twoc").slideUp(2000);
-    $("#threec").slideUp(1500);
-    $("#fourc").slideUp(2000);
-    $("#fivec").slideUp(1000);
-    $("#sixc").slideUp(2500);
-    $("#sevenc").slideUp(1500);
-    $("#eightc").slideUp(2000);
-    $("#ninec").slideUp(2500);
-    $("#tenc").slideUp(2000);
-    $("#elevenc").slideUp(1000);
-    $("#twelvec").slideUp(2000);
-    $("#thirteenc").slideUp(1000);
-    $("#fourteenc").slideUp(2500);
-    $("#fifteenc").slideUp(2000);
-    $("#sixteenc").slideUp(1500);
-</script>
 </html>
