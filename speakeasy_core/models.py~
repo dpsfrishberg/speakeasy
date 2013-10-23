@@ -1,0 +1,29 @@
+from django.contrib import admin
+from django.db import models
+from speakeasy.threadedcomments import ThreadedComment
+# Create your models here.
+
+class Article(models.Model):
+    pass
+#body = models.TextField()
+    
+class Node(models.Model):
+    #position = models.IntegerField()
+    content = models.TextField()
+
+class ArticleNode(Node):
+    article = models.ForeignKey(Article)
+#    content = models.TextField()
+
+class SpeakeasyComment(models.Model):
+    node = models.ForeignKey(Node);
+
+class CommentNode(Node):
+    comment = models.ForeignKey(SpeakeasyComment)
+ #   content = models.TextField()
+
+admin.site.register(Article);
+admin.site.register(Node);
+admin.site.register(ArticleNode);
+admin.site.register(SpeakeasyComment);
+admin.site.register(CommentNode);

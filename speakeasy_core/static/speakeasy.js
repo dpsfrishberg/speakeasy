@@ -300,6 +300,8 @@ $(function() {
 		});
 	
 	$(document).on('touchstart', '#breadcrumb, body', function(e) {
+		console.info(e.delegateTarget);
+		console.info(e.currentTarget);
 		if (e.currentTarget != e.delegateTarget) return;
 		console.info("foo");
 		console.info(e);

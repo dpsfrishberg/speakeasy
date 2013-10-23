@@ -1,0 +1,35 @@
+$(function() {
+    $("#one").slideDown(500);
+    $("#two").slideDown(1000);
+    $("#three").slideDown(700);
+    $("#four").slideDown(1000);
+    $("#five").slideDown(500);
+    $("#six").slideDown(1500);
+    $("#seven").slideDown(700);
+    $("#eight").slideDown(1000);
+    $("#nine").slideDown(500);
+    $("#ten").slideDown(1500);
+    $("#eleven").slideDown(500);
+    $("#twelve").slideDown(1000);
+    $("#thirteen").slideDown(500);
+    $("#fourteen").slideDown(1500);
+    $("#fifteen").slideDown(700);
+    $("#sixteen").slideDown(500);
+    
+    $("#onec").slideUp(1500);
+    $("#twoc").slideUp(2000);
+    $("#threec").slideUp(1500);
+    $("#fourc").slideUp(2000);
+    $("#fivec").slideUp(1000);
+    $("#sixc").slideUp(2500);
+    $("#sevenc").slideUp(1500);
+    $("#eightc").slideUp(2000);
+    $("#ninec").slideUp(2500);
+    $("#tenc").slideUp(2000);
+    $("#elevenc").slideUp(1000);
+    $("#twelvec").slideUp(2000);
+    $("#thirteenc").slideUp(1000);
+    $("#fourteenc").slideUp(2500);
+    $("#fifteenc").slideUp(2000);
+    $("#sixteenc").slideUp(1500);
+});
