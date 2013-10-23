@@ -1,0 +1,331 @@
+h1,body {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+body {
+    background-color: black;
+}
+
+h2 {
+    font-size: 25px;
+    color: white;
+}
+
+#banner {
+    background-color: black;
+    font-size: 35px;
+    width: 100%;
+    height: 55px;
+    color: white;
+    text-align: right;
+    font-family: Courier New, Courier, monospace;
+    position: relative;
+    top: -20px;
+    z-index: 60;
+    margin: 0px;
+    }
+    
+#title {
+    text-align: right;
+    font-family: Courier New, Courier, monospace;
+    font-size: 30px;
+    position: relative;
+    top: -10px;
+    float: right;
+    margin-top: 10px;
+}
+
+#whatis {
+    color: black;
+    float: left;
+    font-size: 23px;
+    text-align: left;
+    background: #BA55D3;
+    height: auto;
+    width: 100%;
+    display: block;
+}
+
+#whatisleft {
+    height: 100%;
+    width: 30%;
+    display: inline-block;
+    float: left;
+    color: #F5E4DC;
+    font-family: Courier New, Courier, monospace;
+}
+
+#whatisright {
+    width: 70%;
+    background: #669;
+    float: left;
+    display: inline-block;
+    height: 100%;
+    color: #F5E4DC;
+}
+
+#tile {
+    width: 40%;
+    font-size: 18px;
+    float: left;
+    display: inline-block;
+    padding-left: 40px;
+    padding-right: 10px;
+    border-right: dashed 1px black;
+    font-family: Courier New, Courier, monospace;
+}
+
+#tryout {
+    color: white;
+    float: left;
+    font-size: 23px;
+    text-align: left;
+    background: #669;
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+#tryoutleft {
+    height: 100%;
+    width: 30%;
+    display: inline-block;
+    float: left;
+    font-family: Courier New, Courier, monospace;
+    color: #F5E4DC;
+}
+
+
+#speakeasy {
+    width: 70%;
+    float: right;
+    display: inline-block;
+    background: #944DD6;
+    padding-bottom: 40px;   
+}
+
+#sorter {
+    width: 100%;
+    height: 40px;
+    padding: 17px;
+    opacity: .8;
+    display: block !important;
+}
+
+.button {
+    background: black;
+    text-transform: uppercase;
+    font-size: 12px;
+    width: auto;
+    height: 20px;
+    padding: 5px;
+    border: 2px solid white;
+    margin: 2px;
+    display: inline;
+    float: left;
+}
+
+#container {
+    width: 100%;
+    height: auto;
+    padding: 17px;
+    opacity: 1;
+    z-index: 98;
+    display: block;
+}
+
+.item {
+    border-radius: 20px;
+    width: 150px;
+    height: 120px;
+    float: left;
+    margin: 8px;
+    padding: 7px;
+    -moz-box-shadow: 0 0 30px 5px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 30px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 30px 5px rgba(0,0,0,0.2);
+    margin-bottom: 2px;
+    text-align: center;
+    background: #CFC2A9;
+    transition: background 1s, padding-top .25s, padding-bottom .25s;
+-webkit-transition: background 1s, padding-top .25s, padding-bottom .25s;
+    cursor: pointer;
+    font-family: Courier New, Courier, monospace;
+
+}
+
+.item:hover {
+    background: #c09;
+}
+
+h3 {
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none !important;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
+
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+
+/*colors*/
+
+#colors {
+    width: 100%;
+    height: 60px;
+}
+
+#colorsup {
+    width: 100%;
+    height: 60px;
+    opacity: .7;
+    margin-top: -30px;
+    z-index: 20;
+    position: relative;
+    display: inline-block;
+}
+
+#colorsdown {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    z-index: 30;
+    top: -30px;
+    opacity: .9;
+    margin-bottom: -60px;
+    display: inline-block;
+}
+
+.columncontainer {
+    display: inline !important;
+    height: 100%;
+    width: 6.25%;
+    margin: 0px;
+    position: relative;
+    float: left;
+}
+
+#one {  background: #C09;}
+#two {  background: #90C;}
+#three {  background: #0C9;}
+#four {background: #843EED;}
+#five { background: #3DF596;}
+#six { background: #E5F2AE;}
+#seven { background: #AEF2E6;}
+#eight {  background: white;}
+#nine {  background: #C09;}
+#ten {  background: #90C;}
+#eleven {  background: #0C9;}
+#twelve {background: #843EED;}
+#thirteen { background: #3DF596;}
+#fourteen { background: #E5F2AE;}
+#fifteen { background: #AEF2E6;}
+#sixteen {  background: white;}
+
+#onec {  background: #C09}
+#twoc {  background: #90C;}
+#threec {  background: #0C9;}
+#fourc {background: #843EED;}
+#fivec { background: #3DF596;}
+#sixc { background: #E5F2AE;}
+#sevenc { background: #AEF2E6;}
+#eightc {  background: white;}
+#ninec {  background: #C09;}
+#tenc {  background: #90C;}
+#elevenc {  background: #0C9;}
+#twelvec {background: #843EED;}
+#thirteenc { background: #3DF596;}
+#fourteenc { background: #E5F2AE;}
+#fifteenc { background: #AEF2E6;}
+#sixteenc {  background: white;}
+
+.a {
+    height: 100%;
+    width: 100%;
+    background: blue;
+    margin: 0px;
+    left: -2px;
+    z-index: 4;
+    display: none;
+}
+
+.b {
+    height: 100%;
+    width: 100%;
+    background: black;
+    margin: 0px;
+    display: none;
+}
+
+.e {
+    height: 100%;
+    width: 100%;
+    background: black;
+    margin: 0px;
+    left: -2px;
+    z-index: 6;
+}
+
+.f {
+    height: 100%;
+    width: 100%;
+    background: black;
+    margin: 0px;
+}
+/*end colors*/

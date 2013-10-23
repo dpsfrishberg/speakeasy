@@ -1,0 +1,17 @@
+[
+    {
+        "comment_id": 1,
+        "node_id": 1,
+        "title": "Test",
+        "user_id": 1,
+        "body": "<p>Vivamus iaculis adipiscing risus, eget hendrerit mi congue at. Nunc ornare diam vitae mauris consequat pellentesque.</p>"
+    },
+    {
+        "comment_id": 2,
+        "parent_id": 1,
+        "node_id": 1,
+        "title": "RE: Test",
+        "user_id": 2,
+        "body": "<p>Maecenas sem nibh, scelerisque rutrum euismod ut, tristique sit amet urna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>"
+    }
+]
