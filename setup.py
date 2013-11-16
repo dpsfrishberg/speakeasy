@@ -9,5 +9,5 @@ setup(
     url="http://www.speakeasycomments.com",
     packages=["speakeasy_core"],
     install_requires=["python-openid", "django_openid_auth", "threadedcomments"],
-    package_data={"speakeasy_core": ["templates/*.html", "templates/*/*.html"]}
+    package_data={"speakeasy_core": ["templates/*.html", "templates/*/*.html", "static/*.*", "static/*/*.*"]}
 )
