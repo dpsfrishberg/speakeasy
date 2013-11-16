@@ -8,5 +8,5 @@ setup(
     author_email="danielpfrishberg@gmail.com",
     url="http://www.speakeasycomments.com",
     packages=["speakeasy_core"],
-    requires=["openid=2.2.1", "django_openid_auth", "threadedcomments"]"
+    requires=["openid", "django_openid_auth", "threadedcomments"]
 )
