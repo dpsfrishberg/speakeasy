@@ -159,14 +159,14 @@ def node_ancestors(request, slug=None):
     node_id = request.GET['node_id']
     while True:
         node = CommentNode.objects.filter(id=node_id)
-        if len(node) == 0:
+        if len(node) == 0: # It's an article node.
             node = ArticleNode.objects.filter(id=node_id)
             if len(node) != 0:
                 if obj['node'] is None:
                     num_comments = node[0].num_comments()
                     obj['node'] = {'id': node[0].id, 'content': node[0].content, 'num_comments': num_comments}
-            break
-        else:
+            break # We're done, because you can't go up past an article node.
+        else: # It's a comment node.
             node = node[0]
             if obj['node'] is None:
                 user = node.comment.user
@@ -183,7 +183,7 @@ def node_ancestors(request, slug=None):
                 user = {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'username': user.username}
             
             
-            num_comments = node.num_comments()
+            num_comments = parent_node.num_comments()
             obj['ancestors'].insert(0, {'id': parent_node.id, 'content': parent_node.content_teaser(), 'num_comments': num_comments, 'user': user})
             node_id = parent_node.id
     return HttpResponse(json.dumps(obj), mimetype='application/javascript')
