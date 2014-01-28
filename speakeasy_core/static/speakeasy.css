@@ -1,9 +1,9 @@
 /*html {
     -moz-box-shadow: 0 0 40px 5px rgba(0,0,0,0.2)inset;
     -webkit-box-shadow: 0 0 40px 5px rgba(0,0,0,0.2)inset;
-    box-shadow: 0 0 40px 5px rgba(0,0,0,0.2) inset;*/
+    box-shadow: 0 0 40px 5px rgba(0,0,0,0.2) inset;
   
-}
+}*/
 html.inactive, html.inactive body {
     overflow: hidden;
 }
