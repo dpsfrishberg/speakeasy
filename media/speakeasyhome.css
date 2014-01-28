@@ -35,6 +35,7 @@ h2 {
     top: -10px;
     float: right;
     margin-top: 10px;
+    padding: 10px;
 }
 
 #whatis {
@@ -42,7 +43,7 @@ h2 {
     float: left;
     font-size: 23px;
     text-align: left;
-    background: #BA55D3;
+    background: #7497E3 /*#BA55D3*/ ;
     height: auto;
     width: 100%;
     display: block;
@@ -50,28 +51,30 @@ h2 {
 
 #whatisleft {
     height: 100%;
-    width: 30%;
+    width: 15%;
     display: inline-block;
     float: left;
-    color: #F5E4DC;
+    color:  #F5E4DC;
     font-family: Courier New, Courier, monospace;
+    
 }
 
 #whatisright {
-    width: 70%;
+    width: 85%;
     background: #669;
     float: left;
     display: inline-block;
     height: 100%;
     color: #F5E4DC;
+    border-top: 35px #EBEBEB solid;
 }
 
 #tile {
-    width: 40%;
+    width: 45%;
     font-size: 18px;
     float: left;
     display: inline-block;
-    padding-left: 40px;
+    padding-left: 20px;
     padding-right: 10px;
     border-right: dashed 1px black;
     font-family: Courier New, Courier, monospace;
@@ -95,6 +98,7 @@ h2 {
     float: left;
     font-family: Courier New, Courier, monospace;
     color: #F5E4DC;
+    border-top: 35px #EBEBEB solid;
 }
 
 
@@ -102,8 +106,9 @@ h2 {
     width: 70%;
     float: right;
     display: inline-block;
-    background: #944DD6;
-    padding-bottom: 40px;   
+    background: #7497E3 /*#BA55D3*/ /*#944DD6*/;
+    padding-bottom: 40px;
+ 
 }
 
 #sorter {

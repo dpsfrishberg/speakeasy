@@ -206,7 +206,7 @@ function viewModel() {
 		eval(data);
 			for (var node_id in nums_comments) {
 				self.nodesEachById(node_id, function(theNode) {
-					theNode.num_comments(nums_comments[node_id]['num_comments']);
+				    theNode.num_comments(nums_comments[node_id]['num_comments']);
 				});
 			}
 		}
@@ -228,7 +228,7 @@ function viewModel() {
     };
     
     self.commentAdded = function(el) {
-	console.info('added');
+	
 	$('#comments-in-isotope').isotope( 'appended', $(el) );
     };
     
