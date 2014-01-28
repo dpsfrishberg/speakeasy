@@ -1,0 +1,3 @@
+python-openid
+django_openid_auth
+threadedcomments
