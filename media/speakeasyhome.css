@@ -8,6 +8,10 @@ body {
     background-color: black;
 }
 
+#pagebody {
+    min-width: 1350px;
+}
+
 h2 {
     font-size: 25px;
     color: white;
