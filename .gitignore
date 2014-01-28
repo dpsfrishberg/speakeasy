@@ -1,4 +1,7 @@
+*/.htaccess
+.htaccess
 dispatch.fcgi
+*/settings.py
 settings.py
 \#*.*\#
 *.*~
