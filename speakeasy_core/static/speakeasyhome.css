@@ -13,6 +13,10 @@ h2 {
     color: white;
 }
 
+#pagebody {
+    min-width: 1350px;
+}
+
 #banner {
     background-color: black;
     font-size: 35px;
