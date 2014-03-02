@@ -1,6 +1,7 @@
 # Create your views here.
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
+from django.core.context_processors import csrf
 from speakeasy_core.models import Article, Node, ArticleNode, SpeakeasyComment, CommentNode
 
 import json
@@ -247,5 +248,7 @@ def get_node_comment_counts(request, slug=None):
 def article(request, slug=None):
     
     article = Article.objects.get(slug=slug)
-    
-    return render_to_response('article.html', {'anonymous': request.user.id is None, 'article_slug': slug})
+    context = RequestContext(request)
+    context.update({'anonymous': request.user.id is None, 'article_slug': slug})
+    context.update(csrf(request))
+    return render_to_response('article.html', context)

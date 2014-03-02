@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'speakeasy.css' %}" />
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+		<script src="{% static 'jquery.cookie.js' %}"></script>
 		<script type="text/javascript" src="{% static 'knockout-2.1.0.js' %}"></script>
                 <script type="text/javascript">
 			article_slug = '{{article_slug}}'  // Used by speakeasy.js; must be placed before speakeasy.js is included
@@ -36,7 +37,7 @@
 				   <div data-bind="attr: {id: node_display_id, class: node_class}">
 					<p class="node-content" data-bind="text: content">
 					</p>
-					<a class="node-button" href="#"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()}, text: num_comments"></span></a>
+					<a class="node-button" href="#"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()+' '+new_comments_class()}, text: num_comments"></span></a>
 					<div class="clear"></div>
 				   </div>
 				</div>
@@ -109,7 +110,7 @@
 							<div class="node" data-bind="attr: {id: node_display_id}">
 								<p class="node-content" data-bind="text: content">
 								</p>
-								<a class="node-button" href="#"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()}, text: num_comments"></span></a>
+								<a class="node-button" href="#"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()+' '+new_comments_class()}, text: num_comments"></span></a>
 								<div class="clear"></div>
 							</div>
 						</div>
@@ -117,13 +118,14 @@
 					</div>
 		</script>
 
-				<div class="comment-submit-form" data-bind="with: _activeNode">
+				<form class="comment-submit-form" action="{% url 'post_comment' article_slug %}" method="POST" data-bind="with: _activeNode">
 					<label data-bind="attr: {for: node_textarea_id}">Leave A Response</label>
 					<!--<a href="http://www.igendelman.com/art/Speakeasy.gif">HELP!</a>-->
 					<textarea placeholder= "Enter your text and separate your thoughts by pressing the 'enter' button" data-bind="attr: {id: node_textarea_id, name: node_textarea_id}" ></textarea>
 					<input type="submit" data-bind="attr: {id: node_submit_id, name: node_submit_id}" value="Submit"/>
+					{% csrf_token %}
 					<div class="clear"></div>
-			</div>
+			</form>
 	</div>
 
 		

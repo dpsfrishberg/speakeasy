@@ -1,5 +1,24 @@
 var vm;
 (function($){
+    
+// Send the CSRF token with each AJAX POST for Django.
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+var csrftoken = $.cookie("csrftoken");
+
+$.ajaxSetup({
+    crossDomain: false,
+    beforeSend: function(xhr, settings) {
+	if (!csrfSafeMethod(settings.type)) {
+	    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+	}
+    }
+    });
+    
+
 function comment(comment_id, parent_id, user) {
     var self = this;
 
@@ -46,8 +65,29 @@ function topeComment(obj) {
     
 }
 
+var baseNode = function() {
+    // TODO: Polling for and updating comment counts should be handled, at least partly, in this class.
+    this.init = function() {
+	var self = this;
+	self.has_new_comments = ko.observable(false);
+	self.update_num_comments = function(new_num_comments, notify_if_new) {
+	    var old_num_comments = self.num_comments();
+	    if (new_num_comments > old_num_comments) {
+	        self.has_new_comments(true);
+	    }
+	    console.info(self);
+	    self.num_comments(new_num_comments);
+	};
+	self.new_comments_class = ko.computed(function(){
+	    return self.has_new_comments() ? 'has-new-comments' : '';
+	});
+    };
+    
+};
 function node(node_id, parent_id, content, num_comments) {
+    this.init.call(this);
     var self = this;
+    baseNode.call(self);
     
     self.node_id = ko.observable(node_id);
     self.node_display_id = ko.observable('node-'+node_id);
@@ -77,9 +117,15 @@ function node(node_id, parent_id, content, num_comments) {
     });
     self.speakeasy_type = 'node';
 }
+node.prototype = new baseNode();
+node.prototype.constructor = node;
 
 function breadcrumbNode(node_id, content, num_comments, user) {
+    this.init.call(this);
     var self = this;
+    
+    baseNode.call(self);
+    
     self.node_id = ko.observable(node_id);
     self.node_display_id = ko.observable('node-'+node_id);
     self.node_textarea_id = ko.observable('post-comment-'+node_id);
@@ -90,6 +136,9 @@ function breadcrumbNode(node_id, content, num_comments, user) {
     if (!user) user = null;
     self.user = ko.observable(user)
 }
+breadcrumbNode.prototype = new baseNode();
+breadcrumbNode.prototype.constructor = breadcrumbNode;
+
 
 function viewModel() {
     //Step 2 and so on below
@@ -206,7 +255,7 @@ function viewModel() {
 		eval(data);
 			for (var node_id in nums_comments) {
 				self.nodesEachById(node_id, function(theNode) {
-				    theNode.num_comments(nums_comments[node_id]['num_comments']);
+				    theNode.update_num_comments(nums_comments[node_id]['num_comments'], true);
 				});
 			}
 		}
