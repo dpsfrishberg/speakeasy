@@ -45,7 +45,7 @@ function topeComment(obj) {
 	    self.user.push(self.obj.user());
 	}
 	self.nodes = ko.observableArray();
-	self.nodes.push(new node(self.obj.node_id(), (self.obj.parent_id ? self.obj.parent_id() : -1), self.obj.content(), self.obj.num_comments()));
+	self.nodes.push(new node(self.obj.node_id(), (self.obj.parent_id ? self.obj.parent_id() : -1), self.obj.content(), self.obj.num_comments(), self.obj.updated()));
     }
     else { //comment
 	self.display_id = ko.observable('tope-comment-'+self.obj.comment_id());
@@ -71,11 +71,13 @@ var baseNode = function() {
 	var self = this;
 	self.has_new_comments = ko.observable(false);
 	self.update_num_comments = function(new_num_comments, notify_if_new) {
-	    var old_num_comments = self.num_comments();
+	    /*var old_num_comments = self.num_comments();
 	    if (new_num_comments > old_num_comments) {
 	        self.has_new_comments(true);
+	    }*/
+	    if (notify_if_new) {
+		self.has_new_comments(true);
 	    }
-	    console.info(self);
 	    self.num_comments(new_num_comments);
 	};
 	self.new_comments_class = ko.computed(function(){
@@ -84,10 +86,9 @@ var baseNode = function() {
     };
     
 };
-function node(node_id, parent_id, content, num_comments) {
+function node(node_id, parent_id, content, num_comments, updated) {
     this.init.call(this);
     var self = this;
-    baseNode.call(self);
     
     self.node_id = ko.observable(node_id);
     self.node_display_id = ko.observable('node-'+node_id);
@@ -96,6 +97,7 @@ function node(node_id, parent_id, content, num_comments) {
     self.content = ko.observable(content);
     self.parent_id = ko.observable(parent_id);
     self.num_comments = ko.observable(num_comments);
+    self.updated = ko.observable(updated);
     
     self.node_class = ko.computed(function() {
 	if (vm._activeNode()){
@@ -120,12 +122,10 @@ function node(node_id, parent_id, content, num_comments) {
 node.prototype = new baseNode();
 node.prototype.constructor = node;
 
-function breadcrumbNode(node_id, content, num_comments, user) {
+function breadcrumbNode(node_id, content, num_comments, user, updated) {
     this.init.call(this);
     var self = this;
-    
-    baseNode.call(self);
-    
+        
     self.node_id = ko.observable(node_id);
     self.node_display_id = ko.observable('node-'+node_id);
     self.node_textarea_id = ko.observable('post-comment-'+node_id);
@@ -134,7 +134,8 @@ function breadcrumbNode(node_id, content, num_comments, user) {
     self.content = ko.observable(content);
     self.speakeasy_type = 'breadcrumbNode';
     if (!user) user = null;
-    self.user = ko.observable(user)
+    self.user = ko.observable(user);
+    self.updated = ko.observable(updated);
 }
 breadcrumbNode.prototype = new baseNode();
 breadcrumbNode.prototype.constructor = breadcrumbNode;
@@ -149,7 +150,7 @@ function viewModel() {
     self.loadArticleNodes = function () {
 	$.getJSON('/article/'+article_slug+'/article-nodes.json', function(data){
 		for (var node_id in data) {
-			var articleNode = new node(node_id, 0, data[node_id].content, data[node_id].num_comments);
+			var articleNode = new node(node_id, 0, data[node_id].content, data[node_id].num_comments, data[node_id].updated);
 			self.articleNodes.push(articleNode);
 		}
 	});
@@ -164,7 +165,7 @@ function viewModel() {
 		for (var comment_id in data) {
 			var nodeComment = new comment(comment_id, data[comment_id].parent_id, data[comment_id].user);
 			for (var node_id in data[comment_id].nodes) {
-				var commentNode = new node(node_id, comment_id, data[comment_id].nodes[node_id].content, data[comment_id].nodes[node_id].num_comments);
+				var commentNode = new node(node_id, comment_id, data[comment_id].nodes[node_id].content, data[comment_id].nodes[node_id].num_comments, data[comment_id].nodes[node_id].updated);
 				nodeComment.nodes.push(commentNode);
 			}
 			self.activeComments.push(nodeComment);
@@ -182,14 +183,14 @@ function viewModel() {
 		//self.activeNodeComments.removeAll();
 		var ancestors = data.ancestors;
 		for (var i = 0; i < ancestors.length; i++){
-			var newBreadcrumbNode = new breadcrumbNode(ancestors[i].id, ancestors[i].content, ancestors[i].num_comments, ancestors[i].user);
+			var newBreadcrumbNode = new breadcrumbNode(ancestors[i].id, ancestors[i].content, ancestors[i].num_comments, ancestors[i].user, ancestors[i].updated);
 			self.activeTrail.push(newBreadcrumbNode);
 			var newTC = new topeComment(newBreadcrumbNode);
                         self.activeNodeComments.push(newTC);
 		}
 		if (data['node']) {
 			var activeNode = data['node'];
-			var activeBreadcrumbNode = new breadcrumbNode(activeNode.id, activeNode.content, activeNode.num_comments, activeNode.user);
+			var activeBreadcrumbNode = new breadcrumbNode(activeNode.id, activeNode.content, activeNode.num_comments, activeNode.user, activeNode.updated);
 			//self.activeTrail.push(activeBreadcrumbNode);
 			self._activeNode(activeBreadcrumbNode);
 			self.activeNodeTextareaId = activeBreadcrumbNode.node_textarea_id();
@@ -211,55 +212,100 @@ function viewModel() {
 }
     
     self.pollForComments = function(){
+      console.info("polling");
       var self = this;
       setTimeout(function(){
-      $.ajax({ url: "/article/"+article_slug+"/check-comments.json", success: function(data){
-	for (var comment_id in data) {
-		var dataComment = data[comment_id];
-		if (!self._activeNode()) break;
-		if (dataComment.node_id == self._activeNode().node_id()) {
-			var found = false;
-			for (var i in self.activeComments()) {
-				var activeComment = self.activeComments()[i];
-				if (activeComment.comment_id() == comment_id) {
-					found = true;
-					break;
+	    // Go to the server and ask for the full list of comments, structured as an object
+	    //  of each IDs pointing to its parent node id, the user who authored the comment,
+	    //  and an object of child nodes, each with a number of comments.
+	  $.ajax({ url: "/article/"+article_slug+"/check-comments.json", success: function(data){
+	    // Loop through the comment IDs. Find any whose parent node is the active node.
+	    //  If the comment does not exist in the active node's comments:
+	    //  Add it, and insert its child nodes.
+	    // TODO: This won't handle modified, removed, or added child nodes of existing comments. Fix that.
+	    // TODO: Allow this to tell each node whether it should have a red flag (if new comments were added).
+	    for (var comment_id in data) {
+		    var dataComment = data[comment_id];
+		    if (!self._activeNode()) break;
+		    if (dataComment.node_id == self._activeNode().node_id()) {
+			    // TODO: Make this search a function: var found = isCommentActive(comment_id)
+			    var found = false;
+			    for (var i in self.activeComments()) {
+				    var activeComment = self.activeComments()[i];
+				    if (activeComment.comment_id() == comment_id) {
+					    found = true;
+					    break;
+				    }
+			    }
+		    
+			    if (found) {
+				
+			    }
+			    else {
+				var newComment = new comment(comment_id, dataComment.node_id, dataComment.user);
+				for (var node_id in dataComment.nodes) {
+				    var commentNode = new node(node_id, comment_id, dataComment.nodes[node_id].content, dataComment.nodes[node_id].num_comments, dataComment.nodes[node_id].updated);
+				    newComment.nodes.push(commentNode);
 				}
-			}
-		
-			if (found) continue;
-			var newComment = new comment(comment_id, dataComment.node_id, dataComment.user);
-			for (var node_id in dataComment.nodes) {
-				var commentNode = new node(node_id, comment_id, dataComment.nodes[node_id].content, dataComment.nodes[node_id].num_comments);
-				newComment.nodes.push(commentNode);
-			}
-			self.activeComments.push(newComment);
-			self.activeNodeComments.push(new topeComment(newComment));
-
-		}			
-	}
+				self.activeComments.push(newComment);
+				self.activeNodeComments.push(new topeComment(newComment));
+			    }
+		    }
+		    /*else if (self._nodeInActiveTrail(dataComment.node_id)) {
+			var oldComment = self._getExistingComment()
+		    }*/
+	    }
+	    
+	    //self.updateNodeCommentCounts();
+	    self.getNodeCountChanges();
+    
+	    //Setup the next poll recursively
+	    self.pollForComments();
+	  }, dataType: "json"});
 	
-	self.updateNodeCommentCounts();
-	
 
-	//Setup the next poll recursively
-	self.pollForComments();
-      }, dataType: "json"});
-	}, 3000);
+	    }, 3000);
+      };
+    
+    
+    self.updateNodeFromChangesById = function(node_id, timestamp, num_comments, notifyIfNew) {
+	console.info("id: ");
+	console.info(node_id);
+	self.nodesEachById(node_id, function(theNode) {
+	     console.info("timestamp");
+	     console.info(self._lastUpdatedTimestamp);
+	     console.info(timestamp);
+	     console.info(theNode.updated());
+	     // Only notify if not on the first update.
+	     // Check against when theNode was updated, because it might be a comment node that was just posted.
+	     var notify = false;
+	     if (notifyIfNew && self._lastUpdatedTimestamp !== 0 && timestamp > theNode.updated()) {
+		console.info("got one");
+		notify = true;
+	     }
+		 console.info(node_id);
+		 theNode.update_num_comments(num_comments, notify);
+		 theNode.updated(timestamp);
+	     
+	});
+
     };
     
-    self.updateNodeCommentCounts = function() {
-	$.ajax({url: "/article/"+article_slug+"/get-node-comment-counts.json",
+    self.updateNodesFromChanges = function(nodes, timestamp) {
+	console.info(nodes);
+	for (var node_id in nodes) {
+	    self.updateNodeFromChangesById(node_id, nodes[node_id].updated, nodes[node_id].num_comments, true);
+	}
+	self._lastUpdatedTimestamp = timestamp;
+
+    };
+    self.getNodeCountChanges = function() {
+	$.ajax({url: "/article/"+article_slug+"/"+self._lastUpdatedTimestamp+"/get-node-changes.json?" + Math.random(),
 	       success: function(data){
-		var nums_comments = {};
 		eval(data);
-			for (var node_id in nums_comments) {
-				self.nodesEachById(node_id, function(theNode) {
-				    theNode.update_num_comments(nums_comments[node_id]['num_comments'], true);
-				});
-			}
-		}
-	});
+		self.updateNodesFromChanges(data["nodes"], data["timestamp"]);
+	       }
+	    });
     };
     
 
@@ -274,6 +320,7 @@ function viewModel() {
 	};
 	applyFuncToNodes(self.articleNodes());
 	applyFuncToNodes(self.activeTrail());
+	applyFuncToNodes(jQuery.map(self.activeNodeComments(), function(tc) {return tc.nodes();}));
     };
     
     self.commentAdded = function(el) {
@@ -305,7 +352,7 @@ function viewModel() {
     self.loadArticleNodes();
         self.pollForComments();
 
-    
+    self._lastUpdatedTimestamp = 0;
 };
 
 
@@ -318,21 +365,32 @@ $(function() {
 			}
 			$.ajax({url: '/article/'+article_slug+'/post-comment.json',
 			       data: {'node_id': $(e.target).attr('name').replace(/post-comment-submit-/, ''),
-						'content': content},
+						'content': content,
+						'last_updated': vm._lastUpdatedTimestamp},
 			       success: function(data, textStatus, jqXHR) {
-					for (var comment_id in data) {
-						var dataComment = data[comment_id];
+				    var comments = data["comments"];
+					for (var comment_id in comments) {
+						var dataComment = comments[comment_id];
 						var newComment = new comment(comment_id, dataComment.node_id, dataComment.user);
 						for (var node_id in dataComment.nodes) {
-							newComment.nodes.push(new node(node_id, comment_id, dataComment.nodes[node_id].content, dataComment.nodes[node_id].num_comments));
+							newComment.nodes.push(new node(node_id, comment_id, dataComment.nodes[node_id].content, dataComment.nodes[node_id].num_comments, dataComment.nodes[node_id].updated));
+							vm.updateNodeFromChangesById(node_id, dataComment.nodes[node_id].updated, dataComment.nodes[node_id].num_comments, false);
+							var ancestors = dataComment.nodes[node_id].ancestors;
+							for (var i = 0; i < ancestors.length; i++){
+							    vm.updateNodeFromChangesById(ancestors[i].id, ancestors[i].updated, ancestors[i].num_comments, false);
+							}
 						}
 						vm.activeComments.push(newComment);
 						vm.activeNodeComments.push(new topeComment(newComment));
+						
 					}
+					//vm.updateNodesFromChanges(data["new_nodes"], data["timestamp"]);
 				},
 				type: 'post',
 				error: function(jqXHR, textStatus, errorThrown) {console.info(errorThrown)},
-				dataType: 'json'});
+				dataType: 'json',
+				async: false // Make this async so we can do the update-handling first.
+				});
 			
 			if (e.preventDefault) e.preventDefault();
 			return false;
@@ -349,14 +407,9 @@ $(function() {
 		});
 	
 	$(document).on('touchstart', '#breadcrumb, body', function(e) {
-		console.info(e.delegateTarget);
-		console.info(e.currentTarget);
 		if (e.currentTarget != e.delegateTarget) return;
-		console.info("foo");
-		console.info(e);
 		vm.hideBreadcrumb();
 	});
-	$(document).on('click', function(e) {console.info(e.target);});
 });
 
 

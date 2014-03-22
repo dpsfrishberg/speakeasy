@@ -188,6 +188,9 @@ body {
     
 }
 
+.node a.node-button.has-new-comments, .breadcrumb-node a.node-button.has-new-comments {
+    background: #c00;
+}
 
 .node {
     /*opacity: 0.8;*/
@@ -274,6 +277,10 @@ a.node-button.node-button-open {
 
 .node-num-comments-0 {
     color: #99f;
+}
+
+.has-new-comments .node-num-comments {
+    color: #fff;
 }
 
 #active-node {

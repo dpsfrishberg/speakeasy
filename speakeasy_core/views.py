@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
-from speakeasy_core.models import Article, Node, ArticleNode, SpeakeasyComment, CommentNode
+from speakeasy_core.models import Article, Node, ArticleNode, SpeakeasyComment, CommentNode, get_current_timestamp as _get_current_timestamp
 
 import json
 import re
@@ -135,7 +135,7 @@ def article_nodes(request, slug=None):
     nodes = ArticleNode.objects.filter(article=article)
     for node in nodes:
         num_comments = node.num_comments()
-        obj[node.id] = {'type': 'node', 'id': node.id, 'content': node.content, 'num_comments': num_comments}
+        obj[node.id] = {'type': 'node', 'id': node.id, 'content': node.content, 'num_comments': num_comments, 'updated': node.updated}
     return HttpResponse(json.dumps(obj), mimetype='application/javascript')
 
 def node_comments(request, slug=None):
@@ -150,12 +150,13 @@ def node_comments(request, slug=None):
         nodes = CommentNode.objects.filter(comment=comment)
         for node in nodes:
             num_comments = node.num_comments()
-            obj[comment.id]['nodes'][node.id] = {'id': node.id, 'content': node.content, 'num_comments': num_comments}
+            obj[comment.id]['nodes'][node.id] = {'id': node.id, 'content': node.content, 'num_comments': num_comments, 'updated': node.updated}
     
     return HttpResponse(json.dumps(obj), mimetype='application/javascript')
     
 
 def node_ancestors(request, slug=None):
+    # TODO: Use Node.get_ancestors()
     obj = {'node': None, 'ancestors': []}
     node_id = request.GET['node_id']
     while True:
@@ -165,7 +166,7 @@ def node_ancestors(request, slug=None):
             if len(node) != 0:
                 if obj['node'] is None:
                     num_comments = node[0].num_comments()
-                    obj['node'] = {'id': node[0].id, 'content': node[0].content, 'num_comments': num_comments}
+                    obj['node'] = {'id': node[0].id, 'content': node[0].content, 'num_comments': num_comments, 'updated': node[0].updated}
             break # We're done, because you can't go up past an article node.
         else: # It's a comment node.
             node = node[0]
@@ -173,7 +174,7 @@ def node_ancestors(request, slug=None):
                 user = node.comment.user
                 user = {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'username': user.username}
                 num_comments = node.num_comments()
-                obj['node'] = {'id': node.id, 'content': node.content, 'user': user, 'num_comments': num_comments}
+                obj['node'] = {'id': node.id, 'content': node.content, 'user': user, 'num_comments': num_comments, 'updated': node.updated}
             parent_node = CommentNode.objects.filter(id=node.comment.node.id)
             if len(parent_node) == 0:
                 parent_node = ArticleNode.objects.filter(id=node.comment.node.id)[0]
@@ -185,7 +186,7 @@ def node_ancestors(request, slug=None):
             
             
             num_comments = parent_node.num_comments()
-            obj['ancestors'].insert(0, {'id': parent_node.id, 'content': parent_node.content_teaser(), 'num_comments': num_comments, 'user': user})
+            obj['ancestors'].insert(0, {'id': parent_node.id, 'content': parent_node.content_teaser(), 'num_comments': num_comments, 'user': user, 'updated': parent_node.updated})
             node_id = parent_node.id
     return HttpResponse(json.dumps(obj), mimetype='application/javascript')
 
@@ -198,6 +199,7 @@ def comment_parent(request):
 def post_comment(request, slug=None):
     node_id = request.POST['node_id']
     content = request.POST['content']
+    timestamp = request.POST['last_updated']
     user = request.user
     node = Node.objects.get(id=node_id)
     comment = SpeakeasyComment(node=node, user=user,article=node.article)
@@ -215,11 +217,14 @@ def post_comment(request, slug=None):
         comment_nodes.append(comment_node)
     
     obj = {}
-    
-    obj[comment.id] = {'comment_id': comment.id, 'node_id': node_id, 'user': {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'username': user.username}, 'nodes': {}}
+    comments = {}
+    comments[comment.id] = {'comment_id': comment.id, 'node_id': node_id, 'user': {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'username': user.username}, 'nodes': {}}
     for comment_node in comment_nodes:
         num_comments = comment_node.num_comments()
-        obj[comment.id]['nodes'][comment_node.id] = {'node_id': comment_node.id, 'comment_id': comment.id, 'content': comment_node.content, 'num_comments': num_comments}
+        comments[comment.id]['nodes'][comment_node.id] = {'node_id': comment_node.id, 'comment_id': comment.id, 'content': comment_node.content, 'num_comments': num_comments, 'updated': comment_node.updated, "ancestors": comment_node.get_ancestors()}
+    obj["comments"] = comments
+    obj["timestamp"] = _get_current_timestamp()
+    obj["new_nodes"] = _get_node_changes(slug, timestamp)
     
     return HttpResponse(json.dumps(obj), mimetype='application/javascript')
     
@@ -233,17 +238,27 @@ def check_comments(request, slug=None):
         nodes = CommentNode.objects.filter(comment=comment)
         for node in nodes:
             num_comments = node.num_comments()
-            obj[comment.id]['nodes'][node.id] = {'id': node.id, 'content': node.content, 'num_comments': num_comments}
+            obj[comment.id]['nodes'][node.id] = {'id': node.id, 'content': node.content, 'num_comments': num_comments, 'updated': node.updated}
             
     return HttpResponse(json.dumps(obj), mimetype='application/javascript')
     
-def get_node_comment_counts(request, slug=None):
+def _get_node_changes(slug, timestamp, exclude=[]):    
     article = Article.objects.get(slug=slug)
-    nodes = Node.objects.filter(article=article)
     obj = {}
+    obj["timestamp"] = _get_current_timestamp()
+    obj["nodes"] = {}
+    nodes = Node.objects.filter(article=article, updated__gt=timestamp);
     for node in nodes:
-        obj[node.id] = {"num_comments": node.num_comments()}
-    return HttpResponse("nums_comments = " + json.dumps(obj), mimetype='application/javascript')
+        obj["nodes"][node.id] = {"num_comments": node.num_comments(), "updated": node.updated}
+        #for a_node in node.get_self_and_ancestor_nodes():
+        #    if not a_node.id in exclude:
+        #        obj["nodes"][a_node.id] = {"num_comments": a_node.num_comments(), "updated": a_node.updated}
+    return obj
+
+def get_node_changes(request, slug=None, timestamp=None):
+    obj = _get_node_changes(slug, timestamp)
+    #obj = {"foo": "bar"}
+    return HttpResponse("data = " + json.dumps(obj), mimetype='application/javascript')
 
 def article(request, slug=None):
     
