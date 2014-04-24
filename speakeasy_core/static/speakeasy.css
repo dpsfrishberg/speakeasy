@@ -1127,6 +1127,10 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     border: solid black 6px ;
 }
 
+.item.tope-comment:first {
+    clear: both;
+}
+
 #comments-in-isotope {
   /*  height: auto !important;*/
 }
@@ -1202,8 +1206,11 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     display: none;
 }
 
-#comments-in-isotope, .comment-submit-form {
+.comments-in-isotope, .comment-submit-form {
     width: 70%;
+}
+.comments-in-isotope {
+    height: auto !important;
 }
 
 #right {

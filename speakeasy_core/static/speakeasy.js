@@ -99,7 +99,7 @@ function node(node_id, parent_id, content, num_comments, updated) {
     self.num_comments = ko.observable(num_comments);
     self.updated = ko.observable(updated);
     
-    self.node_class = ko.computed(function() {
+        self.node_class = ko.computed(function() {
 	if (vm._activeNode()){
 		if (vm._activeNode().node_id() == self.node_id()) {
 			return 'node active-node';
@@ -136,6 +136,29 @@ function breadcrumbNode(node_id, content, num_comments, user, updated) {
     if (!user) user = null;
     self.user = ko.observable(user);
     self.updated = ko.observable(updated);
+    
+    self.active_class = ko.computed(function() {
+        // TODO: Move to baseNode
+        if (vm._activeNode()) {
+            if (vm._activeNode().node_id() == self.node_id()) {
+                    return 'active-node';
+            }
+            else {
+                    var activeTrail = vm.activeTrail();
+                    if (!activeTrail) return '';
+                    for (var i in activeTrail) {
+                            var activeTrailNode = activeTrail[i];
+                            if (activeTrailNode && self.node_id() && (activeTrailNode.node_id() == self.node_id())) {
+                                    return 'active-node';
+                            }
+                    }
+            }
+        }
+        return '';
+        }
+    );
+
+
 }
 breadcrumbNode.prototype = new baseNode();
 breadcrumbNode.prototype.constructor = breadcrumbNode;
@@ -179,7 +202,7 @@ function viewModel() {
     self.loadBreadcrumbForNode = function (node_id) {
 	$.ajax({url: '/article/'+article_slug+'/node-ancestors.json', data: {node_id: node_id}, success: function(data){
 		self.activeTrail.removeAll();
-		$('#comments-in-isotope').isotope( 'reLayout', function(){});
+		$('.comments-in-isotope').each(function(){$(this).isotope( 'reLayout', function(){});});
 		//self.activeNodeComments.removeAll();
 		var ancestors = data.ancestors;
 		for (var i = 0; i < ancestors.length; i++){
@@ -193,6 +216,7 @@ function viewModel() {
 			var activeBreadcrumbNode = new breadcrumbNode(activeNode.id, activeNode.content, activeNode.num_comments, activeNode.user, activeNode.updated);
 			//self.activeTrail.push(activeBreadcrumbNode);
 			self._activeNode(activeBreadcrumbNode);
+                        self.activeTrail.push(activeBreadcrumbNode);
 			self.activeNodeTextareaId = activeBreadcrumbNode.node_textarea_id();
 			self.activeNodeSubmitId = activeBreadcrumbNode.node_submit_id();
 			var activeTC = new topeComment(activeBreadcrumbNode);
@@ -212,7 +236,6 @@ function viewModel() {
 }
     
     self.pollForComments = function(){
-      console.info("polling");
       var self = this;
       setTimeout(function(){
 	    // Go to the server and ask for the full list of comments, structured as an object
@@ -269,21 +292,13 @@ function viewModel() {
     
     
     self.updateNodeFromChangesById = function(node_id, timestamp, num_comments, notifyIfNew) {
-	console.info("id: ");
-	console.info(node_id);
 	self.nodesEachById(node_id, function(theNode) {
-	     console.info("timestamp");
-	     console.info(self._lastUpdatedTimestamp);
-	     console.info(timestamp);
-	     console.info(theNode.updated());
 	     // Only notify if not on the first update.
 	     // Check against when theNode was updated, because it might be a comment node that was just posted.
 	     var notify = false;
 	     if (notifyIfNew && self._lastUpdatedTimestamp !== 0 && timestamp > theNode.updated()) {
-		console.info("got one");
 		notify = true;
 	     }
-		 console.info(node_id);
 		 theNode.update_num_comments(num_comments, notify);
 		 theNode.updated(timestamp);
 	     
@@ -292,7 +307,6 @@ function viewModel() {
     };
     
     self.updateNodesFromChanges = function(nodes, timestamp) {
-	console.info(nodes);
 	for (var node_id in nodes) {
 	    self.updateNodeFromChangesById(node_id, nodes[node_id].updated, nodes[node_id].num_comments, true);
 	}
@@ -320,12 +334,15 @@ function viewModel() {
 	};
 	applyFuncToNodes(self.articleNodes());
 	applyFuncToNodes(self.activeTrail());
-	applyFuncToNodes(jQuery.map(self.activeNodeComments(), function(tc) {return tc.nodes();}));
+	//applyFuncToNodes(jQuery.map(self.activeNodeComments(), function(tc) {return tc.nodes();}));
+        applyFuncToNodes(jQuery.map(self.activeComments(), function(comm) {return comm.nodes();}));
+        applyFuncToNodes([self._activeNode()]);
     };
     
     self.commentAdded = function(el) {
-	
-	$('#comments-in-isotope').isotope( 'appended', $(el) );
+	var $cont = el.closest(".comments-in-isotope");
+        console.info($cont);
+	$cont.isotope( 'appended', $(el) );
     };
     
     self.showBreadcrumb = function() {
@@ -420,13 +437,13 @@ vm = new viewModel();
 
 //Step 3
 ko.applyBindings(vm);
-$('#comments-in-isotope').isotope({
+$('.comments-in-isotope').each(function(){$(this).isotope({
 	animationOptions: {
      duration: 750,
      easing: 'linear',
      queue: false
    }
-});
+});});
 });
 //I can explain this all this weekend
 
