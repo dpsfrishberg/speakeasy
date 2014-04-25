@@ -89,6 +89,28 @@ function breadcrumbNode(node_id, content, num_comments, user) {
     self.speakeasy_type = 'breadcrumbNode';
     if (!user) user = null;
     self.user = ko.observable(user)
+    
+    self.active_class = ko.computed(function() {
+	// TODO: Move to baseNode
+	if (vm._activeNode()) {
+	    if (vm._activeNode().node_id() == self.node_id()) {
+		    return 'active';
+	    }
+	    else {
+		    var activeTrail = vm.activeTrail();
+		    if (!activeTrail) return '';
+		    for (var i in activeTrail) {
+			    var activeTrailNode = activeTrail[i];
+			    if (activeTrailNode && self.node_id() && (activeTrailNode.node_id() == self.node_id())) {
+				    return 'active';
+			    }
+		    }
+	    }
+	}
+	return '';
+	}
+    );
+
 }
 
 function viewModel() {
@@ -129,7 +151,7 @@ function viewModel() {
     self.loadBreadcrumbForNode = function (node_id) {
 	$.ajax({url: '/article/'+article_slug+'/node-ancestors.json', data: {node_id: node_id}, success: function(data){
 		self.activeTrail.removeAll();
-		$('#comments-in-isotope').isotope( 'reLayout', function(){});
+		$('.comments-in-isotope').each(function(){$(this).isotope( 'reLayout', function(){});});
 		//self.activeNodeComments.removeAll();
 		var ancestors = data.ancestors;
 		for (var i = 0; i < ancestors.length; i++){
@@ -143,6 +165,7 @@ function viewModel() {
 			var activeBreadcrumbNode = new breadcrumbNode(activeNode.id, activeNode.content, activeNode.num_comments, activeNode.user);
 			//self.activeTrail.push(activeBreadcrumbNode);
 			self._activeNode(activeBreadcrumbNode);
+			self.activeTrail.push(activeBreadcrumbNode);
 			self.activeNodeTextareaId = activeBreadcrumbNode.node_textarea_id();
 			self.activeNodeSubmitId = activeBreadcrumbNode.node_submit_id();
 			var activeTC = new topeComment(activeBreadcrumbNode);
@@ -206,7 +229,7 @@ function viewModel() {
 		eval(data);
 			for (var node_id in nums_comments) {
 				self.nodesEachById(node_id, function(theNode) {
-				    theNode.num_comments(nums_comments[node_id]['num_comments']);
+					theNode.num_comments(nums_comments[node_id]['num_comments']);
 				});
 			}
 		}
@@ -228,8 +251,10 @@ function viewModel() {
     };
     
     self.commentAdded = function(el) {
-	
-	$('#comments-in-isotope').isotope( 'appended', $(el) );
+	console.info('added');
+	var $cont = el.closest(".comments-in-isotope");
+	$cont.isotope( 'appended', $(el) );
+
     };
     
     self.showBreadcrumb = function() {
@@ -315,13 +340,13 @@ vm = new viewModel();
 
 //Step 3
 ko.applyBindings(vm);
-$('#comments-in-isotope').isotope({
-	animationOptions: {
-     duration: 750,
-     easing: 'linear',
-     queue: false
-   }
-});
+$('.comments-in-isotope').each(function(){$(this).isotope({
+ 	animationOptions: {
+      duration: 750,
+      easing: 'linear',
+      queue: false
+    }
+});});
 });
 //I can explain this all this weekend
 

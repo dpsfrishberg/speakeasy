@@ -75,8 +75,8 @@
 		</div>
 		<div id="main">
 		<div id="content">
-			<h2>Article Title</h2>
-			<hr>
+                    <h2>Welcome!</h2>
+                    <h3>We are so glad to have you join our discussion! Please read the text and dive right into the comments. All you need to do to participate is sign in with your gmail account (top right of the page). When you comment press the enter button as you write to separate your thoughts into chunks that can be individually responded to. Have at it!</h3><hr>
 			<div id="article-1" class="article">
 				<div id="nodes" data-bind="foreach: articleNodes">
 				   <div data-bind="attr: {id: node_display_id, class: node_class}">
@@ -141,8 +141,36 @@
 
 	<div id="breadcrumb" class="inactive"> <!--content for breadcrumb popup-->
 		<!--adding the comments-->
-		<div id="comments-in-isotope" data-bind="template: {name: 'comment-template', foreach: activeNodeComments, afterAdd: commentAdded}">
+		
+		<div id="breadcrumb-trail" class="comments-in-isotope" data-bind="foreach: activeTrail, afterAdd: commentAdded">
+		    <div data-bind="attr: {id: 'tope-comment-'+node_id(), class: 'comment item isotope-item tope-comment-breadcrumb'}">
+			<div class="comment-nodes">
+			    <div class="node" data-bind="attr: {id: 'node-'+node_id()}">
+				<p class="node-content" data-bind="text: content">
+				</p>
+				<a href="#" data-bind="attr: {class: 'node-button'}"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()}, text: num_comments"></span></a>
+				<div class="clear"></div>
+			    </div>
+			</div>
+		    </div>
 		</div>
+		<div id="comments-trail" class="comments-in-isotope" data-bind="foreach: activeComments, afterAdd: commentAdded">
+		    <div data-bind="attr: {id: 'tope-comment-'+comment_id(), class: 'comment item isotope-item tope-comment'}">
+			    <div class="comment-user" data-bind="with: user"><span data-bind="text: first_name + '&#151;'"></span></div>
+			    <div class="comment-nodes" data-bind="foreach: nodes">
+			    <div class="node" data-bind="attr: {id: node_display_id}">
+				<p class="node-content" data-bind="text: content">
+				</p>
+				<a href="#" data-bind="attr: {class: 'node-button'}"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()}, text: num_comments"></span></a>
+				<div class="clear"></div>
+			    </div>
+			</div>
+			<div class="clear"></div>
+		    </div>
+		</div>
+
+		<!--<div id="comments-in-isotope" data-bind="template: {name: 'comment-template', foreach: activeNodeComments, afterAdd: commentAdded}">
+		</div>-->
 		
 		<script type="text/html" id="comment-template">
 			<div data-bind="attr: {id: display_id, class: display_class}">
@@ -161,7 +189,7 @@
 		<!--adding the submit box-->
 		<div class="comment-submit-form" data-bind="with: _activeNode">
 					<label data-bind="attr: {for: node_textarea_id}">Leave A Response</label>
-					<!--<a href="http://www.igendelman.com/art/Speakeasy.gif">HELP!</a>-->
+<!--					<a href="http://www.igendelman.com/art/Speakeasy.gif">HELP!</a>-->
 					<textarea placeholder= "Enter your text and separate your thoughts by pressing the 'enter' button" data-bind="attr: {id: node_textarea_id, name: node_textarea_id}" ></textarea>
 					<input type="submit" data-bind="attr: {id: node_submit_id, name: node_submit_id}" value="Submit"/>
 					<div class="clear"></div>
