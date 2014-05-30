@@ -1123,7 +1123,7 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     background-color: #c1d1e1;
 }
 
-.item.tope-comment-breadcrumb.active {
+.item.tope-comment-breadcrumb:last-child {
     border: solid black 6px ;
 }
 

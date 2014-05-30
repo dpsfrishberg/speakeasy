@@ -141,7 +141,7 @@ function breadcrumbNode(node_id, content, num_comments, user, updated) {
         // TODO: Move to baseNode
         if (vm._activeNode()) {
             if (vm._activeNode().node_id() == self.node_id()) {
-                    return 'active-node';
+                    return 'active';
             }
             else {
                     var activeTrail = vm.activeTrail();
@@ -149,7 +149,7 @@ function breadcrumbNode(node_id, content, num_comments, user, updated) {
                     for (var i in activeTrail) {
                             var activeTrailNode = activeTrail[i];
                             if (activeTrailNode && self.node_id() && (activeTrailNode.node_id() == self.node_id())) {
-                                    return 'active-node';
+                                    return 'active';
                             }
                     }
             }
