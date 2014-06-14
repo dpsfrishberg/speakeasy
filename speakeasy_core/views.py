@@ -267,3 +267,6 @@ def article(request, slug=None):
     context.update({'anonymous': request.user.id is None, 'article_slug': slug})
     context.update(csrf(request))
     return render_to_response('article.html', context)
+
+def create_account(request):
+    return render_to_response('account/create.html')
