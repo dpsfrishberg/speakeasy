@@ -355,6 +355,13 @@ function viewModel() {
 	$("html").removeClass("inactive");
     }
     
+    self.breadcrumbIsShown = function() {
+        
+        var ret = !($("#breadcrumb").hasClass("inactive"));
+        console.info(ret);
+        return ret;
+    };
+    
     self.activeNodeTextareaId = ko.observable();
     self.activeNodeSubmitId = ko.observable();
     
@@ -420,12 +427,18 @@ $(function() {
 				var $node = $button.closest('.node, .breadcrumb-node');
 				var node_id = $node.attr('id').replace('node-', '');
 				vm.setActiveNode(node_id);
-			}			
+			}
+                        e.stopPropagation();
 		});
 	
-	$(document).on('touchstart', '#breadcrumb, body', function(e) {
-		if (e.currentTarget != e.delegateTarget) return;
-		vm.hideBreadcrumb();
+	$(document).on('click touchstart', '#breadcrumb, body', function(e) {
+		console.info("clicked");
+                console.info(e);
+                //if (e.currentTarget != e.delegateTarget) return;
+                if (vm.breadcrumbIsShown() && ($(e.target).is("#breadcrumb") || $(e.target).parents("#breadcrumb").length == 0)) {
+                    console.info("hiding");
+                    vm.hideBreadcrumb();
+                }
 	});
 });
 
