@@ -30,6 +30,7 @@ from django_openid_auth.forms import OpenIDLoginForm
 from django_openid_auth.store import DjangoOpenIDStore
 import django_openid_auth
 from django_openid_auth.views import make_consumer, login_complete, render_openid_request
+from django.contrib.auth.decorators import login_required
 
 def login_begin(request, template_name='openid/login.html',
                 redirect_field_name=REDIRECT_FIELD_NAME):
@@ -268,9 +269,11 @@ def article(request, slug=None):
     context.update(csrf(request))
     return render_to_response('article.html', context)
 
+@login_required
 def list_domains(request):
     return render_to_response('account/list.html', {'domains': Domain.objects.filter(admins=request.user)})
 
+@login_required
 def create_account(request):
     user = request.user
     if request.method == "POST":
