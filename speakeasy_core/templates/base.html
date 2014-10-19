@@ -1,7 +1,7 @@
 {% load static %}
 <html>
 	<head>
-		<title>Speakeasy</title>
+		<title>{{ title }}</title>
 		<link rel="stylesheet" type="text/css" href="{% static 'speakeasy.css' %}" />
                 {% block first_script %}
                 {% endblock first_script %}
@@ -14,9 +14,24 @@
                 {% endblock extra_head %}
 		
 	</head>
-        {% block body %}
-	<body>		
-		
+	<body>
+            {% include 'article/colors.html' %}
+            <div id="header">
+		<a href= "http://www.speakeasycomments.com/articles"><img alt="S" id= "Sletter" src="http://i.imgur.com/XtqDmB2.png"/>
+                    <span id="title">peakeasy</span></a>
+                {% if anonymous %}
+                    <a id="login_button" href="/login?next=/article/{{article_slug}}">Log in</a>
+                {% else %}
+                    <a id="logout_button" href="/logout?next=/article/{{article_slug}}">Log out</a>
+                {% endif %}
+                    
+	    </div>
+            <div id="main">
+
+                <div id="content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
 	</body>
-        {% endblock body %}
 </html>

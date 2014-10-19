@@ -52,9 +52,15 @@ body {
 }
 
 #content, #comments {
+    height: 100%;   
+}
+
+#comments {
     float: left;
-    height: 100%;
-    
+}
+
+#content {
+    overflow: hidden;
 }
 
 #breadcrumb {
@@ -1263,4 +1269,10 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     width: 100%;
     background: black;
     margin: 0px;
+}
+
+
+/* Account Pages */
+code {
+    display: block;
 }

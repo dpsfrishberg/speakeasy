@@ -1,14 +1,20 @@
+from django.conf import settings
 from django.contrib import admin
 from django.db import models
 from django.contrib.auth.models import User
 import time
+import re
 
 def get_current_timestamp():
     return int(time.time())
 
 class Article(models.Model):
     slug = models.CharField(max_length=200)
-    pass
+    
+    @property
+    def title(self):
+        return re.sub(r'(^\w| \w)', lambda match: match.group(0).upper(), self.slug.replace("_", " "))
+    
     def __repr__(self):
         return self.slug
     def __unicode__(self):
@@ -126,5 +132,12 @@ class SpeakeasyComment(models.Model):
 class CommentNode(Node):
     comment = models.ForeignKey(SpeakeasyComment)
 
-#class SpeakeasyUser(models.Model):
+
+# Administration
+class Domain(models.Model):
+    name = models.CharField(max_length=200)
+    admins = models.ManyToManyField(User)
     
+    @property
+    def script(self):
+        return "<script type=\"text/javascript\" src=\"//%s/embedded/%s.js\"></script>" % (settings.PROJECT_DOMAIN, self.id)

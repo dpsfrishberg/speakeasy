@@ -1,8 +1,9 @@
 # Create your views here.
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.core.context_processors import csrf
-from speakeasy_core.models import Article, Node, ArticleNode, SpeakeasyComment, CommentNode, get_current_timestamp as _get_current_timestamp
+from speakeasy_core.models import Article, Node, ArticleNode, SpeakeasyComment, CommentNode, Domain, get_current_timestamp as _get_current_timestamp
+from speakeasy_core.forms import AccountCreationForm
 
 import json
 import re
@@ -257,16 +258,34 @@ def _get_node_changes(slug, timestamp, exclude=[]):
 
 def get_node_changes(request, slug=None, timestamp=None):
     obj = _get_node_changes(slug, timestamp)
-    #obj = {"foo": "bar"}
     return HttpResponse("data = " + json.dumps(obj), mimetype='application/javascript')
 
 def article(request, slug=None):
     
     article = Article.objects.get(slug=slug)
     context = RequestContext(request)
-    context.update({'anonymous': request.user.id is None, 'article_slug': slug})
+    context.update({'anonymous': request.user.id is None, 'article_slug': slug, 'title': 'Speakeasy - %s' % article.title })
     context.update(csrf(request))
     return render_to_response('article.html', context)
 
+def list_domains(request):
+    return render_to_response('account/list.html', {'domains': Domain.objects.filter(admins=request.user)})
+
 def create_account(request):
-    return render_to_response('account/create.html')
+    user = request.user
+    if request.method == "POST":
+        response = ""
+        data = request.POST
+
+        for domain_name in data.get("domains", "").replace("\r\n", "\n").split("\n"):
+            domain = Domain(name=domain_name)
+            domain.save()
+            domain.admins.add(user)
+            domain.save()
+            
+        return redirect("/account/list")
+    else:
+        context = RequestContext(request)
+        context.update({'anonymous': request.user.id is None, 'form': AccountCreationForm(), 'title': 'Create an Account'})
+        context.update(csrf(request))
+        return render_to_response('account/create.html', context)

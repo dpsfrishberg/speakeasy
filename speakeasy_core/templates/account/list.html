@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for domain in domains %}
+    <p>
+        Your script for {{ domain.name }} is:
+        <code>{{ domain.script | force_escape }}</code>
+    </p>
+{% endfor %}
+{% endblock content %}
