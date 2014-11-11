@@ -14,8 +14,11 @@ class GoogleBackend:
     google_lastname = openid_response.getSigned('http://openid.net/srv/ax/1.0', 'value.ext1')
     try:
       user = User.objects.get(username=google_email)
+      if user.email == u'':
+        user.email = google_email
+        user.save()
     except User.DoesNotExist:
-      user = User(username=google_email, first_name=google_firstname, last_name=google_lastname)
+      user = User(username=google_email, first_name=google_firstname, last_name=google_lastname, email=google_email)
       user.save()
 
     return user
