@@ -233,6 +233,8 @@ function viewModel() {
 	vm.activeNodeComments.removeAll();
 	vm.loadBreadcrumbForNode(node_id);
 	vm.loadCommentsForNode(node_id);
+        console.info(node_id);
+        window.location.hash = node_id;
 }
     
     self.pollForComments = function(){
@@ -327,7 +329,7 @@ function viewModel() {
 	applyFuncToNodes = function(nodes) {
 	    for (var i in nodes) {
 		var theNode = nodes[i];
-		if (theNode.node_id() == node_id) {
+		if (typeof theNode !== "undefined" && theNode.node_id() == node_id) {
 			node_func(theNode);
 		}
     	    }
@@ -341,7 +343,6 @@ function viewModel() {
     
     self.commentAdded = function(el) {
 	var $cont = el.closest(".comments-in-isotope");
-        console.info($cont);
 	$cont.isotope( 'appended', $(el) );
     };
     
@@ -358,7 +359,6 @@ function viewModel() {
     self.breadcrumbIsShown = function() {
         
         var ret = !($("#breadcrumb").hasClass("inactive"));
-        console.info(ret);
         return ret;
     };
     
@@ -432,16 +432,28 @@ $(function() {
 		});
 	
 	$(document).on('click touchstart', '#breadcrumb, body', function(e) {
-		console.info("clicked");
-                console.info(e);
-                //if (e.currentTarget != e.delegateTarget) return;
+		//if (e.currentTarget != e.delegateTarget) return;
                 if (vm.breadcrumbIsShown() && ($(e.target).is("#breadcrumb") || $(e.target).parents("#breadcrumb").length == 0)) {
-                    console.info("hiding");
                     vm.hideBreadcrumb();
                 }
 	});
 });
 
+function goToCommentFromHash() {
+    var nodeId = window.location.hash || null;
+    nodeId = nodeId ? nodeId.replace(/^#/, "") : null;
+    console.info(nodeId);
+    if (nodeId === null || nodeId === "" || (vm._activeNode() && vm._activeNode().node_id() == nodeId)) {
+        return;
+    }
+    console.info("continuing");
+    vm.showBreadcrumb();
+    if (nodeId) {
+        vm.loadBreadcrumbForNode(nodeId);
+    }
+}
+
+$(window).on("hashchange", goToCommentFromHash);
 
 $(function() {
 //Step 1
@@ -457,8 +469,9 @@ $('.comments-in-isotope').each(function(){$(this).isotope({
      queue: false
    }
 });});
+
+goToCommentFromHash();
 });
-//I can explain this all this weekend
 
 /*
     Notes: 
