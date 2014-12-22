@@ -31,6 +31,23 @@ from django_openid_auth.store import DjangoOpenIDStore
 import django_openid_auth
 from django_openid_auth.views import make_consumer, login_complete, render_openid_request
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+
+def notify(comment):
+    commenters = comment.article.get_subscribers()
+    for commenter in commenters:
+        send_mail('New comment',
+                  '%s: %s' % (reduce(
+                                lambda x, y: "%s\n\n%s" % (x, y),
+                                [node.content for node
+                                 in CommentNode.objects.filter(comment=comment)],
+                                ''),
+                              comment.node.permalink
+                              ),
+                  settings.DEFAULT_FROM_EMAIL,
+                  [settings.DEFAULT_FROM_EMAIL, commenter.email],
+                  fail_silently=False)
+
 
 def login_begin(request, template_name='openid/login.html',
                 redirect_field_name=REDIRECT_FIELD_NAME):
@@ -218,6 +235,8 @@ def post_comment(request, slug=None):
         comment_node.save()
         comment_nodes.append(comment_node)
     
+    notify(comment)
+
     obj = {}
     comments = {}
     comments[comment.id] = {'comment_id': comment.id, 'node_id': node_id, 'user': {'id': user.id, 'first_name': user.first_name, 'last_name': user.last_name, 'username': user.username}, 'nodes': {}}
