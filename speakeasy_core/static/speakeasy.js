@@ -428,6 +428,7 @@ $(function() {
 				var node_id = $node.attr('id').replace('node-', '');
 				vm.setActiveNode(node_id);
 			}
+			e.preventDefault();
                         e.stopPropagation();
 		});
 	
