@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib import admin
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.mail import send_mail
 import time
 import re
 
@@ -33,6 +32,10 @@ class Node(models.Model):
     content = models.TextField()
     article = models.ForeignKey(Article)
     updated = models.IntegerField(default=0)
+
+    @property
+    def permalink(self):
+        return "http://%s/article/%s#%s" % (settings.PROJECT_DOMAIN, self.article.slug, self.id)
     
     def get_ancestors(self):
         ar = []
@@ -133,12 +136,7 @@ class SpeakeasyComment(models.Model):
     node = models.ForeignKey(Node)
     user = models.ForeignKey(User)
     article = models.ForeignKey(Article)
-    
-    def save(self, *args, **kwargs):
-        super(SpeakeasyComment, self).save(*args, **kwargs)
-        commenters = self.article.get_subscribers()
-        for commenter in commenters:
-            send_mail('Test', 'test %s' % commenter.email, 'danielpfrishberg@gmail.com', ['danielpfrishberg@gmail.com', commenter.email], fail_silently=False)
+            
     
 class CommentNode(Node):
     comment = models.ForeignKey(SpeakeasyComment)
