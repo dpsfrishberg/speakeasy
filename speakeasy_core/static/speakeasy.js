@@ -436,6 +436,7 @@ $(function() {
 		//if (e.currentTarget != e.delegateTarget) return;
                 if (vm.breadcrumbIsShown() && ($(e.target).is("#breadcrumb") || $(e.target).parents("#breadcrumb").length == 0)) {
                     vm.hideBreadcrumb();
+                    window.location.hash = "";
                 }
 	});
 });
