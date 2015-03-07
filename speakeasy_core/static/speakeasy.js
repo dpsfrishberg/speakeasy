@@ -316,7 +316,8 @@ function viewModel() {
 
     };
     self.getNodeCountChanges = function() {
-	$.ajax({url: "/article/"+article_slug+"/"+self._lastUpdatedTimestamp+"/get-node-changes.json?" + Math.random(),
+	// TODO: Why Math.random()?
+        $.ajax({url: "/article/"+article_slug+"/"+self._lastUpdatedTimestamp+"/get-node-changes.json?" + Math.random(),
 	       success: function(data){
 		eval(data);
 		self.updateNodesFromChanges(data["nodes"], data["timestamp"]);

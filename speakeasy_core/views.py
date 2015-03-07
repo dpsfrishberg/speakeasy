@@ -266,9 +266,11 @@ def check_comments(request, slug=None):
 def _get_node_changes(slug, timestamp, exclude=[]):    
     article = Article.objects.get(slug=slug)
     obj = {}
-    obj["timestamp"] = _get_current_timestamp()
+    #obj["timestamp"] = _get_current_timestamp()
     obj["nodes"] = {}
     nodes = Node.objects.filter(article=article, updated__gt=timestamp);
+    updated_times = [node.updated for node in nodes]
+    obj["timestamp"] = max(updated_times) if len(updated_times) > 0 else timestamp
     for node in nodes:
         obj["nodes"][node.id] = {"num_comments": node.num_comments(), "updated": node.updated}
         #for a_node in node.get_self_and_ancestor_nodes():
