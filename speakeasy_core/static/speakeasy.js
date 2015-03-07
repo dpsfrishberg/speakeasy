@@ -77,6 +77,7 @@ var baseNode = function() {
 	    }*/
 	    if (notify_if_new) {
 		self.has_new_comments(true);
+                console.info("Notifying for " + self.node_id());
 	    }
 	    self.num_comments(new_num_comments);
 	};
@@ -233,6 +234,9 @@ function viewModel() {
 	vm.activeNodeComments.removeAll();
 	vm.loadBreadcrumbForNode(node_id);
 	vm.loadCommentsForNode(node_id);
+        self.nodesEachById(node_id, function(theNode) {
+            theNode.has_new_comments(false);
+        });
         console.info(node_id);
         window.location.hash = node_id;
 }
