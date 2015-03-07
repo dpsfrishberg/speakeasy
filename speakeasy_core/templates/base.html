@@ -1,37 +1,39 @@
 {% load static %}
 <html>
-	<head>
-		<title>{{ title }}</title>
-		<link rel="stylesheet" type="text/css" href="{% static 'speakeasy.css' %}" />
-                {% block first_script %}
-                {% endblock first_script %}
-                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-		<script src="{% static 'jquery.cookie.js' %}"></script>
-		<script type="text/javascript" src="{% static 'knockout-2.1.0.js' %}"></script>
-                <script type= "text/javascript" src="{% static 'jquery.isotope.min.js' %}"></script>	
-                {% block extra_head %}
-                {% endblock extra_head %}
+    <head>
+        <title>{{ title }}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'speakeasy.css' %}" />
+        {% block first_script %}
+        {% endblock first_script %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+	<script src="{% static 'jquery.cookie.js' %}"></script>
+        <script type="text/javascript" src="{% static 'knockout-2.1.0.js' %}"></script>
+        <script type= "text/javascript" src="{% static 'jquery.isotope.min.js' %}"></script>	
+        {% block extra_head %}
+        {% endblock extra_head %}
 		
-	</head>
-	<body>
-            {% include 'article/colors.html' %}
-            <div id="header">
-		<a href= "http://www.speakeasycomments.com/articles"><img alt="S" id= "Sletter" src="http://i.imgur.com/XtqDmB2.png"/>
-                    <span id="title">peakeasy</span></a>
-                {% if anonymous %}
-                    <a id="login_button" href="/login?next=/article/{{article_slug}}">Log in</a>
-                {% else %}
-                    <a id="logout_button" href="/logout?next=/article/{{article_slug}}">Log out</a>
-                {% endif %}
+    </head>
+    <body>
+        {% include 'article/colors.html' %}
+        <div id="header">
+            <a href= "http://www.speakeasycomments.com/articles">
+                <img alt="S" id= "Sletter" src="http://i.imgur.com/XtqDmB2.png"/>
+                <span id="title">peakeasy</span>
+            </a>
+            {% if anonymous %}
+                <a id="login_button" href="/login?next=/article/{{article_slug}}">Log in</a>
+            {% else %}
+                <a id="logout_button" href="/logout?next=/article/{{article_slug}}">Log out</a>
+            {% endif %}
                     
-	    </div>
-            <div id="main">
+        </div>
+        <div id="main">
 
-                <div id="content">
-                    {% block content %}
-                    {% endblock %}
-                </div>
+            <div id="content">
+                {% block content %}
+                {% endblock %}
             </div>
-	</body>
+        </div>
+    </body>
 </html>
