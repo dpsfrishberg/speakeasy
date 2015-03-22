@@ -124,26 +124,26 @@ def index(request):
     articles = Article.objects.all()
     return render_to_response("index.html", {"articles": articles})
 
-def tree(request, node=None):
+def tree(request, slug=None, node=None):
     obj = {}
-    article = Article.objects.get(slug=slug)
 
     if node is None:
+        article = Article.objects.get(slug=slug)
         nodes = ArticleNode.objects.filter(article=article)
         for node in nodes:
-            obj[node.id] = tree(request, node)
+            obj[node.id] = tree(request, node=node)
         return HttpResponse(json.dumps(obj), mimetype='application/javascript')
     elif type(node) == SpeakeasyComment:
         obj = {'type': 'comment', 'id': node.id, 'nodes': {}, 'user_id': 1}
         comment_nodes = CommentNode.objects.filter(comment=node)
         for comment_node in comment_nodes:
-            obj['nodes'][comment_node.id] = tree(request, comment_node)
+            obj['nodes'][comment_node.id] = tree(request, node=comment_node)
         return obj
     else: # type(node) == ArticleNode or type(node) == CommentNode
         comments = SpeakeasyComment.objects.filter(node=node)
         obj = {'type': 'node', 'id': node.id, 'comments': {}, 'content': node.content}
         for comment in comments:
-            obj['comments'][comment.id] = tree(request, comment)
+            obj['comments'][comment.id] = tree(request, node=comment)
         return obj
 
 

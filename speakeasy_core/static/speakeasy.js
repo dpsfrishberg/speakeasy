@@ -18,152 +18,57 @@ $.ajaxSetup({
     }
     });
     
-
-function comment(comment_id, parent_id, user) {
-    var self = this;
-
-    self.comment_id = ko.observable(comment_id);
-    //define the properties of a comment
-    self.comment_display_id = ko.observable('comment-'+comment_id);
-    self.parent_id = ko.observable(parent_id);
-    self.user = ko.observable(user);
-    self.nodes = ko.observableArray();
-    self.speakeasy_type = 'comment';
-}
-
-function topeComment(obj) {
-    var self = this;
+function SpeakeasyNode(nodeId, parentId, content, comments) {
+    this.nodeId = ko.observable(nodeId);
+    this.parentId = ko.observable(parentId);
+    this.content = ko.observable(content);
     
-    self.obj = obj;
-    if (obj.speakeasy_type == 'node' || obj.speakeasy_type == 'breadcrumbNode') {
-	self.display_id = ko.observable('tope-comment-'+self.obj.node_id());
-	self.display_class = ko.observable('comment item isotope-item tope-comment-breadcrumb');
-
-
-	self.user = [];
-	if (self.obj.user()) {
-	    self.user.push(self.obj.user());
-	}
-	self.nodes = ko.observableArray();
-	self.nodes.push(new node(self.obj.node_id(), (self.obj.parent_id ? self.obj.parent_id() : -1), self.obj.content(), self.obj.num_comments(), self.obj.updated()));
-    }
-    else { //comment
-	self.display_id = ko.observable('tope-comment-'+self.obj.comment_id());
-	self.display_class = ko.observable('comment item isotope-item tope-comment');
-	/*self.content = ko.computed(function(){
-		var content = "";
-		var nodes = this.obj.nodes();
-		for (var i = 0; i < nodes.length; i++) {
-		    content += nodes[i].content();
-		}
-		return content;
-		}, self);*/
-	
-	self.nodes = self.obj.nodes;
-	self.user = [self.obj.user];
+    this.comments = ko.observableArray();
+    for (var commentId in comments) {
+        var comment = comments[commentId];
+        this.comments.push(new SpeakeasyComment(commentId, nodeId, comment.userId, comment.nodes));
     }
     
+    this.isActive = ko.computed(function() {
+        return vm._activeNode() === this;
+    }, this);
+    
+    this.hasNewComments = ko.computed(function() {
+        return false;
+    }, this);
+    
+    this.numComments = ko.computed(function() {
+        var comments = this.comments();
+        var num = 0;
+        num += comments.length;
+        comments.forEach(function(comment) {    
+            num += comment.numComments();
+        });
+    
+        return num;
+    }, this);
 }
 
-var baseNode = function() {
-    // TODO: Polling for and updating comment counts should be handled, at least partly, in this class.
-    this.init = function() {
-	var self = this;
-	self.has_new_comments = ko.observable(false);
-	self.update_num_comments = function(new_num_comments, notify_if_new) {
-	    /*var old_num_comments = self.num_comments();
-	    if (new_num_comments > old_num_comments) {
-	        self.has_new_comments(true);
-	    }*/
-	    if (notify_if_new) {
-		self.has_new_comments(true);
-                console.info("Notifying for " + self.node_id());
-	    }
-	    self.num_comments(new_num_comments);
-	};
-	self.new_comments_class = ko.computed(function(){
-	    return self.has_new_comments() ? 'has-new-comments' : '';
-	});
-    };
+function SpeakeasyComment(commentId, parentId, userId, nodes) {
+    this.commentId = ko.observable(commentId);
+    this.parentId = ko.observable(parentId);
+    this.userId = ko.observable(userId);
+    this.nodes = ko.observableArray();
     
-};
-function node(node_id, parent_id, content, num_comments, updated) {
-    this.init.call(this);
-    var self = this;
+    for (var nodeId in nodes) {
+        var node = nodes[nodeId];
+        this.nodes.push(new SpeakeasyNode(nodeId, commentId, node.content, node.comments));
+    }
     
-    self.node_id = ko.observable(node_id);
-    self.node_display_id = ko.observable('node-'+node_id);
-    self.node_textarea_id = ko.observable('post-comment-'+node_id);
-    self.node_submit_id = ko.observable('post-comment-submit-'+node_id);
-    self.content = ko.observable(content);
-    self.parent_id = ko.observable(parent_id);
-    self.num_comments = ko.observable(num_comments);
-    self.updated = ko.observable(updated);
-    
-        self.node_class = ko.computed(function() {
-	if (vm._activeNode()){
-		if (vm._activeNode().node_id() == self.node_id()) {
-			return 'node active-node';
-		}
-		else {
-			var activeTrail = vm.activeTrail();
-			if (!activeTrail) return 'node';
-			for (var i in activeTrail) {
-				var activeTrailNode = activeTrail[i];
-				if (activeTrailNode && (activeTrailNode.node_id() == self.node_id())) {
-					return 'node active-node';
-				}
-			}
-		}
-	}
-	return 'node';
-    });
-    self.speakeasy_type = 'node';
+    this.numComments = ko.computed(function() {
+        var nodes = this.nodes();
+        var num = 0;
+        nodes.forEach(function(node) {
+            num += node.numComments();
+        });
+        return num;    
+    }, this);
 }
-node.prototype = new baseNode();
-node.prototype.constructor = node;
-
-function breadcrumbNode(node_id, content, num_comments, user, updated) {
-    this.init.call(this);
-    var self = this;
-        
-    self.node_id = ko.observable(node_id);
-    self.node_display_id = ko.observable('node-'+node_id);
-    self.node_textarea_id = ko.observable('post-comment-'+node_id);
-    self.node_submit_id = ko.observable('post-comment-submit-'+node_id);
-    self.num_comments = ko.observable(num_comments);
-    self.content = ko.observable(content);
-    self.speakeasy_type = 'breadcrumbNode';
-    if (!user) user = null;
-    self.user = ko.observable(user);
-    self.updated = ko.observable(updated);
-    
-    self.active_class = ko.computed(function() {
-        // TODO: Move to baseNode
-        if (vm._activeNode()) {
-            if (vm._activeNode().node_id() == self.node_id()) {
-                    return 'active';
-            }
-            else {
-                    var activeTrail = vm.activeTrail();
-                    if (!activeTrail) return '';
-                    for (var i in activeTrail) {
-                            var activeTrailNode = activeTrail[i];
-                            if (activeTrailNode && self.node_id() && (activeTrailNode.node_id() == self.node_id())) {
-                                    return 'active';
-                            }
-                    }
-            }
-        }
-        return '';
-        }
-    );
-
-
-}
-breadcrumbNode.prototype = new baseNode();
-breadcrumbNode.prototype.constructor = breadcrumbNode;
-
 
 function viewModel() {
     //Step 2 and so on below
@@ -171,16 +76,17 @@ function viewModel() {
 
     self.articleNodes = ko.observableArray();
 
-    self.loadArticleNodes = function () {
-	$.getJSON('/article/'+article_slug+'/article-nodes.json', function(data){
-		for (var node_id in data) {
-			var articleNode = new node(node_id, 0, data[node_id].content, data[node_id].num_comments, data[node_id].updated);
-			self.articleNodes.push(articleNode);
-		}
-	});
+    self.loadTree = function () {
+        $.getJSON('/article/'+article_slug+'/tree.json', function(data) {
+            for (var nodeId in data) {
+                var node = data[nodeId];
+                self.articleNodes.push(new SpeakeasyNode(nodeId, -1, node.content, node.comments));
+            }
+        });
     };
+
     self._activeNode = null;
-    
+    /*
     self.loadCommentsForNode = function (node_id) {
 	$.ajax({url: '/article/'+article_slug+'/node-comments.json', data: {node_id: node_id}, dataType: 'json',
 	       success: function(data) {
@@ -280,9 +186,6 @@ function viewModel() {
 				self.activeNodeComments.push(new topeComment(newComment));
 			    }
 		    }
-		    /*else if (self._nodeInActiveTrail(dataComment.node_id)) {
-			var oldComment = self._getExistingComment()
-		    }*/
 	    }
 	    
 	    //self.updateNodeCommentCounts();
@@ -374,14 +277,14 @@ function viewModel() {
     self.activeNodeComments = ko.observableArray();
     
     self.activeTrail = ko.observableArray();
-    
+    */
     self._activeNode = ko.observable();
     
+    self.loadTree();
     
-    self.loadArticleNodes();
-        self.pollForComments();
+    //self.pollForComments();
 
-    self._lastUpdatedTimestamp = 0;
+    //self._lastUpdatedTimestamp = 0;
 };
 
 
@@ -469,7 +372,8 @@ vm = new viewModel();
 
 //Step 3
 ko.applyBindings(vm);
-$('.comments-in-isotope').each(function(){$(this).isotope({
+/*
+ $('.comments-in-isotope').each(function(){$(this).isotope({
 	animationOptions: {
      duration: 750,
      easing: 'linear',
@@ -477,7 +381,7 @@ $('.comments-in-isotope').each(function(){$(this).isotope({
    }
 });});
 
-goToCommentFromHash();
+goToCommentFromHash();*/
 });
 
 /*
