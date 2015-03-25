@@ -15,10 +15,10 @@
         
     <div id="article-1" class="article">
         <div id="nodes" data-bind="foreach: articleNodes">
-           <div data-bind="attr: {id: 'node-' + nodeId(), class: 'node' + ((isActive()) ? ' active-node' : '')}" >
+           <div data-bind="attr: {id: 'node-' + nodeID(), class: 'node' + ((isActive()) ? ' active-node' : '')}" >
                 <p class="node-content" data-bind="text: content">
                 </p>
-                <a href="#" data-bind="attr: {class: 'node-button' + (hasNewComments() ? ' has-new-comments' : '')}"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+numComments()}, text: numComments"></span></a>
+                <a href="#" data-bind="attr: {class: 'node-button' + (isActive() ? ' node-button-open' : '') + (hasNewComments() ? ' has-new-comments' : '')}"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+numComments()}, text: numComments"></span></a>
                 <div class="clear"></div>
            </div>
         </div>

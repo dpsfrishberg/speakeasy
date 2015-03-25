@@ -18,15 +18,15 @@ $.ajaxSetup({
     }
     });
     
-function SpeakeasyNode(nodeId, parentId, content, comments) {
-    this.nodeId = ko.observable(nodeId);
-    this.parentId = ko.observable(parentId);
+function SpeakeasyNode(nodeID, parentID, content, comments) {
+    this.nodeID = ko.observable(nodeID);
+    this.parentID = ko.observable(parentID);
     this.content = ko.observable(content);
     
     this.comments = ko.observableArray();
-    for (var commentId in comments) {
-        var comment = comments[commentId];
-        this.comments.push(new SpeakeasyComment(commentId, nodeId, comment.userId, comment.nodes));
+    for (var commentID in comments) {
+        var comment = comments[commentID];
+        this.comments.push(new SpeakeasyComment(commentID, nodeID, comment.userID, comment.nodes));
     }
     
     this.isActive = ko.computed(function() {
@@ -49,15 +49,15 @@ function SpeakeasyNode(nodeId, parentId, content, comments) {
     }, this);
 }
 
-function SpeakeasyComment(commentId, parentId, userId, nodes) {
-    this.commentId = ko.observable(commentId);
-    this.parentId = ko.observable(parentId);
-    this.userId = ko.observable(userId);
+function SpeakeasyComment(commentID, parentID, userID, nodes) {
+    this.commentID = ko.observable(commentID);
+    this.parentID = ko.observable(parentID);
+    this.userID = ko.observable(userID);
     this.nodes = ko.observableArray();
     
-    for (var nodeId in nodes) {
-        var node = nodes[nodeId];
-        this.nodes.push(new SpeakeasyNode(nodeId, commentId, node.content, node.comments));
+    for (var nodeID in nodes) {
+        var node = nodes[nodeID];
+        this.nodes.push(new SpeakeasyNode(nodeID, commentID, node.content, node.comments));
     }
     
     this.numComments = ko.computed(function() {
@@ -78,14 +78,52 @@ function viewModel() {
 
     self.loadTree = function () {
         $.getJSON('/article/'+article_slug+'/tree.json', function(data) {
-            for (var nodeId in data) {
-                var node = data[nodeId];
-                self.articleNodes.push(new SpeakeasyNode(nodeId, -1, node.content, node.comments));
+            for (var nodeID in data) {
+                var node = data[nodeID];
+                self.articleNodes.push(new SpeakeasyNode(nodeID, -1, node.content, node.comments));
             }
         });
     };
 
-    self._activeNode = null;
+    self.getNodeByID = function(nodeID) {
+        var node = null;
+        $(self.articleNodes()).each(function(){
+            if (this.nodeID == nodeID) {
+                node = this;
+                return;
+            }
+            var nodes = traverse(this).reduce(function(acc, x) {
+                if (typeof x.nodeID !== "undefined" && x.nodeID == nodeID) {
+                    acc.push(x);
+                }
+            }, []);
+            if (nodes.length > 0) {
+                node = nodes[0];
+            }
+        });
+        return node;
+    };
+
+    self.setActiveNode = function(nodeID) {
+	var node = vm.getNodeByID(nodeID);
+        self._activeNode(node);
+        /*vm.activeNodeComments.removeAll();
+	vm.loadBreadcrumbForNode(node_id);
+	vm.loadCommentsForNode(node_id);
+        self.nodesEachById(node_id, function(theNode) {
+            theNode.has_new_comments(false);
+        });
+        console.info(node_id);
+        window.location.hash = node_id;
+        */
+    }
+
+    self.showBreadcrumb = function() {
+	$("html").addClass("inactive");
+	$("#breadcrumb").removeClass("inactive");
+    };
+
+    self._activeNode = ko.observable();
     /*
     self.loadCommentsForNode = function (node_id) {
 	$.ajax({url: '/article/'+article_slug+'/node-comments.json', data: {node_id: node_id}, dataType: 'json',
@@ -136,16 +174,6 @@ function viewModel() {
     };
     
     
-    self.setActiveNode = function(node_id) {
-	vm.activeNodeComments.removeAll();
-	vm.loadBreadcrumbForNode(node_id);
-	vm.loadCommentsForNode(node_id);
-        self.nodesEachById(node_id, function(theNode) {
-            theNode.has_new_comments(false);
-        });
-        console.info(node_id);
-        window.location.hash = node_id;
-}
     
     self.pollForComments = function(){
       var self = this;
@@ -254,10 +282,6 @@ function viewModel() {
 	$cont.isotope( 'appended', $(el) );
     };
     
-    self.showBreadcrumb = function() {
-	$("html").addClass("inactive");
-	$("#breadcrumb").removeClass("inactive");
-    };
     
     self.hideBreadcrumb = function() {
 	$("#breadcrumb").addClass("inactive");
@@ -329,15 +353,11 @@ $(function() {
 		});
 	
 	$(document).on('click', '.node, .breadcrumb-node', function(e) {
+			vm.setActiveNode($(e.target).closest('.node, .breadcrumb-node').attr('id').replace('node-', ''));
 			vm.showBreadcrumb();
-			var $button = $(e.target);
-			if (!$button.hasClass('node-button-open')) {
-				var $node = $button.closest('.node, .breadcrumb-node');
-				var node_id = $node.attr('id').replace('node-', '');
-				vm.setActiveNode(node_id);
-			}
 			e.preventDefault();
                         e.stopPropagation();
+                        
 		});
 	
 	$(document).on('click touchstart', '#breadcrumb, body', function(e) {
