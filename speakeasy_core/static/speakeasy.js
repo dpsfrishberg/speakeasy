@@ -35,7 +35,7 @@ function SpeakeasyNode(nodeID, parentComment, content, comments) {
     self.comments = ko.observableArray();
     for (var commentID in comments) {
         var comment = comments[commentID];
-        self.comments.push(new SpeakeasyComment(commentID, null, comment.userID, comment.nodes));
+        self.comments.push(new SpeakeasyComment(commentID, self, comment.userID, comment.nodes));
     }
     
     self.isActive = ko.computed(function() {
@@ -67,7 +67,7 @@ function SpeakeasyComment(commentID, parentNode, userID, nodes) {
     
     for (var nodeID in nodes) {
         var node = nodes[nodeID];
-        self.nodes.push(new SpeakeasyNode(nodeID, null, node.content, node.comments));
+        self.nodes.push(new SpeakeasyNode(nodeID, self, node.content, node.comments));
     }
     
     self.numComments = ko.computed(function() {
@@ -317,15 +317,16 @@ function viewModel() {
     self.activeTrail = ko.observableArray();
     */
     self.activeTrail = ko.computed(function(){
-        var activeNode = self._activeNode();
+        var activeNode = this._activeNode();
         return (activeNode) ? (function getActiveTrail(node) {
             if (node === null) {
                 return [];
             }
             var trail = getActiveTrail(node.parentNode());
-            trail.append(node);
+            trail.push(node);
+            console.info(trail);
             return trail;
-        })(activeNode) : null;
+        })(activeNode) : [];
     }, self);
     self._activeNode = ko.observable(null);
     
