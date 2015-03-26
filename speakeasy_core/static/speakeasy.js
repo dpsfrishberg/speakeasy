@@ -18,27 +18,36 @@ $.ajaxSetup({
     }
     });
     
-function SpeakeasyNode(nodeID, parentID, content, comments) {
-    this.nodeID = ko.observable(nodeID);
-    this.parentID = ko.observable(parentID);
-    this.content = ko.observable(content);
+function SpeakeasyNode(nodeID, parentComment, content, comments) {
+    var self = this;
+    self.nodeID = ko.observable(nodeID);
+    /*self.parentComment = ko.observable(parentComment);
+    self.parentNode = ko.computed(function() {
+        if (self.parentComment() !== null) {
+            return self.parentComment().parentNode();
+        }
+        else {
+            return null;
+        }
+    }, self);*/
+    self.content = ko.observable(content);
     
-    this.comments = ko.observableArray();
+    self.comments = ko.observableArray();
     for (var commentID in comments) {
         var comment = comments[commentID];
-        this.comments.push(new SpeakeasyComment(commentID, nodeID, comment.userID, comment.nodes));
+        self.comments.push(new SpeakeasyComment(commentID, null, comment.userID, comment.nodes));
     }
     
-    this.isActive = ko.computed(function() {
-        return vm._activeNode() === this;
-    }, this);
+    self.isActive = ko.computed(function() {
+        return vm._activeNode() === self;
+    }, self);
     
-    this.hasNewComments = ko.computed(function() {
+    self.hasNewComments = ko.computed(function() {
         return false;
-    }, this);
+    }, self);
     
-    this.numComments = ko.computed(function() {
-        var comments = this.comments();
+    self.numComments = ko.computed(function() {
+        var comments = self.comments();
         var num = 0;
         num += comments.length;
         comments.forEach(function(comment) {    
@@ -46,28 +55,29 @@ function SpeakeasyNode(nodeID, parentID, content, comments) {
         });
     
         return num;
-    }, this);
+    }, self);
 }
 
-function SpeakeasyComment(commentID, parentID, userID, nodes) {
-    this.commentID = ko.observable(commentID);
-    this.parentID = ko.observable(parentID);
-    this.userID = ko.observable(userID);
-    this.nodes = ko.observableArray();
+function SpeakeasyComment(commentID, parentNode, userID, nodes) {
+    var self = this;
+    self.commentID = ko.observable(commentID);
+    //self.parentNode = ko.observable(parentNode);
+    self.userID = ko.observable(userID);
+    self.nodes = ko.observableArray();
     
     for (var nodeID in nodes) {
         var node = nodes[nodeID];
-        this.nodes.push(new SpeakeasyNode(nodeID, commentID, node.content, node.comments));
+        self.nodes.push(new SpeakeasyNode(nodeID, null, node.content, node.comments));
     }
     
-    this.numComments = ko.computed(function() {
-        var nodes = this.nodes();
+    self.numComments = ko.computed(function() {
+        var nodes = self.nodes();
         var num = 0;
         nodes.forEach(function(node) {
             num += node.numComments();
         });
         return num;    
-    }, this);
+    }, self);
 }
 
 function viewModel() {
@@ -80,28 +90,32 @@ function viewModel() {
         $.getJSON('/article/'+article_slug+'/tree.json', function(data) {
             for (var nodeID in data) {
                 var node = data[nodeID];
-                self.articleNodes.push(new SpeakeasyNode(nodeID, -1, node.content, node.comments));
+                self.articleNodes.push(new SpeakeasyNode(nodeID, null, node.content, node.comments));
             }
         });
     };
 
     self.getNodeByID = function(nodeID) {
-        var node = null;
-        $(self.articleNodes()).each(function(){
-            if (this.nodeID == nodeID) {
-                node = this;
-                return;
-            }
-            var nodes = traverse(this).reduce(function(acc, x) {
-                if (typeof x.nodeID !== "undefined" && x.nodeID == nodeID) {
-                    acc.push(x);
+        return (function getNode(nodes) {
+            for (var i = 0; i < nodes.length; i++) {
+                var node = nodes[i];
+                if (node.nodeID() == nodeID) {
+                    return node;
                 }
-            }, []);
-            if (nodes.length > 0) {
-                node = nodes[0];
+                else {
+                    var comments = node.comments();
+                    for (var j = 0; j < comments.length; j++) {
+                        var comment = comments[j];
+                        var node = getNode(comment.nodes());
+                        if (node) {
+                            return node;
+                        }
+                        
+                    }
+                }
             }
-        });
-        return node;
+            return null;
+        })(self.articleNodes());
     };
 
     self.setActiveNode = function(nodeID) {
@@ -302,7 +316,18 @@ function viewModel() {
     
     self.activeTrail = ko.observableArray();
     */
-    self._activeNode = ko.observable();
+    self.activeTrail = ko.computed(function(){
+        var activeNode = self._activeNode();
+        return (activeNode) ? (function getActiveTrail(node) {
+            if (node === null) {
+                return [];
+            }
+            var trail = getActiveTrail(node.parentNode());
+            trail.append(node);
+            return trail;
+        })(activeNode) : null;
+    }, self);
+    self._activeNode = ko.observable(null);
     
     self.loadTree();
     
