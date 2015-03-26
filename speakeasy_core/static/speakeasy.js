@@ -21,7 +21,7 @@ $.ajaxSetup({
 function SpeakeasyNode(nodeID, parentComment, content, comments) {
     var self = this;
     self.nodeID = ko.observable(nodeID);
-    /*self.parentComment = ko.observable(parentComment);
+    self.parentComment = ko.observable(parentComment);
     self.parentNode = ko.computed(function() {
         if (self.parentComment() !== null) {
             return self.parentComment().parentNode();
@@ -29,7 +29,7 @@ function SpeakeasyNode(nodeID, parentComment, content, comments) {
         else {
             return null;
         }
-    }, self);*/
+    }, self);
     self.content = ko.observable(content);
     
     self.comments = ko.observableArray();
@@ -61,7 +61,7 @@ function SpeakeasyNode(nodeID, parentComment, content, comments) {
 function SpeakeasyComment(commentID, parentNode, userID, nodes) {
     var self = this;
     self.commentID = ko.observable(commentID);
-    //self.parentNode = ko.observable(parentNode);
+    self.parentNode = ko.observable(parentNode);
     self.userID = ko.observable(userID);
     self.nodes = ko.observableArray();
     
