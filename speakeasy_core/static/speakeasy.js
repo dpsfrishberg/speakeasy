@@ -129,10 +129,9 @@ function viewModel() {
         self._activeNode(undefined);
     };
 
-
-        self.activeTrail = ko.computed(function(){
+    self.activeTrail = ko.computed(function(){
         var activeNode = this._activeNode();
-        /*return (activeNode) ? (function getActiveTrail(node) {
+        return (activeNode) ? (function getActiveTrail(node) {
             if (node === null) {
                 return [];
             }
@@ -140,13 +139,7 @@ function viewModel() {
             trail.push(node);
             console.info(trail);
             return trail;
-        })(activeNode) : [];*/
-        if (typeof activeNode === "undefined") {
-            return [];
-        }
-        else {
-            return [activeNode];
-        }
+        })(activeNode) : [];
     }, self);
         
     self.showBreadcrumb = function() {

@@ -8,6 +8,6 @@ setup(
     author_email="danielpfrishberg@gmail.com",
     url="http://www.speakeasycomments.com",
     packages=["speakeasy_core"],
-    install_requires=["python-openid", "django_openid_auth", "threadedcomments"],
+    install_requires=["robotframework-pageobjects", "selenium", "python-openid", "django_openid_auth", "threadedcomments"],
     package_data={"speakeasy_core": ["templates/*.html", "templates/*/*.html", "static/*.*", "static/*/*.*"]}
 )
