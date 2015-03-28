@@ -86,15 +86,13 @@ function viewModel() {
 
     self.articleNodes = ko.observableArray();
 
-    self.loadTree = function () {
-        $.getJSON('/article/'+article_slug+'/tree.json', function(data) {
+    var loadingTree = $.getJSON('/article/'+article_slug+'/tree.json', function(data) {
             for (var nodeID in data) {
                 var node = data[nodeID];
                 self.articleNodes.push(new SpeakeasyNode(nodeID, null, node.content, node.comments));
             }
         });
-    };
-
+    
     self.getNodeByID = function(nodeID) {
         return (function getNode(nodes) {
             for (var i = 0; i < nodes.length; i++) {
@@ -120,23 +118,18 @@ function viewModel() {
     self._activeNode = ko.observable();
 
     self.setActiveNode = function(nodeID) {
+        loadingTree.complete(function(){
+            
 	var node = vm.getNodeByID(nodeID);
         self._activeNode(node);
-        /*vm.activeNodeComments.removeAll();
-	vm.loadBreadcrumbForNode(node_id);
-	vm.loadCommentsForNode(node_id);
-        self.nodesEachById(node_id, function(theNode) {
-            theNode.has_new_comments(false);
+        window.location.hash = nodeID;
         });
-        console.info(node_id);
-        window.location.hash = node_id;
-        */
     }
-
-    self.showBreadcrumb = function() {
-	$("html").addClass("inactive");
-	$("#breadcrumb").removeClass("inactive");
+    self.clearActiveNode = function(nodeID) {
+        self._activeNode(undefined);
     };
+
+
         self.activeTrail = ko.computed(function(){
         var activeNode = this._activeNode();
         /*return (activeNode) ? (function getActiveTrail(node) {
@@ -155,9 +148,24 @@ function viewModel() {
             return [activeNode];
         }
     }, self);
+        
+    self.showBreadcrumb = function() {
+	$("html").addClass("inactive");
+	$("#breadcrumb").removeClass("inactive");
+    };
+    self.hideBreadcrumb = function() {
+	$("#breadcrumb").addClass("inactive");
+	$("html").removeClass("inactive");
+    }
 
-    self.loadTree();
-    
+    self.breadcrumbIsShown = function() {
+        
+        var ret = !($("#breadcrumb").hasClass("inactive"));
+        return ret;
+    };
+
+
+
 
     /*
     self.loadCommentsForNode = function (node_id) {
@@ -318,16 +326,7 @@ function viewModel() {
     };
     
     
-    self.hideBreadcrumb = function() {
-	$("#breadcrumb").addClass("inactive");
-	$("html").removeClass("inactive");
-    }
     
-    self.breadcrumbIsShown = function() {
-        
-        var ret = !($("#breadcrumb").hasClass("inactive"));
-        return ret;
-    };
     
     self.activeNodeTextareaId = ko.observable();
     self.activeNodeSubmitId = ko.observable();
@@ -392,29 +391,15 @@ $(function() {
 		});
 	
 	$(document).on('click touchstart', '#breadcrumb, body', function(e) {
-		//if (e.currentTarget != e.delegateTarget) return;
                 if (vm.breadcrumbIsShown() && ($(e.target).is("#breadcrumb") || $(e.target).parents("#breadcrumb").length == 0)) {
                     vm.hideBreadcrumb();
+                    vm.clearActiveNode();
                     window.location.hash = "";
                 }
 	});
 });
 
-function goToCommentFromHash() {
-    var nodeId = window.location.hash || null;
-    nodeId = nodeId ? nodeId.replace(/^#/, "") : null;
-    console.info(nodeId);
-    if (nodeId === null || nodeId === "" || (vm._activeNode() && vm._activeNode().node_id() == nodeId)) {
-        return;
-    }
-    console.info("continuing");
-    vm.showBreadcrumb();
-    if (nodeId) {
-        vm.loadBreadcrumbForNode(nodeId);
-    }
-}
 
-$(window).on("hashchange", goToCommentFromHash);
 
 $(function() {
 //Step 1
@@ -435,16 +420,22 @@ $("#breadcrumb-trail .node").each(
         });
     }
 );
-/*
- $('.comments-in-isotope').each(function(){$(this).isotope({
-	animationOptions: {
-     duration: 750,
-     easing: 'linear',
-     queue: false
-   }
-});});
+function goToCommentFromHash() {
+    var nodeID = window.location.hash || null;
+    nodeID = nodeID ? nodeID.replace(/^#/, "") : null;
+    console.info(nodeID);
+    if (nodeID === null || nodeID === "" || (vm._activeNode() && vm._activeNode().nodeID() == nodeID)) {
+        return;
+    }
+    console.info("continuing");
+    if (nodeID) {
+        vm.setActiveNode(nodeID);
+    }
+    vm.showBreadcrumb();
+}
+$(window).on("hashchange", goToCommentFromHash);
 
-goToCommentFromHash();*/
+
 });
 
 /*
