@@ -25,7 +25,7 @@
     </div>
     <div id="breadcrumb" class="inactive">
         <div id="breadcrumb-trail" data-bind="foreach: activeTrail">
-            <div class="node" data-bind="attr: {id: 'node-'+nodeID()"}>
+            <div class="node item isotope-item" data-bind="attr: {id: 'node-'+nodeID()"}>
                 <p class="node-content" data-bind="text: content">
                 </p>
                 <a href="#" data-bind="attr: {class: 'node-button ' + (isActive() ? ' node-button-open' : '') + (hasNewComments() ? ' has-new-comments' : '')}"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+numComments()}, text: numComments"></span></a>

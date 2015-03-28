@@ -117,6 +117,7 @@ function viewModel() {
             return null;
         })(self.articleNodes());
     };
+    self._activeNode = ko.observable();
 
     self.setActiveNode = function(nodeID) {
 	var node = vm.getNodeByID(nodeID);
@@ -136,8 +137,28 @@ function viewModel() {
 	$("html").addClass("inactive");
 	$("#breadcrumb").removeClass("inactive");
     };
+        self.activeTrail = ko.computed(function(){
+        var activeNode = this._activeNode();
+        /*return (activeNode) ? (function getActiveTrail(node) {
+            if (node === null) {
+                return [];
+            }
+            var trail = getActiveTrail(node.parentNode());
+            trail.push(node);
+            console.info(trail);
+            return trail;
+        })(activeNode) : [];*/
+        if (typeof activeNode === "undefined") {
+            return [];
+        }
+        else {
+            return [activeNode];
+        }
+    }, self);
 
-    self._activeNode = ko.observable();
+    self.loadTree();
+    
+
     /*
     self.loadCommentsForNode = function (node_id) {
 	$.ajax({url: '/article/'+article_slug+'/node-comments.json', data: {node_id: node_id}, dataType: 'json',
@@ -316,22 +337,6 @@ function viewModel() {
     
     self.activeTrail = ko.observableArray();
     */
-    self.activeTrail = ko.computed(function(){
-        var activeNode = this._activeNode();
-        return (activeNode) ? (function getActiveTrail(node) {
-            if (node === null) {
-                return [];
-            }
-            var trail = getActiveTrail(node.parentNode());
-            trail.push(node);
-            console.info(trail);
-            return trail;
-        })(activeNode) : [];
-    }, self);
-    self._activeNode = ko.observable(null);
-    
-    self.loadTree();
-    
     //self.pollForComments();
 
     //self._lastUpdatedTimestamp = 0;
@@ -418,6 +423,18 @@ vm = new viewModel();
 
 //Step 3
 ko.applyBindings(vm);
+
+$("#breadcrumb-trail .node").each(
+    function(){
+        $(this).isotope({
+            animationOptions: {
+                duration: 750,
+                easing: "linear",
+                queue: false
+            }
+        });
+    }
+);
 /*
  $('.comments-in-isotope').each(function(){$(this).isotope({
 	animationOptions: {

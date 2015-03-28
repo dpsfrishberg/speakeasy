@@ -1125,21 +1125,18 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     
 }
 
-.item.tope-comment-breadcrumb {
+#breadcrumb-trail .item {
     background-color: #c1d1e1;
 }
 
-.item.tope-comment-breadcrumb:last-child {
+#breadcrumb-trail .item:last-child {
     border: solid black 6px ;
 }
 
-.item.tope-comment:first {
+#breadcrumb-trail .item:first {
     clear: both;
 }
 
-#comments-in-isotope {
-  /*  height: auto !important;*/
-}
 /* The Magnificent Clearfix: nicolasgallagher.com/micro-clearfix-hack/ */
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
@@ -1212,10 +1209,10 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     display: none;
 }
 
-.comments-in-isotope, .comment-submit-form {
+#breadcrumb-trail, .comment-submit-form {
     width: 70%;
 }
-.comments-in-isotope {
+#breadcrumb-trail {
     height: auto !important;
 }
 
