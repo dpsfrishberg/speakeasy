@@ -25,11 +25,6 @@ from openid.consumer.consumer import (
 from openid.consumer.discover import DiscoveryFailure
 from openid.extensions import sreg
 from openid.extensions import ax
-from django_openid_auth import teams
-from django_openid_auth.forms import OpenIDLoginForm
-from django_openid_auth.store import DjangoOpenIDStore
-import django_openid_auth
-from django_openid_auth.views import make_consumer, login_complete, render_openid_request
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 
@@ -48,74 +43,6 @@ def notify(comment):
                   [settings.DEFAULT_FROM_EMAIL, commenter.email],
                   fail_silently=False)
 
-
-def login_begin(request, template_name='openid/login.html',
-                redirect_field_name=REDIRECT_FIELD_NAME):
-    """Begin an OpenID login request, possibly asking for an identity URL."""
-    redirect_to = request.REQUEST.get(redirect_field_name, '')
-
-    # Get the OpenID URL to try.  First see if we've been configured
-    # to use a fixed server URL.
-    openid_url = getattr(settings, 'OPENID_SSO_SERVER_URL', None)
-
-    if openid_url is None:
-        if request.POST:
-            login_form = OpenIDLoginForm(data=request.POST)
-            if login_form.is_valid():
-                openid_url = login_form.cleaned_data['openid_identifier']
-        else:
-            login_form = OpenIDLoginForm()
-
-        # Invalid or no form data:
-        if openid_url is None:
-            return render_to_response(template_name, {
-                    'form': login_form,
-                    redirect_field_name: redirect_to
-                    }, context_instance=RequestContext(request))
-
-    error = None
-    consumer = make_consumer(request)
-    try:
-        openid_request = consumer.begin(openid_url)
-    except DiscoveryFailure, exc:
-        return render_failure(
-            request, "OpenID discovery error: %s" % (str(exc),), status=500)
-
-    # Request some user details.
-    openid_request.addExtension(
-        sreg.SRegRequest(required=['email', 'fullname', 'nickname']))
-    ax_request = ax.FetchRequest()
-    ax_request.add(ax.AttrInfo('http://axschema.org/contact/email', required=True))
-    ax_request.add(ax.AttrInfo('http://axschema.org/namePerson/first', required=True))
-    ax_request.add(ax.AttrInfo('http://axschema.org/namePerson/last', required=True))
-
-    openid_request.addExtension(
-        ax_request)
-    # Request team info
-    teams_mapping_auto = getattr(settings, 'OPENID_LAUNCHPAD_TEAMS_MAPPING_AUTO', False)
-    teams_mapping_auto_blacklist = getattr(settings, 'OPENID_LAUNCHPAD_TEAMS_MAPPING_AUTO_BLACKLIST', [])
-    launchpad_teams = getattr(settings, 'OPENID_LAUNCHPAD_TEAMS_MAPPING', {})
-    if teams_mapping_auto:
-        #ignore launchpad teams. use all django-groups
-        launchpad_teams = dict()
-        all_groups = Group.objects.exclude(name__in=teams_mapping_auto_blacklist)
-        for group in all_groups:
-            launchpad_teams[group.name] = group.name
-
-    if launchpad_teams:
-        openid_request.addExtension(teams.TeamsRequest(launchpad_teams.keys()))
-
-    # Construct the request completion URL, including the page we
-    # should redirect to.
-    return_to = request.build_absolute_uri(reverse(login_complete))
-    if redirect_to:
-        if '?' in return_to:
-            return_to += '&'
-        else:
-            return_to += '?'
-        return_to += urllib.urlencode({redirect_field_name: redirect_to})
-
-    return render_openid_request(request, openid_request, return_to)
 
 def splash(request):
     return render_to_response("splash.html")
