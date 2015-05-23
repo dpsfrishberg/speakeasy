@@ -28,10 +28,10 @@ from openid.extensions import ax
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 
-def notify(comment):
+def notify(comment, user):
     commenters = comment.article.get_subscribers()
     for commenter in commenters:
-        send_mail('New comment',
+        send_mail('New comment by %s' % user.email,
                   '%s: %s' % (reduce(
                                 lambda x, y: "%s\n\n%s" % (x, y),
                                 [node.content for node
@@ -162,7 +162,7 @@ def post_comment(request, slug=None):
         comment_node.save()
         comment_nodes.append(comment_node)
     
-    notify(comment)
+    notify(comment, request.user)
 
     obj = {}
     comments = {}

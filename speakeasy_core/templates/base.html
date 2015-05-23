@@ -22,9 +22,9 @@
                 <span id="title">peakeasy</span>
             </a>
             {% if anonymous %}
-                <a id="login_button" href="/login?next=/article/{{article_slug}}">Log in</a>
+                <a id="login_button" href="/accounts/google/login?next=/article/{{article_slug}}">Log in</a>
             {% else %}
-                <a id="logout_button" href="/logout?next=/article/{{article_slug}}">Log out</a>
+                <a id="logout_button" href="/accounts/logout?next=/article/{{article_slug}}">Log out</a>
             {% endif %}
                     
         </div>
