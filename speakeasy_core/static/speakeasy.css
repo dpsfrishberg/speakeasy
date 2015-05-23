@@ -224,7 +224,7 @@ a.node-button.node-button-open {
 #existing-comments {
 }
 
-.comment-submit-form {
+#comment-submit-form {
     padding: 4px;
     background-color: #669;
     border-radius: 8px;
@@ -232,19 +232,19 @@ a.node-button.node-button-open {
     margin-bottom: 10%;
 }
 
-.comment-submit-form label, .comment-submit-form textarea, .comment-submit-form input {
+#comment-submit-form label, #comment-submit-form textarea, #comment-submit-form input {
     display: block;
     float: left;
 }
 
-.comment-submit-form label {
+#comment-submit-form label {
     color: #fff;
     margin-bottom: 2px;
     font-weight: bold;
 
 }
 
-.comment-submit-form textarea {
+#comment-submit-form textarea {
     clear: left;
     width: 99%;
     height: 80px;
@@ -252,11 +252,11 @@ a.node-button.node-button-open {
     border: 1px solid #666;
 }
 
-.comment-submit-form input[type=submit] {
+#comment-submit-form input[type=submit] {
     
 }
 
-.comment-submit-form .help {
+#comment-submit-form .help {
     color: #fff;
     clear: left;
     font-size: 10px;
@@ -338,7 +338,7 @@ h2 {
     text-align: center;
 }
 
-#login_button, #logout_button, .comment-submit-form input[type=submit] {
+#login_button, #logout_button, #comment-submit-form input[type=submit] {
     width: 80px;
     height: 20px;
     background-color: #669;
@@ -349,7 +349,7 @@ h2 {
     padding-top: 4px;
 }
 
-.comment-submit-form input[type=submit] {
+#comment-submit-form input[type=submit] {
     background-color: #f3f2ee;
     color: #669;
     margin-top: 4px;
@@ -1209,7 +1209,7 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     display: none;
 }
 
-#breadcrumb-trail, .comment-submit-form {
+#breadcrumb-trail, #comment-submit-form {
     width: 70%;
 }
 #breadcrumb-trail {

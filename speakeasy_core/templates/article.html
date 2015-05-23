@@ -5,7 +5,7 @@
 {% endblock extra_head %}
 {% block first_script %}
     <script type="text/javascript">
-			article_slug = '{{article_slug}}'  // Used by speakeasy.js; must be placed before speakeasy.js is included
+			articleSlug = '{{article_slug}}'  // Used by speakeasy.js; must be placed before speakeasy.js is included
     </script>
 {% endblock first_script %}
 {% block content %}
@@ -25,7 +25,7 @@
     </div>
     <div id="breadcrumb" class="inactive">
         <div id="breadcrumb-trail" data-bind="foreach: activeTrail">
-            <div class="node item isotope-item" data-bind="attr: {id: 'node-'+nodeID()"}>
+            <div class="node item isotope-item" data-bind="attr: {id: 'node-'+nodeID()}">
                 <p class="node-content" data-bind="text: content">
                 </p>
                 <a href="#" data-bind="attr: {class: 'node-button ' + (isActive() ? ' node-button-open' : '') + (hasNewComments() ? ' has-new-comments' : '')}"><span data-bind="attr: {class: 'node-num-comments node-num-comments-'+numComments()}, text: numComments"></span></a>
@@ -33,6 +33,43 @@
                 </div>
             </div>
         </div>
+        <div id="comments" data-bind="foreach: activeNodeComments, afterAdd: commentAdded">
+            <div data-bind="attr: {id: 'comment-'+commentID(), class: 'comment item isotope-item tope-comment'}">
+                <!--<div class="comment-user" data-bind="with: user">
+                    <span data-bind="text: first_name + '&#151;'">
+                    </span>
+                </div>-->
+                <div class="comment-user" data-bind="text: userID"></div>
+                <div class="comment-nodes" data-bind="foreach: nodes">
+                    <div class="node" data-bind="attr: {id: 'node-'+nodeID()}">
+                        <p class="node-content" data-bind="text: content">
+                        </p>
+                        <a href="#" data-bind="attr: {class: 'node-button'}">
+                            <!--<span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()}, text: num_comments">
+                            </span>-->
+                        </a>
+                        <!--<a href="#" data-bind="attr: {class: 'node-button ' + new_comments_class()}">
+                            <span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()}, text: num_comments">
+                            </span>
+                        </a>-->
+                        <div class="clear">
+                        </div>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+
+
+        <form id="comment-submit-form" action="{% url 'post_comment' article_slug %}" method="POST" data-bind="with: _activeNode">
+	    <label for="response">Leave A Response</label>
+	    <textarea id="response" name="response" placeholder="Enter your text and separate your thoughts by pressing the 'enter' button"></textarea>
+	    <input type="submit" id="submit" value="Submit"/>
+	    {% csrf_token %}
+	    <div class="clear"></div>
+	</form>
+
     </div>
 		<!--      		
 		

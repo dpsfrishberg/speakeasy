@@ -86,7 +86,7 @@ function viewModel() {
 
     self.articleNodes = ko.observableArray();
 
-    var loadingTree = $.getJSON('/article/'+article_slug+'/tree.json', function(data) {
+    var loadingTree = $.getJSON('/article/'+articleSlug+'/tree.json', function(data) {
             for (var nodeID in data) {
                 var node = data[nodeID];
                 self.articleNodes.push(new SpeakeasyNode(nodeID, null, node.content, node.comments));
@@ -156,8 +156,12 @@ function viewModel() {
         var ret = !($("#breadcrumb").hasClass("inactive"));
         return ret;
     };
+    
+    self.activeNodeComments = ko.computed(function(){
+        return self._activeNode() ? self._activeNode().comments() : [];
+    });
 
-
+    self._lastUpdated = 0;
 
 
     /*
@@ -336,31 +340,34 @@ function viewModel() {
 
 
 $(function() {
-	$(document).on('click', 'input[type=submit]', function(e){
-			var content = jQuery.trim($(e.target).closest('.comment-submit-form').find('textarea').val());
+	$(document).on('submit', '#comment-submit-form', function(e){
+                        e.preventDefault();
+                        var content = jQuery.trim($('#response').val());
 			if (!content) {
-			    if (e.preventDefault) e.preventDefault();
 			    return false;
 			}
-			$.ajax({url: '/article/'+article_slug+'/post-comment.json',
-			       data: {'node_id': $(e.target).attr('name').replace(/post-comment-submit-/, ''),
+                        var activeNode = vm._activeNode();
+			$.ajax({url: '/article/'+articleSlug+'/post-comment.json',
+			       data: {'node_id': activeNode.nodeID(),
 						'content': content,
-						'last_updated': vm._lastUpdatedTimestamp},
+						'last_updated': vm._lastUpdated},
 			       success: function(data, textStatus, jqXHR) {
 				    var comments = data["comments"];
-					for (var comment_id in comments) {
-						var dataComment = comments[comment_id];
-						var newComment = new comment(comment_id, dataComment.node_id, dataComment.user);
-						for (var node_id in dataComment.nodes) {
+                                    activeNode.comments([]);
+                                    
+					for (var commentID in comments) {
+						var dataComment = comments[commentID];
+                                                activeNode.comments.push(new SpeakeasyComment(commentID, activeNode, dataComment.user, dataComment.nodes));
+						/*for (var node_ID in dataComment.nodes) {
 							newComment.nodes.push(new node(node_id, comment_id, dataComment.nodes[node_id].content, dataComment.nodes[node_id].num_comments, dataComment.nodes[node_id].updated));
 							vm.updateNodeFromChangesById(node_id, dataComment.nodes[node_id].updated, dataComment.nodes[node_id].num_comments, false);
 							var ancestors = dataComment.nodes[node_id].ancestors;
 							for (var i = 0; i < ancestors.length; i++){
 							    vm.updateNodeFromChangesById(ancestors[i].id, ancestors[i].updated, ancestors[i].num_comments, false);
 							}
-						}
-						vm.activeComments.push(newComment);
-						vm.activeNodeComments.push(new topeComment(newComment));
+						}*/
+						//vm.activeComments.push(newComment);
+						//vm.activeNodeComments.push(new topeComment(newComment));
 						
 					}
 					//vm.updateNodesFromChanges(data["new_nodes"], data["timestamp"]);
@@ -370,8 +377,7 @@ $(function() {
 				dataType: 'json',
 				async: false // Make this async so we can do the update-handling first.
 				});
-			
-			if (e.preventDefault) e.preventDefault();
+                        
 			return false;
 		});
 	
