@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div id="comments" data-bind="foreach: activeNodeComments, afterAdd: commentAdded">
+        <div id="comments" class="isotope" data-bind="foreach: activeNodeComments, afterAdd: commentAdded">
             <div data-bind="attr: {id: 'comment-'+commentID(), class: 'comment item isotope-item tope-comment'}">
                 <!--<div class="comment-user" data-bind="with: user">
                     <span data-bind="text: first_name + '&#151;'">

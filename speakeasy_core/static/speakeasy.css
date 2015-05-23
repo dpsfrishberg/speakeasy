@@ -51,12 +51,8 @@ body {
     line-height: 18px;
 }
 
-#content, #comments {
+#content {
     height: 100%;   
-}
-
-#comments {
-    float: left;
 }
 
 #content {
@@ -139,16 +135,11 @@ body {
 .comments-reply {
     width: 280px;
 }
-
 #comments {
-    width: 300px;
-    margin-left: 20px;
-    padding-right: 12px;
-    overflow-x:hidden;
-
-}
-#comments > div:empty, #breadcrumb:empty {
-    background-color: transparent;
+    height: auto !important;
+    position: relative;
+    overflow: hidden;
+    width: 70%;
 }
 
 .comments-reply textarea, .comments-reply input {
