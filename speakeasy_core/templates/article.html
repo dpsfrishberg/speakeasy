@@ -44,9 +44,8 @@
                     <div class="node" data-bind="attr: {id: 'node-'+nodeID()}">
                         <p class="node-content" data-bind="text: content">
                         </p>
-                        <a href="#" data-bind="attr: {class: 'node-button'}">
-                            <!--<span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()}, text: num_comments">
-                            </span>-->
+                        <a href="#" data-bind="attr: {class: 'node-button' + (hasNewComments() ? ' has-new-comments' : '') }">
+                            <span data-bind="attr: {class: 'node-num-comments node-num-comments-'+numComments()}, text: numComments"></span>
                         </a>
                         <!--<a href="#" data-bind="attr: {class: 'node-button ' + new_comments_class()}">
                             <span data-bind="attr: {class: 'node-num-comments node-num-comments-'+num_comments()}, text: num_comments">
