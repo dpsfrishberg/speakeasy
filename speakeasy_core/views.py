@@ -61,7 +61,8 @@ def tree(request, slug=None, node=None):
             obj[node.id] = tree(request, node=node)
         return HttpResponse(json.dumps(obj), mimetype='application/javascript')
     elif type(node) == SpeakeasyComment:
-        obj = {'type': 'comment', 'id': node.id, 'nodes': {}, 'user_id': 1}
+        user = {'id': node.user.id, 'firstName': node.user.first_name, 'lastName': node.user.last_name}
+        obj = {'type': 'comment', 'id': node.id, 'nodes': {}, 'user': user}
         comment_nodes = CommentNode.objects.filter(comment=node)
         for comment_node in comment_nodes:
             obj['nodes'][comment_node.id] = tree(request, node=comment_node)

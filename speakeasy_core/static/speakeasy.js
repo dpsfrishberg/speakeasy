@@ -35,7 +35,7 @@ function SpeakeasyNode(nodeID, parentComment, content, comments) {
     self.comments = ko.observableArray();
     for (var commentID in comments) {
         var comment = comments[commentID];
-        self.comments.push(new SpeakeasyComment(commentID, self, comment.userID, comment.nodes));
+        self.comments.push(new SpeakeasyComment(commentID, self, comment.user, comment.nodes));
     }
     
     self.isActive = ko.computed(function() {
@@ -58,11 +58,21 @@ function SpeakeasyNode(nodeID, parentComment, content, comments) {
     }, self);
 }
 
-function SpeakeasyComment(commentID, parentNode, userID, nodes) {
+function SpeakeasyUser(userID, firstName, lastName) {
+    var self = this;
+    self.id = ko.observable(userID);
+    self.firstName = ko.observable(firstName);
+    self.lastName = ko.observable(lastName);
+    self.name = ko.computed(function(){
+        return self.firstName() + " " + self.lastName();
+    });
+}
+
+function SpeakeasyComment(commentID, parentNode, user, nodes) {
     var self = this;
     self.commentID = ko.observable(commentID);
     self.parentNode = ko.observable(parentNode);
-    self.userID = ko.observable(userID);
+    self.user = ko.observable(new SpeakeasyUser(user.id, user.firstName, user.lastName));
     self.nodes = ko.observableArray();
     
     for (var nodeID in nodes) {
