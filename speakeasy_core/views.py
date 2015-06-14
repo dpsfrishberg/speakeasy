@@ -84,31 +84,6 @@ def new_comments(request, slug=None):
     last_updated = request.GET.get("lastUpdated")
     new_last_updated = _get_current_timestamp()
             
-    #def new_tree(node):
-    #    if type(node) in (ArticleNode, CommentNode):
-    #        tree = {'type': 'node', 'id': node.id, 'comments': {}, 'content': node.content}
-    #        comments = SpeakeasyComment.objects.filter(node=node)
-    #        for comment in comments:
-    #            comment_tree = new_tree(comment)
-    #            if comment_tree != {}:
-    #                tree['comments'][comment.id] = comment_tree
-    #        if tree['comments'] != {} or node.updated > last_updated:
-    #            return tree
-    #        else:
-    #            return {}
-    #    else: #type(node) == SpeakeasyComment
-    #        user = {'id': node.user.id, 'firstName': node.user.first_name, 'lastName': node.user.last_name}
-    #        tree = {'type': 'comment', 'id': node.id, 'nodes': {}, 'user': user}
-    #        nodes = CommentNode.objects.filter(comment=node)
-    #        for node in nodes:
-    #            node_tree = new_tree(node)
-    #            if node_tree != {}:
-    #                tree['nodes'][node.id] = node_tree
-    #        if tree['nodes'] != {}:
-    #            return tree
-    #        else:
-    #            return {}
-    
     obj = {}
     
     article = Article.objects.get(slug=slug)
