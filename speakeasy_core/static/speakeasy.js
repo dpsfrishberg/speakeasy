@@ -56,6 +56,37 @@ function SpeakeasyNode(nodeID, parentComment, content, comments) {
     
         return num;
     }, self);
+    
+    self.hasComment = function(commentID) {
+        var comments = self.comments();
+        for (var i = 0; i < comments.length; i++) {
+            if (comments[i].commentID() == commentID) {
+                return true;
+            }
+        }
+        return false;
+    };
+    
+    self.getComment = function(commentID) {
+        var comments = self.comments();
+        for (var i = 0; i < comments.length; i++) {
+            if (comments[i].commentID() == commentID) {
+                return comments[i];
+            }
+        }
+        return null;
+    };
+    
+    self.update = function(comments) {
+        for (var commentID in comments) {
+            if (self.hasComment(commentID)) {
+                self.getComment(commentID).update(comments[commentID].nodes);
+            }
+            else {
+                self.comments.push(new SpeakeasyComment(commentID, self, comments[commentID].user, comments[commentID].nodes))
+            }
+        }
+    };
 }
 
 function SpeakeasyUser(userID, firstName, lastName) {
@@ -88,6 +119,37 @@ function SpeakeasyComment(commentID, parentNode, user, nodes) {
         });
         return num;    
     }, self);
+    
+    self.hasNode = function(nodeID) {
+        var nodes = self.nodes();
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].nodeID() == nodeID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    self.getNode = function(nodeID) {
+        var nodes = self.nodes();
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].nodeID() == nodeID) {
+                return nodes[i];
+            }
+        }
+        return null;
+    }
+    
+    self.update = function(nodes){
+        for (var nodeID in nodes) {
+            if (self.hasNode(nodeID)) {
+                self.getNode(nodeID).update(nodes[nodeID].comments);
+            }
+            else {
+                self.nodes.push(new SpeakeasyNode(nodeID, self, nodes[nodeID].content, nodes[nodeID].comments));
+            }
+        }
+    };
 }
 
 function viewModel() {
@@ -445,7 +507,25 @@ function goToCommentFromHash() {
 $(window).on("hashchange", goToCommentFromHash);
 
 
+(function pollForComments(){
+    $.ajax({url: "/article/"+articleSlug+"/new-comments.json",
+           data: {
+               lastUpdated: vm._lastUpdated
+           },
+           success: function(data, textStatus, jqXHR) {
+               vm._lastUpdated = data.lastUpdated;
+               console.info(data);
+           },
+           error: function(jqXHR, textStatus, errorThrown) {
+            console.info(errorThrown);
+           },
+           dataType: "json",
+           type: "get"})
+})();
+
 });
+
+
 
 /*
     Notes: 
