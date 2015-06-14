@@ -159,8 +159,10 @@ function viewModel() {
     self.articleNodes = ko.observableArray();
 
     var loadingTree = $.getJSON('/article/'+articleSlug+'/tree.json', function(data) {
-            for (var nodeID in data) {
-                var node = data[nodeID];
+            var tree = data.tree;
+            self._lastUpdated = data.lastUpdated;
+            for (var nodeID in tree) {
+                var node = tree[nodeID];
                 self.articleNodes.push(new SpeakeasyNode(nodeID, null, node.content, node.comments));
             }
         });
@@ -232,182 +234,40 @@ function viewModel() {
     self.activeNodeComments = ko.computed(function(){
         return self._activeNode() ? self._activeNode().comments() : [];
     });
+    
+    self.hasNode = function(nodeID) {
+        var nodes = self.articleNodes();
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].nodeID() == nodeID) {
+                return true;
+            }
+        }
+        return false;
+    };
+    
+    self.getNode = function(nodeID) {
+        var nodes = self.articleNodes();
+        for (var i = 0; i < nodes.length; i++) {
+            if (nodes[i].nodeID() == nodeID) {
+                return nodes[i];
+            }
+        }
+        return null;
+    }
+    
+    self.update = function(nodes) {
+        for (var nodeID in nodes) {
+            if (self.hasNode(nodeID)) {
+                self.getNode(nodeID).update(nodes[nodeID].comments);
+            }
+            else {
+                self.articleNodes.push(new SpeakeasyNode(nodeID, self, nodes[nodeID].content, nodes[nodeID].comments));
+            }
+        }
+
+    };
 
     self._lastUpdated = 0;
-
-
-    /*
-    self.loadCommentsForNode = function (node_id) {
-	$.ajax({url: '/article/'+article_slug+'/node-comments.json', data: {node_id: node_id}, dataType: 'json',
-	       success: function(data) {
-		self.activeComments.removeAll();
-		//self.activeNodeComments.removeAll();
-		for (var comment_id in data) {
-			var nodeComment = new comment(comment_id, data[comment_id].parent_id, data[comment_id].user);
-			for (var node_id in data[comment_id].nodes) {
-				var commentNode = new node(node_id, comment_id, data[comment_id].nodes[node_id].content, data[comment_id].nodes[node_id].num_comments, data[comment_id].nodes[node_id].updated);
-				nodeComment.nodes.push(commentNode);
-			}
-			self.activeComments.push(nodeComment);
-			self.activeNodeComments.push(new topeComment(nodeComment));
-
-		}
-	},
-	async: false});
-    };
-    
-    self.loadBreadcrumbForNode = function (node_id) {
-	$.ajax({url: '/article/'+article_slug+'/node-ancestors.json', data: {node_id: node_id}, success: function(data){
-		self.activeTrail.removeAll();
-		$('.comments-in-isotope').each(function(){$(this).isotope( 'reLayout', function(){});});
-		//self.activeNodeComments.removeAll();
-		var ancestors = data.ancestors;
-		for (var i = 0; i < ancestors.length; i++){
-			var newBreadcrumbNode = new breadcrumbNode(ancestors[i].id, ancestors[i].content, ancestors[i].num_comments, ancestors[i].user, ancestors[i].updated);
-			self.activeTrail.push(newBreadcrumbNode);
-			var newTC = new topeComment(newBreadcrumbNode);
-                        self.activeNodeComments.push(newTC);
-		}
-		if (data['node']) {
-			var activeNode = data['node'];
-			var activeBreadcrumbNode = new breadcrumbNode(activeNode.id, activeNode.content, activeNode.num_comments, activeNode.user, activeNode.updated);
-			//self.activeTrail.push(activeBreadcrumbNode);
-			self._activeNode(activeBreadcrumbNode);
-                        self.activeTrail.push(activeBreadcrumbNode);
-			self.activeNodeTextareaId = activeBreadcrumbNode.node_textarea_id();
-			self.activeNodeSubmitId = activeBreadcrumbNode.node_submit_id();
-			var activeTC = new topeComment(activeBreadcrumbNode);
-			activeTC.display_class(activeTC.display_class() + " active");
-			self.activeNodeComments.push(activeTC);
-		}
-		},
-		dataType: 'json',
-		async: false});
-    };
-    
-    
-    
-    self.pollForComments = function(){
-      var self = this;
-      setTimeout(function(){
-	    // Go to the server and ask for the full list of comments, structured as an object
-	    //  of each IDs pointing to its parent node id, the user who authored the comment,
-	    //  and an object of child nodes, each with a number of comments.
-	  $.ajax({ url: "/article/"+article_slug+"/check-comments.json", success: function(data){
-	    // Loop through the comment IDs. Find any whose parent node is the active node.
-	    //  If the comment does not exist in the active node's comments:
-	    //  Add it, and insert its child nodes.
-	    // TODO: This won't handle modified, removed, or added child nodes of existing comments. Fix that.
-	    // TODO: Allow this to tell each node whether it should have a red flag (if new comments were added).
-	    for (var comment_id in data) {
-		    var dataComment = data[comment_id];
-		    if (!self._activeNode()) break;
-		    if (dataComment.node_id == self._activeNode().node_id()) {
-			    // TODO: Make this search a function: var found = isCommentActive(comment_id)
-			    var found = false;
-			    for (var i in self.activeComments()) {
-				    var activeComment = self.activeComments()[i];
-				    if (activeComment.comment_id() == comment_id) {
-					    found = true;
-					    break;
-				    }
-			    }
-		    
-			    if (found) {
-				
-			    }
-			    else {
-				var newComment = new comment(comment_id, dataComment.node_id, dataComment.user);
-				for (var node_id in dataComment.nodes) {
-				    var commentNode = new node(node_id, comment_id, dataComment.nodes[node_id].content, dataComment.nodes[node_id].num_comments, dataComment.nodes[node_id].updated);
-				    newComment.nodes.push(commentNode);
-				}
-				self.activeComments.push(newComment);
-				self.activeNodeComments.push(new topeComment(newComment));
-			    }
-		    }
-	    }
-	    
-	    //self.updateNodeCommentCounts();
-	    self.getNodeCountChanges();
-    
-	    //Setup the next poll recursively
-	    self.pollForComments();
-	  }, dataType: "json"});
-	
-
-	    }, 3000);
-      };
-    
-    
-    self.updateNodeFromChangesById = function(node_id, timestamp, num_comments, notifyIfNew) {
-	self.nodesEachById(node_id, function(theNode) {
-	     // Only notify if not on the first update.
-	     // Check against when theNode was updated, because it might be a comment node that was just posted.
-	     var notify = false;
-	     if (notifyIfNew && self._lastUpdatedTimestamp !== 0 && timestamp > theNode.updated()) {
-		notify = true;
-	     }
-		 theNode.update_num_comments(num_comments, notify);
-		 theNode.updated(timestamp);
-	     
-	});
-
-    };
-    
-    self.updateNodesFromChanges = function(nodes, timestamp) {
-	for (var node_id in nodes) {
-	    self.updateNodeFromChangesById(node_id, nodes[node_id].updated, nodes[node_id].num_comments, true);
-	}
-	self._lastUpdatedTimestamp = timestamp;
-
-    };
-    self.getNodeCountChanges = function() {
-	// TODO: Why Math.random()?
-        $.ajax({url: "/article/"+article_slug+"/"+self._lastUpdatedTimestamp+"/get-node-changes.json?" + Math.random(),
-	       success: function(data){
-		eval(data);
-		self.updateNodesFromChanges(data["nodes"], data["timestamp"]);
-	       }
-	    });
-    };
-    
-
-    self.nodesEachById = function(node_id, node_func) {
-	applyFuncToNodes = function(nodes) {
-	    for (var i in nodes) {
-		var theNode = nodes[i];
-		if (typeof theNode !== "undefined" && theNode.node_id() == node_id) {
-			node_func(theNode);
-		}
-    	    }
-	};
-	applyFuncToNodes(self.articleNodes());
-	applyFuncToNodes(self.activeTrail());
-	//applyFuncToNodes(jQuery.map(self.activeNodeComments(), function(tc) {return tc.nodes();}));
-        applyFuncToNodes(jQuery.map(self.activeComments(), function(comm) {return comm.nodes();}));
-        applyFuncToNodes([self._activeNode()]);
-    };
-    
-    self.commentAdded = function(el) {
-	var $cont = el.closest(".comments-in-isotope");
-	$cont.isotope( 'appended', $(el) );
-    };
-    
-    
-    
-    
-    self.activeNodeTextareaId = ko.observable();
-    self.activeNodeSubmitId = ko.observable();
-    
-    self.activeComments = ko.observableArray();
-    self.activeNodeComments = ko.observableArray();
-    
-    self.activeTrail = ko.observableArray();
-    */
-    //self.pollForComments();
-
-    //self._lastUpdatedTimestamp = 0;
 };
 
 
@@ -423,27 +283,7 @@ $(function() {
 			       data: {'node_id': activeNode.nodeID(),
 						'content': content,
 						'last_updated': vm._lastUpdated},
-			       success: function(data, textStatus, jqXHR) {
-				    var comments = data["comments"];
-                                    activeNode.comments([]);
-                                    
-					for (var commentID in comments) {
-						var dataComment = comments[commentID];
-                                                activeNode.comments.push(new SpeakeasyComment(commentID, activeNode, dataComment.user, dataComment.nodes));
-						/*for (var node_ID in dataComment.nodes) {
-							newComment.nodes.push(new node(node_id, comment_id, dataComment.nodes[node_id].content, dataComment.nodes[node_id].num_comments, dataComment.nodes[node_id].updated));
-							vm.updateNodeFromChangesById(node_id, dataComment.nodes[node_id].updated, dataComment.nodes[node_id].num_comments, false);
-							var ancestors = dataComment.nodes[node_id].ancestors;
-							for (var i = 0; i < ancestors.length; i++){
-							    vm.updateNodeFromChangesById(ancestors[i].id, ancestors[i].updated, ancestors[i].num_comments, false);
-							}
-						}*/
-						//vm.activeComments.push(newComment);
-						//vm.activeNodeComments.push(new topeComment(newComment));
-						
-					}
-					//vm.updateNodesFromChanges(data["new_nodes"], data["timestamp"]);
-				},
+			       success: function(data, textStatus, jqXHR) {},
 				type: 'post',
 				error: function(jqXHR, textStatus, errorThrown) {console.info(errorThrown)},
 				dataType: 'json',
@@ -508,12 +348,13 @@ $(window).on("hashchange", goToCommentFromHash);
 
 
 (function pollForComments(){
-    $.ajax({url: "/article/"+articleSlug+"/new-comments.json",
+    $.ajax({url: "/article/"+articleSlug+"/tree.json",
            data: {
                lastUpdated: vm._lastUpdated
            },
            success: function(data, textStatus, jqXHR) {
                vm._lastUpdated = data.lastUpdated;
+               vm.update(data.tree);
                console.info(data);
            },
            error: function(jqXHR, textStatus, errorThrown) {
@@ -521,6 +362,7 @@ $(window).on("hashchange", goToCommentFromHash);
            },
            dataType: "json",
            type: "get"})
+    setTimeout(pollForComments, 3000);
 })();
 
 });

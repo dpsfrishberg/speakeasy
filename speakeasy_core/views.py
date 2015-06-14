@@ -52,7 +52,8 @@ def index(request):
     return render_to_response("index.html", {"articles": articles})
 
 def tree(request, slug=None, node=None, last_updated=0):
-    last_updated = int(last_updated)
+    last_updated = int(last_updated) if int(last_updated) > 0 else int(request.GET.get("lastUpdated", 0))
+    new_last_updated = _get_current_timestamp()
     obj = {}
 
     if node is None:
@@ -61,7 +62,7 @@ def tree(request, slug=None, node=None, last_updated=0):
         for node in nodes:
             if node.updated > last_updated:
                 obj[node.id] = tree(request, node=node, last_updated=last_updated)
-        return HttpResponse(json.dumps(obj), mimetype='application/javascript')
+        return HttpResponse(json.dumps({'lastUpdated': str(new_last_updated), 'tree': obj}), mimetype='application/javascript')
     elif type(node) == SpeakeasyComment:
         user = {'id': node.user.id, 'firstName': node.user.first_name, 'lastName': node.user.last_name}
         obj = {'type': 'comment', 'id': node.id, 'nodes': {}, 'user': user}
@@ -79,20 +80,6 @@ def tree(request, slug=None, node=None, last_updated=0):
             return obj
         else:
             return {}
-
-def new_comments(request, slug=None):
-    last_updated = request.GET.get("lastUpdated")
-    new_last_updated = _get_current_timestamp()
-            
-    obj = {}
-    
-    article = Article.objects.get(slug=slug)
-    nodes = ArticleNode.objects.filter(article=article)
-    for node in nodes:
-        obj[node.id] = tree(request, node=node, last_updated=last_updated)
-    
-    return HttpResponse(json.dumps({'lastUpdated': new_last_updated, 'tree': obj}), mimetype='application/javascript')
-    #return {"currentTime": }
 
 def post_comment(request, slug=None):
     node_id = request.POST['node_id']
