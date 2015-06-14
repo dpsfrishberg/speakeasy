@@ -355,7 +355,6 @@ $(window).on("hashchange", goToCommentFromHash);
            success: function(data, textStatus, jqXHR) {
                vm._lastUpdated = data.lastUpdated;
                vm.update(data.tree);
-               console.info(data);
            },
            error: function(jqXHR, textStatus, errorThrown) {
             console.info(errorThrown);
