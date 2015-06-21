@@ -17,12 +17,15 @@ $.ajaxSetup({
 	}
     }
     });
+
+//////// Prototypes & Constructors //////////
     
 function SpeakeasyNode(nodeID, parentComment, content, comments) {
     var self = this;
     self.nodeID = ko.observable(nodeID);
     self.parentComment = ko.observable(parentComment);
     self.parentNode = ko.computed(function() {
+        console.info(self.parentComment());
         if (self.parentComment() !== null) {
             return self.parentComment().parentNode();
         }
@@ -43,8 +46,26 @@ function SpeakeasyNode(nodeID, parentComment, content, comments) {
     }, self);
     
     self.hasNewComments = ko.computed(function() {
+        var comments = self.comments();
+        for (var i = 0; i < comments.length; i++) {
+            var comment = comments[i];
+            if (comment.isNew()) {
+                return true;
+            }
+            if (comment.hasNewComments()) {
+                return true;
+            }
+        }
         return false;
     }, self);
+    
+    self.clearNewComments = function(){
+        var comments = self.comments();
+        for (var i = 0; i < comments.length; i++) {
+            var comment = comments[i];
+            comment.isNew(false);
+        }
+    };
     
     self.numComments = ko.computed(function() {
         var comments = self.comments();
@@ -83,7 +104,7 @@ function SpeakeasyNode(nodeID, parentComment, content, comments) {
                 self.getComment(commentID).update(comments[commentID].nodes);
             }
             else {
-                self.comments.push(new SpeakeasyComment(commentID, self, comments[commentID].user, comments[commentID].nodes))
+                self.comments.push(new SpeakeasyComment(commentID, self, comments[commentID].user, comments[commentID].nodes, true));
             }
         }
     };
@@ -99,12 +120,16 @@ function SpeakeasyUser(userID, firstName, lastName) {
     });
 }
 
-function SpeakeasyComment(commentID, parentNode, user, nodes) {
+function SpeakeasyComment(commentID, parentNode, user, nodes, isNew) {
+    if (typeof isNew === "undefined") {
+        isNew = false;
+    }
     var self = this;
     self.commentID = ko.observable(commentID);
     self.parentNode = ko.observable(parentNode);
     self.user = ko.observable(new SpeakeasyUser(user.id, user.firstName, user.lastName));
     self.nodes = ko.observableArray();
+    self.isNew = ko.observable(isNew);
     
     for (var nodeID in nodes) {
         var node = nodes[nodeID];
@@ -119,6 +144,17 @@ function SpeakeasyComment(commentID, parentNode, user, nodes) {
         });
         return num;    
     }, self);
+    
+    self.hasNewComments = ko.computed(function() {
+        var nodes = self.nodes();
+        var hasNewComments = false;
+        nodes.forEach(function(node) {
+            if (node.hasNewComments()) {
+                hasNewComments = true;
+            }
+        });
+        return hasNewComments;
+    });
     
     self.hasNode = function(nodeID) {
         var nodes = self.nodes();
@@ -152,6 +188,7 @@ function SpeakeasyComment(commentID, parentNode, user, nodes) {
     };
 }
 
+///////// Main viewModel ///////////////
 function viewModel() {
     //Step 2 and so on below
     var self = this;
@@ -196,6 +233,7 @@ function viewModel() {
             
 	var node = vm.getNodeByID(nodeID);
         self._activeNode(node);
+        node.clearNewComments();
         window.location.hash = nodeID;
         });
     }
@@ -255,6 +293,10 @@ function viewModel() {
         return null;
     }
     
+    self.parentNode = function() {
+        return null;
+    }
+    
     self.update = function(nodes) {
         for (var nodeID in nodes) {
             if (self.hasNode(nodeID)) {
@@ -270,7 +312,7 @@ function viewModel() {
     self._lastUpdated = 0;
 };
 
-
+//////////// Event Handlers /////////////////////
 $(function() {
 	$(document).on('submit', '#comment-submit-form', function(e){
                         e.preventDefault();
@@ -310,7 +352,7 @@ $(function() {
 	});
 });
 
-
+//////////////// Initialization /////////////////
 
 $(function() {
 //Step 1
