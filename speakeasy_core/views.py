@@ -51,17 +51,24 @@ def index(request):
     articles = Article.objects.all()
     return render_to_response("index.html", {"articles": articles})
 
-def tree(request, slug=None, node=None, last_updated=0):
+def tree_by_slug(request, slug=None, *args, **kwargs):
+    return tree(request, {"slug": slug}, *args, **kwargs)
+
+def tree_by_id(request, id=None, *args, **kwargs):
+    return tree(request, {"id": id}, *args, **kwargs)
+
+def tree(request, get_kwargs, node=None, last_updated=0):
     last_updated = int(last_updated) if int(last_updated) > 0 else int(request.GET.get("lastUpdated", 0))
     new_last_updated = _get_current_timestamp()
     obj = {}
 
     if node is None:
-        article = Article.objects.get(slug=slug)
+        article = Article.objects.get(**get_kwargs)
         nodes = ArticleNode.objects.filter(article=article)
         for node in nodes:
             if node.updated > last_updated:
-                obj[node.id] = tree(request, node=node, last_updated=last_updated)
+                obj[node.id] = tree(request, get_kwargs, node=node, last_updated=last_updated)
+        #return HttpResponse("jsonp123(%s);" % json.dumps({'lastUpdated': str(new_last_updated), 'tree': obj}), mimetype='application/javascript')
         return HttpResponse(json.dumps({'lastUpdated': str(new_last_updated), 'tree': obj}), mimetype='application/javascript')
     elif type(node) == SpeakeasyComment:
         user = {'id': node.user.id, 'firstName': node.user.first_name, 'lastName': node.user.last_name}
@@ -69,14 +76,14 @@ def tree(request, slug=None, node=None, last_updated=0):
         comment_nodes = CommentNode.objects.filter(comment=node)
         for comment_node in comment_nodes:
             if comment_node.updated > last_updated:
-                obj['nodes'][comment_node.id] = tree(request, node=comment_node, last_updated=last_updated)
+                obj['nodes'][comment_node.id] = tree(request, get_kwargs, node=comment_node, last_updated=last_updated)
         return obj
     else: # type(node) == ArticleNode or type(node) == CommentNode
         if node.updated > last_updated:
             comments = SpeakeasyComment.objects.filter(node=node)
             obj = {'type': 'node', 'id': node.id, 'comments': {}, 'content': node.content, 'updated': node.updated}
             for comment in comments:
-                obj['comments'][comment.id] = tree(request, node=comment, last_updated=last_updated)
+                obj['comments'][comment.id] = tree(request, get_kwargs, node=comment, last_updated=last_updated)
             return obj
         else:
             return {}
@@ -113,7 +120,7 @@ def post_comment(request, slug=None):
     #obj["timestamp"] = _get_current_timestamp()
     #obj["new_nodes"] = _get_node_changes(slug, timestamp)
     
-    return HttpResponse(json.dumps(obj), mimetype='application/javascript')
+    return HttpResponse("jsonp123(%s);" % json.dumps(obj), mimetype='application/javascript')
 
 def article(request, slug=None):
     

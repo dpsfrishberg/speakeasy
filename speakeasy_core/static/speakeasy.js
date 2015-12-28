@@ -195,7 +195,7 @@ function viewModel() {
 
     self.articleNodes = ko.observableArray();
 
-    var loadingTree = $.getJSON('/article/'+articleSlug+'/tree.json', function(data) {
+    var loadingTree = $.getJSON('/article/'+articleSlug+'/tree-by-slug.json', function(data) {
             var tree = data.tree;
             self._lastUpdated = data.lastUpdated;
             for (var nodeID in tree) {
@@ -390,7 +390,7 @@ $(window).on("hashchange", goToCommentFromHash);
 
 
 (function pollForComments(){
-    $.ajax({url: "/article/"+articleSlug+"/tree.json",
+    $.ajax({url: "/article/"+articleSlug+"/tree-by-slug.json",
            data: {
                lastUpdated: vm._lastUpdated
            },
