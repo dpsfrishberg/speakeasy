@@ -2,7 +2,7 @@
     -moz-box-shadow: 0 0 40px 5px rgba(0,0,0,0.2)inset;
     -webkit-box-shadow: 0 0 40px 5px rgba(0,0,0,0.2)inset;
     box-shadow: 0 0 40px 5px rgba(0,0,0,0.2) inset;
-  
+
 }*/
 html.inactive, html.inactive body {
     overflow: hidden;
@@ -14,7 +14,7 @@ body {
     color: #000;
     font-size: 12px;
     line-height: 16px;
-    background-color: #669;
+/*    background-color: #669; */
 }
 #content {
     width: 80%;
@@ -26,10 +26,10 @@ body {
     padding-left: 12px;
     padding-right: 12px;
     border-right:  dashed grey 2px;
-    
+
 }
 
-#footer {
+/*#footer {
     width: 100%;
     height: 50px;
     background-color: black;
@@ -41,7 +41,7 @@ body {
     width: 400px;
     height: 600px;
     margin-top: 200px;
-}
+}*/
 .article p {
     overflow: visible;
 }
@@ -52,7 +52,7 @@ body {
 }
 
 #content {
-    height: 100%;   
+    height: 100%;
 }
 
 #content {
@@ -64,8 +64,8 @@ body {
     min-height: 1px;
     margin-right: 20px;
     overflow: scroll !important;
-    
-    
+
+
 }
 
 .comments-wrapper {
@@ -182,7 +182,7 @@ body {
     border: 1px solid #669;
     border-radius: 10px;
     text-align: center;
-    
+
 }
 
 .node a.node-button.has-new-comments, .breadcrumb-node a.node-button.has-new-comments {
@@ -244,7 +244,7 @@ a.node-button.node-button-open {
 }
 
 #comment-submit-form input[type=submit] {
-    
+
 }
 
 #comment-submit-form .help {
@@ -313,7 +313,7 @@ a.node-button.node-button-open {
 }
 
 #breadcrumb-comments h2 {
-    
+
 }
 
 hr {
@@ -423,7 +423,7 @@ h1, h2 {
     top: -10px;
     color: white;
     text-decoration: none !important;
-    
+
 }
 
 #header h1 {
@@ -543,7 +543,7 @@ body {
   font-size: 15px;
 }
 
-#options h4 { 
+#options h4 {
   font-weight: bold;
 }
 
@@ -637,23 +637,23 @@ body {
   margin: 5px;
   float: left;
 }
- 
+
 .color-shape.round {
   -webkit-border-radius: 35px;
      -moz-border-radius: 35px;
           border-radius: 35px;
 }
- 
+
 .color-shape.big.round {
   -webkit-border-radius: 75px;
      -moz-border-radius: 75px;
           border-radius: 75px;
 }
- 
+
 .color-shape.red { background: red; }
 .color-shape.blue { background: blue; }
 .color-shape.yellow { background: yellow; }
- 
+
 .color-shape.wide, .color-shape.big { width: 150px; }
 .color-shape.tall, .color-shape.big { height: 150px; }
 
@@ -755,7 +755,7 @@ body {
 }
 #site-nav ul a:hover,
 #site-nav ul .current a:hover { color: white; }
-  
+
 #site-nav ul .current .toc a {
   font-size: 12px;
   padding-left: 1.2em;
@@ -770,7 +770,7 @@ body {
   margin-bottom: 0.8em;
 }
 
-.docs #content h2:target { 
+.docs #content h2:target {
   padding: 10px;
   background: white;
   color: #222;
@@ -954,7 +954,7 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
   color: #111;
 }
 
-.super-list .example b { 
+.super-list .example b {
   font-weight: bold;
   line-height: 1.3em;
   padding: 3px;
@@ -1051,7 +1051,7 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
 
 .big-graph .project:hover {
   z-index: 5;
-  
+
 }
 
 .big-graph .project:hover .icon {
@@ -1113,7 +1113,7 @@ code .nd { color: #9FAD7E; } /* CSS pseudo selector */
     border: 2px solid black;
     text-align: left;
     background: white;
-    
+
 }
 
 #breadcrumb-trail .item {
