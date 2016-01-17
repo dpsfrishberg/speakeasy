@@ -46,13 +46,34 @@
                 dataType: "json"
             });
        console.info(document.body);
-        $(document.body).on("mouseup", function(e) {
+       $(document).on("mouseup", "body > p", function(e) {
             var text = getSelectedText();
             console.info(e.target);
             var xpath = getXPath(e.target);
             console.info(xpath);
             console.info(jQuery(e.target).text().indexOf(text));
+            jQuery(document).tooltip({
+            items: "body",
+            content: function(element) {
+                console.info(element);
+                return '<p><a id="create-node">Add a comment</a></p><p><a id="cancel-node">Cancel</a></p>';
+            },
+            position: {
+                of: e,
+                my: "right+3 bottom-3"
+            }
+            });
+            jQuery(document).tooltip("open");
         });
+        $(document.body).on( "click", "#create-node", function(e){
+            e.preventDefault();
+            $(document).tooltip("destroy");
+
+         });
+         $(document.body).on("click", "#cancel-node", function(e){
+            e.preventDefault();
+            $(document).tooltip("destroy");
+         });
 
     });
 })(jQuery);
