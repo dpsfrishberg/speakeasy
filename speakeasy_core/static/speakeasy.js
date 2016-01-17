@@ -1,3 +1,20 @@
+$.fn.xpathEvaluate = function (xpathExpression) {
+   // http://stackoverflow.com/questions/12243661/javascript-use-xpath-in-jquery
+   // NOTE: vars not declared local for debug purposes
+   $this = this.first(); // Don't make me deal with multiples before coffee
+
+   // Evaluate xpath and retrieve matching nodes
+   xpathResult = this[0].evaluate(xpathExpression, this[0], null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+
+   result = [];
+   while (elem = xpathResult.iterateNext()) {
+      result.push(elem);
+   }
+
+   $result = jQuery([]).pushStack( result );
+   return $result;
+};
+
 (function($){
 
     function getXPath(element) {
@@ -22,9 +39,42 @@
         return '';
     }
 
+    function showNode(nodeID, text, xpath, offset, parentID) {
+        var element = $(document).xpathEvaluate(xpath);
+        element.html(
+            jQuery(element).html().replace(
+                text, '<span class="node" data-node-id="' + nodeID + '">' + text + '</span>'
+            )
+        );
+    }
+
+    function createNode(element, text, xpath, offset, parentID) {
+        $.ajax({
+            url: "/article/create-node.json",
+            data: {
+                text: text,
+                xpath: xpath,
+                offset: offset,
+                articleID: articleID,
+                parentID: parentID
+            },
+            type: "get",
+            crossDomain: "true",
+            success: function(data, textStatus, jqXHR) {
+                var nodeID = data.nodeID;
+                showNode(nodeID, text, xpath, offset, parentID);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(errorThrown);
+            },
+            jsonpCallback: "jsonp123",
+            dataType: "json"
+        });
+    }
+
     var articleID = null;
     $(function(){
-        $.ajax({
+        var getIDCall = $.ajax({
                 url: "//speakeasy.frishberg.net/article/id.json",
                 data: {
                     url: window.location.href
@@ -45,18 +95,42 @@
                 jsonpCallback: "jsonp123",
                 dataType: "json"
             });
+
+       getIDCall.done(function() {
+           $.ajax({
+            url: "/article/nodes.json",
+            data: {
+                articleID: articleID
+            },
+            type: "get",
+            crossDomain: "true",
+            success: function(data, textStatus, jqXHR) {
+                console.info("data");
+                console.info(data);
+                var nodes = data.nodes;
+                for (var i = 0; i < nodes.length; i++) {
+                    var node = nodes[i];
+                    showNode(node.nodeID, node.text, node.xpath, node.offset, null);
+                }
+            },
+            jsonpCallback: "jsonp123",
+            dataType: "json"
+           });
+       });
        console.info(document.body);
        $(document).on("mouseup", "body > p", function(e) {
+            var element = e.target;
             var text = getSelectedText();
             console.info(e.target);
             var xpath = getXPath(e.target);
             console.info(xpath);
-            console.info(jQuery(e.target).text().indexOf(text));
+            var offset = jQuery(e.target).text().indexOf(text);
+            console.info(offset);
             jQuery(document).tooltip({
             items: "body",
             content: function(element) {
                 console.info(element);
-                return '<p><a id="create-node">Add a comment</a></p><p><a id="cancel-node">Cancel</a></p>';
+                return '<p><a href="#" id="create-node">Add a comment</a></p><p><a id="cancel-node">Cancel</a></p>';
             },
             position: {
                 of: e,
@@ -64,16 +138,16 @@
             }
             });
             jQuery(document).tooltip("open");
+            $(document.body).on( "click", "#create-node", function(e){
+                e.preventDefault();
+                $(document).tooltip("destroy");
+                createNode(element, text, xpath, offset, null);
+             });
+             $(document.body).on("click", "#cancel-node", function(e){
+                e.preventDefault();
+                $(document).tooltip("destroy");
+             });
         });
-        $(document.body).on( "click", "#create-node", function(e){
-            e.preventDefault();
-            $(document).tooltip("destroy");
-
-         });
-         $(document.body).on("click", "#cancel-node", function(e){
-            e.preventDefault();
-            $(document).tooltip("destroy");
-         });
 
     });
 })(jQuery);
