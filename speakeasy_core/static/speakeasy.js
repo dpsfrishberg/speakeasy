@@ -109,6 +109,7 @@ var speakeasy = function(){};
         function showBreadcrumb() {
             $("html").addClass("inactive");
             $("#breadcrumb").removeClass("inactive");
+            vm.activeNode.notifySubscribers();
         };
         function hideBreadcrumb() {
             $("#breadcrumb").addClass("inactive");
@@ -151,33 +152,56 @@ var speakeasy = function(){};
 
         function SpeakeasyNode(nodeID, text, xpath, offset, parentID) {
             var self = this;
-            self.nodeID = ko.observable(nodeID);
+            self.nodeID = ko.observable(parseInt(nodeID));
             self.text = ko.observable(text);
             self.xpath = ko.observable(xpath);
             self.offset = ko.observable(offset);
-            var parentComment = vm.comments[parentID] || null;
-            self.parentComment = ko.observable(parentComment);
 
-            self.comments = ko.observableArray([]);
+            self.parentID = ko.observable(parseInt(parentID));
 
-            if (parentComment) {
-                parentComment.nodes.push(self);
-            }
+            self.parentComment = function(){
+                var parentComment = vm.comments[parentID] || null;
+                return parentComment;
+            };
+
+            self.comments = function(){
+                var comments = [];
+                for (var commentID in vm.comments) {
+                    if (isNaN(commentID)) continue;
+                    var comment = vm.comments[commentID];
+                    if (comment.parentID() === self.nodeID()) {
+                        comments.push(comment);
+                    }
+                }
+                return comments;
+            };
 
         }
 
         function SpeakeasyComment(commentID, content, parentID) {
             var self = this;
 
-            self.commentID = ko.observable(commentID);
+            self.commentID = ko.observable(parseInt(commentID));
             self.content = ko.observable(content);
 
-            var parentNode = vm.nodes[parentID];
-            self.parentNode = ko.observable(parentNode);
+            self.parentID = ko.observable(parseInt(parentID));
 
-            self.nodes = ko.observableArray([]);
+            self.parentNode = function(){
+                return vm.nodes[parentID];
+            };
 
-            parentNode.comments.push(self);
+            self.nodes = function(){
+                var nodes = [];
+                for (var nodeID in vm.nodes) {
+                    if (isNaN(nodeID)) continue;
+                    var node = vm.nodes[nodeID];
+                    if (node.parentID() == self.commentID()) {
+                        nodes.push(node);
+                    }
+                }
+                return nodes;
+            };
+
         }
 
         function showNode(nodeID, text, xpath, offset, parentID) {
@@ -345,6 +369,7 @@ var speakeasy = function(){};
                         var newComment = new SpeakeasyComment(commentID, data.content, data.parentID);
 
                         vm.comments[commentID] = newComment;
+                        vm.activeNode.notifySubscribers();
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.error(errorThrown);
