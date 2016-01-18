@@ -151,14 +151,20 @@ var speakeasy = function(){};
         '            </div>' +
         '        </div>' +
         '    </div>' +
-        '    <div id="comments" data-bind="foreach: activeNodeChildren">' +
-        '        <div class="node" data-bind="attr: {\'data-node-id\': nodeID}">' +
-        '            <p class="node-content" data-bind="text: content">' +
+        '    <div id="comments" data-bind="foreach: activeNodeComments">' +
+        '        <div class="comment" data-bind="attr: {\'data-comment-id\': commentID}">' +
+        '            <p class="comment-content" data-bind="text: content">' +
         '            </p>' +
         '            <div class="clear">' +
         '            </div>' +
         '        </div>' +
         '    </div>' +
+        '    <form id="comment-submit-form" action="" method="get">' +
+	    '        <label for="response">Add a comment</label>' +
+	    '        <textarea id="response" name="response"></textarea>' +
+	    '        <input type="submit" id="submit" value="Submit"/>' +
+	    '        <div class="clear"></div>' +
+	    '    </form>' +
         '</div>');
 
         function SpeakeasyNode(nodeID, text, parentID) {
@@ -166,14 +172,28 @@ var speakeasy = function(){};
             self.nodeID = ko.observable(nodeID);
             self.text = ko.observable(text);
             self.parentNode = ko.observable(null);
-            var parentNode = vm.nodes[parentID] || null;
+            var parentComment = vm.comments[parentID] || null;
+            self.parentComment = ko.observable(parentComment);
+
+            self.comments = ko.observableArray([]);
+
+            if (parentComment) {
+                parentComment.children.push(self);
+            }
+        }
+
+        function SpeakeasyComment(commentID, content, parentID) {
+            var self = this;
+
+            self.commentID = ko.observable(commentID);
+            self.content = ko.observable(content);
+
+            var parentNode = vm.nodes[parentID];
             self.parentNode = ko.observable(parentNode);
 
-            self.children = ko.observable([]);
+            self.nodes = ko.observableArray([]);
 
-            if (parentNode) {
-                parentNode.children.push(self);
-            }
+            parentNode.comments.push(self);
         }
 
         function showNode(nodeID, text, xpath, offset, parentID) {
@@ -222,13 +242,14 @@ var speakeasy = function(){};
             var self = this;
             self.activeNode = ko.observable(null);
             self.nodes = ko.mapping.fromJS({});
+            self.comments = ko.mapping.fromJS({});
             self.activeTrail = ko.computed(function(){
                 var activeNode = self.activeNode();
                 return (activeNode) ? [activeNode] : [];
             });
-            self.activeNodeChildren = ko.computed(function() {
+            self.activeNodeComments = ko.computed(function() {
                 var activeNode = self.activeNode();
-                return (activeNode) ? activeNode.children() : [];
+                return (activeNode) ? activeNode.comments() : [];
             });
         }
 
@@ -263,10 +284,15 @@ var speakeasy = function(){};
             crossDomain: "true",
             success: function(data, textStatus, jqXHR) {
                 var nodes = data.nodes;
+                var comments = data.comments;
                 for (var i = 0; i < nodes.length; i++) {
                     var node = nodes[i];
                     showNode(node.nodeID, node.text, node.xpath, node.offset, null);
                     vm.nodes[node.nodeID] = new SpeakeasyNode(node.nodeID, node.text, null);
+                }
+                for (var i = 0; i < comments.length; i++) {
+                    var comment = comments[i];
+                    vm.comments[comment.commentID] = new SpeakeasyComment(comment.commentID, comment.content, comment.parentID);
                 }
             },
             jsonpCallback: "jsonp123",
@@ -288,6 +314,33 @@ var speakeasy = function(){};
                     hideBreadcrumb();
                     clearActiveNode();
                 }
+	    });
+
+	    $("#comment-submit-form").on("submit", function(e) {
+	        e.preventDefault();
+	        $.ajax(
+                {
+                    url: "/article/create-comment.json",
+                    data: {
+                        content: $("#response").val(),
+                        articleID: articleID,
+                        parentID: vm.activeNode().nodeID()
+                    },
+                    type: "get",
+                    crossDomain: "true",
+                    success: function(data, textStatus, jqXHR) {
+                        var commentID = data.commentID;
+                        var newComment = SpeakeasyComment(commentID, data.content, data.parentID);
+
+                        vm.comments[commentID] = newComment;
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error(errorThrown);
+                    },
+                    jsonpCallback: "jsonp123",
+                    dataType: "json"
+                }
+            );
 	    });
     });
 })(jQuery);
