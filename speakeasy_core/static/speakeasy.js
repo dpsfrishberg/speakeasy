@@ -77,7 +77,6 @@ var speakeasy = function(){};
             },
             zIndex: function(){return 999999999;},
             position: function(opt, x, y) {
-            console.info(lastClickEvent);
                 opt.$menu.position({my: "left top", at: "right bottom", of: lastClickEvent});
             }
         });
@@ -85,9 +84,7 @@ var speakeasy = function(){};
         $(document).on("mouseup", "body > p, .comment > p", function(e) {
             lastClickEvent = e;
             var selectedText = getSelectedText();
-            console.info("hmm");
             if (selectedText && selectedText != "") {
-                console.info("fooey");
                 $("body").contextMenu();
             }
         });
@@ -224,12 +221,6 @@ var speakeasy = function(){};
         }
 
         function createNode(element, text, xpath, offset, parentID) {
-            console.info("creating node")
-            console.info(element);
-            console.info(text);
-            console.info(xpath);
-            console.info(offset);
-            console.info(parentID);
             $.ajax({
                 url: "/article/create-node.json",
                 data: {
@@ -243,7 +234,6 @@ var speakeasy = function(){};
                 crossDomain: "true",
                 success: function(data, textStatus, jqXHR) {
                     var nodeID = data.nodeID;
-                    console.info(data);
                     var showNow = false;
                     var parentID = (data.parentID == "") ? null : data.parentID;
                     if (parentID == null) {
@@ -377,7 +367,6 @@ var speakeasy = function(){};
                     crossDomain: "true",
                     success: function(data, textStatus, jqXHR) {
                         var commentID = data.commentID;
-                        console.info(data.parentID);
                         var newComment = new SpeakeasyComment(commentID, data.content, data.parentID);
 
                         vm.comments[commentID] = newComment;
