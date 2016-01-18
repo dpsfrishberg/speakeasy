@@ -122,6 +122,8 @@ var speakeasy = function(){};
         };
 
 
+
+
         $(document.body).append('<div id="breadcrumb" class="inactive">' +
         '    <div id="breadcrumb-trail" data-bind="foreach: activeTrail">' +
         '        <div class="node" data-bind="attr: {\'data-node-id\': nodeID}">' +
@@ -131,7 +133,7 @@ var speakeasy = function(){};
         '            </div>' +
         '        </div>' +
         '    </div>' +
-        '    <div id="comments" data-bind="foreach: activeNodeComments">' +
+        '    <div id="comments" data-bind="foreach: {data: activeNodeComments, afterRender: showNodesForActiveComment}">' +
         '        <div class="comment" data-bind="attr: {\'data-comment-id\': commentID}">' +
         '            <p class="comment-content" data-bind="text: content">' +
         '            </p>' +
@@ -147,10 +149,12 @@ var speakeasy = function(){};
 	    '    </form>' +
         '</div>');
 
-        function SpeakeasyNode(nodeID, text, parentID) {
+        function SpeakeasyNode(nodeID, text, xpath, offset, parentID) {
             var self = this;
             self.nodeID = ko.observable(nodeID);
             self.text = ko.observable(text);
+            self.xpath = ko.observable(xpath);
+            self.offset = ko.observable(offset);
             var parentComment = vm.comments[parentID] || null;
             self.parentComment = ko.observable(parentComment);
 
@@ -159,6 +163,7 @@ var speakeasy = function(){};
             if (parentComment) {
                 parentComment.nodes.push(self);
             }
+
         }
 
         function SpeakeasyComment(commentID, content, parentID) {
@@ -209,7 +214,9 @@ var speakeasy = function(){};
                 crossDomain: "true",
                 success: function(data, textStatus, jqXHR) {
                     var nodeID = data.nodeID;
+                    console.info(data);
                     var showNow = false;
+                    var parentID = (data.parentID == "") ? null : data.parentID;
                     if (parentID == null) {
                         showNow = true;
                     }
@@ -217,9 +224,9 @@ var speakeasy = function(){};
                         showNow = true;
                     }
                     if (showNow) {
-                        showNode(nodeID, text, xpath, offset, parentID);
+                        showNode(nodeID, data.text, data.xpath, data.offset, parentID);
                     }
-                    speakeasy.vm.nodes[nodeID] = new SpeakeasyNode(nodeID, text, parentID);
+                    speakeasy.vm.nodes[nodeID] = new SpeakeasyNode(nodeID, data.text, data.xpath, data.offset, parentID);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error(errorThrown);
@@ -244,6 +251,14 @@ var speakeasy = function(){};
                 var activeNode = self.activeNode();
                 return (activeNode) ? activeNode.comments() : [];
             });
+            self.showNodesForActiveComment = function(elements, comment) {
+                var nodes = comment.nodes();
+                for (var i = 0; i < nodes.length; i++) {
+                    var node = nodes[i];
+                    showNode(node.nodeID(), node.text(), node.xpath(), node.offset(), node.parentComment().commentID());
+                }
+            }
+
         }
 
         speakeasy.vm = vm = new viewModel();
@@ -280,10 +295,11 @@ var speakeasy = function(){};
                 var comments = data.comments;
                 for (var i = 0; i < nodes.length; i++) {
                     var node = nodes[i];
-                    if (node.parentID == null) {
+                    var parentID = (node.parentID == "") ? null : node.parentID;
+                    if (parentID == null) {
                         showNode(node.nodeID, node.text, node.xpath, node.offset, null);
                     }
-                    vm.nodes[node.nodeID] = new SpeakeasyNode(node.nodeID, node.text, node.parentID);
+                    vm.nodes[node.nodeID] = new SpeakeasyNode(node.nodeID, node.text, node.xpath, node.offset, parentID);
                 }
                 for (var i = 0; i < comments.length; i++) {
                     var comment = comments[i];
@@ -325,6 +341,7 @@ var speakeasy = function(){};
                     crossDomain: "true",
                     success: function(data, textStatus, jqXHR) {
                         var commentID = data.commentID;
+                        console.info(data.parentID);
                         var newComment = new SpeakeasyComment(commentID, data.content, data.parentID);
 
                         vm.comments[commentID] = newComment;

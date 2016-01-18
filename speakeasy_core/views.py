@@ -37,7 +37,7 @@ def create_node(request):
     parent_id = request.GET.get("parentID")
     article_id = request.GET.get("articleID")
 
-    if parent_id != "":
+    if parent_id == "":
         parent_id = None
 
     node = Node(text=text, offset=offset, xpath=xpath, article_id=article_id, parent_id=parent_id)
@@ -48,7 +48,7 @@ def create_node(request):
         "text": text,
         "offset": offset,
         "xpath": xpath,
-        "parentID": parent_id
+        "parentID": node.parent_id
     }))
 
 def create_comment(request):

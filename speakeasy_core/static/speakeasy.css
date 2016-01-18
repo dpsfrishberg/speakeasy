@@ -298,17 +298,6 @@ a.node-button.node-button-open {
     clear: both;
 }
 
-.comment .node {
-    background: transparent;
-    transition: background 1s;
--moz-transition: background 1s; /* Firefox 4 */
--webkit-transition: background 1s; /* Safari and Chrome */
--o-transition: background 1s; /* Opera */
-}
-
-.comment .node:hover {
-    background: #c1d1e1;
-}
 
 
 #breadcrumb-comments {
