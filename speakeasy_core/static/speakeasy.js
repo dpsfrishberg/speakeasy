@@ -15,7 +15,13 @@ $.fn.xpathEvaluate = function (xpathExpression) {
    return $result;
 };
 
+var speakeasy = function(){};
+
+
+
 (function($){
+    var articleID = null;
+    var vm;
 
     function getXPath(element) {
     // http://stackoverflow.com/questions/3454526/how-to-calculate-the-xpath-position-of-an-element-using-javascript
@@ -41,6 +47,8 @@ $.fn.xpathEvaluate = function (xpathExpression) {
 
     function showNode(nodeID, text, xpath, offset, parentID) {
         var element = $(document).xpathEvaluate(xpath);
+        console.info(xpath);
+        console.info(element);
         element.html(
             jQuery(element).html().replace(
                 text, '<span class="node" data-node-id="' + nodeID + '">' + text + '</span>'
@@ -72,31 +80,63 @@ $.fn.xpathEvaluate = function (xpathExpression) {
         });
     }
 
-    var articleID = null;
+
+    $(document).on("mouseup", "body > p", function(e) {
+        var element = e.target;
+        var text = getSelectedText();
+        console.info(e.target);
+        var xpath = getXPath(e.target);
+        console.info(xpath);
+        var offset = jQuery(e.target).text().indexOf(text);
+        console.info(offset);
+        jQuery(document).tooltip({
+        items: "body",
+        content: function(element) {
+            console.info(element);
+            return '<p><a href="#" id="create-node">Add a comment</a></p><p><a id="cancel-node">Cancel</a></p>';
+        },
+        position: {
+            of: e,
+            my: "right+3 bottom-3"
+        }
+        });
+        jQuery(document).tooltip("open");
+        $(document.body).on( "click", "#create-node", function(e){
+            e.preventDefault();
+            $(document).tooltip("destroy");
+            createNode(element, text, xpath, offset, null);
+         });
+         $(document.body).on("click", "#cancel-node", function(e){
+            e.preventDefault();
+            $(document).tooltip("destroy");
+         });
+    });
+
+
     $(function(){
         var getIDCall = $.ajax({
-                url: "//speakeasy.frishberg.net/article/id.json",
-                data: {
-                    url: window.location.href
-                },
-                type: "get",
-                crossDomain: "true",
-                success: function(data, textStatus, jqXHR) {
-                    console.info("data");
-                    console.info(data);
-                    articleID = data.id;
-                    console.info(articleID);
+            url: "/article/id.json",
+            data: {
+                url: window.location.href
+            },
+            type: "get",
+            crossDomain: "true",
+            success: function(data, textStatus, jqXHR) {
+                console.info("data");
+                console.info(data);
+                articleID = data.id;
+                console.info(articleID);
 
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    articleID = null;
-                    console.error(errorThrown);
-                },
-                jsonpCallback: "jsonp123",
-                dataType: "json"
-            });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                articleID = null;
+                console.error(errorThrown);
+            },
+            jsonpCallback: "jsonp123",
+            dataType: "json"
+        });
 
-       getIDCall.done(function() {
+        var getNodes = getIDCall.done(function() {
            $.ajax({
             url: "/article/nodes.json",
             data: {
@@ -111,43 +151,93 @@ $.fn.xpathEvaluate = function (xpathExpression) {
                 for (var i = 0; i < nodes.length; i++) {
                     var node = nodes[i];
                     showNode(node.nodeID, node.text, node.xpath, node.offset, null);
+                    vm.nodes[node.nodeID] = {
+                        nodeID: node.nodeID,
+                        text: node.text,
+                        parentID: null
+                    };
                 }
             },
             jsonpCallback: "jsonp123",
             dataType: "json"
            });
        });
-       console.info(document.body);
-       $(document).on("mouseup", "body > p", function(e) {
-            var element = e.target;
-            var text = getSelectedText();
-            console.info(e.target);
-            var xpath = getXPath(e.target);
-            console.info(xpath);
-            var offset = jQuery(e.target).text().indexOf(text);
-            console.info(offset);
-            jQuery(document).tooltip({
-            items: "body",
-            content: function(element) {
-                console.info(element);
-                return '<p><a href="#" id="create-node">Add a comment</a></p><p><a id="cancel-node">Cancel</a></p>';
-            },
-            position: {
-                of: e,
-                my: "right+3 bottom-3"
-            }
-            });
-            jQuery(document).tooltip("open");
-            $(document.body).on( "click", "#create-node", function(e){
-                e.preventDefault();
-                $(document).tooltip("destroy");
-                createNode(element, text, xpath, offset, null);
-             });
-             $(document.body).on("click", "#cancel-node", function(e){
-                e.preventDefault();
-                $(document).tooltip("destroy");
-             });
-        });
 
+        function setActiveNode(nodeID) {
+            getNodes.complete(function(){
+
+                var node = vm.nodes[nodeID];
+                vm.activeNode(node);
+                //node.clearNewComments();
+            });
+        }
+        function clearActiveNode(nodeID) {
+            vm.activeNode(null);
+        };
+
+
+        function showBreadcrumb() {
+            $("html").addClass("inactive");
+            $("#breadcrumb").removeClass("inactive");
+        };
+        function hideBreadcrumb() {
+            $("#breadcrumb").addClass("inactive");
+            $("html").removeClass("inactive");
+        };
+
+        function breadcrumbIsShown() {
+
+            var ret = !($("#breadcrumb").hasClass("inactive"));
+            return ret;
+        };
+
+
+        $(document.body).append('<div id="breadcrumb" class="inactive">' +
+        '    <div id="breadcrumb-trail" data-bind="foreach: activeTrail">' +
+        '        <div class="node" data-bind="attr: {\'data-node-id\': nodeID}">' +
+        '            <p class="node-content" data-bind="text: text">' +
+        '            </p>' +
+        '            <div class="clear">' +
+        '            </div>' +
+        '        </div>' +
+        '    </div>' +
+        '</div>');
+
+        function viewModel () {
+            var self = this;
+            self.activeNode = ko.observable(null);
+            self.nodes = ko.mapping.fromJS({});
+            self.activeTrail = ko.computed(function(){
+                var activeNode = self.activeNode();
+                return (activeNode) ? [activeNode] : [];
+            });
+        }
+
+
+        /*speakeasy.viewModel = viewModel = ko.mapping.fromJS({
+            activeNode: null,
+            nodes: {},
+            activeTrail: function(){
+                var activeNode = viewModel.activeNode;
+                return (activeNode) ? [activeNode] : [];
+            }
+            }
+        );*/
+        speakeasy.vm = vm = new viewModel();
+        ko.applyBindings(vm);
+
+	    $(document).on('click', '.node', function(e) {
+			setActiveNode($(e.target).closest('.node').data("node-id"));
+	        showBreadcrumb();
+			e.preventDefault();
+            e.stopPropagation();
+
+		});
+		$(document).on('click touchstart', '#breadcrumb, body', function(e) {
+            if (breadcrumbIsShown() && ($(e.target).is("#breadcrumb") || $(e.target).parents("#breadcrumb").length == 0)) {
+                    hideBreadcrumb();
+                    clearActiveNode();
+                }
+	    });
     });
 })(jQuery);
