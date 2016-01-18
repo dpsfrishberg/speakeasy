@@ -152,16 +152,21 @@ var speakeasy = function(){};
 
         function SpeakeasyNode(nodeID, text, xpath, offset, parentID) {
             var self = this;
-            self.nodeID = ko.observable(parseInt(nodeID));
+            self.nodeID = ko.observable((isNaN(nodeID)) ? null : parseInt(nodeID));
             self.text = ko.observable(text);
             self.xpath = ko.observable(xpath);
             self.offset = ko.observable(offset);
 
-            self.parentID = ko.observable(parseInt(parentID));
+            self.parentID = ko.observable((isNaN(parentID)) ? null : parseInt(parentID));
 
             self.parentComment = function(){
                 var parentComment = vm.comments[parentID] || null;
                 return parentComment;
+            };
+
+            self.parentNode = function() {
+                if (!self.parentID()) return null;
+                return self.parentComment().parentNode();
             };
 
             self.comments = function(){
@@ -181,10 +186,10 @@ var speakeasy = function(){};
         function SpeakeasyComment(commentID, content, parentID) {
             var self = this;
 
-            self.commentID = ko.observable(parseInt(commentID));
+            self.commentID = ko.observable((isNaN(commentID)) ? null : parseInt(commentID));
             self.content = ko.observable(content);
 
-            self.parentID = ko.observable(parseInt(parentID));
+            self.parentID = ko.observable((isNaN(parentID)) ? null : parseInt(parentID));
 
             self.parentNode = function(){
                 return vm.nodes[parentID];
@@ -269,7 +274,14 @@ var speakeasy = function(){};
             self.comments = ko.mapping.fromJS({});
             self.activeTrail = ko.computed(function(){
                 var activeNode = self.activeNode();
-                return (activeNode) ? [activeNode] : [];
+                if (!activeNode) return [];
+                return (function getActiveTrail(node){
+                    if (!node) return [];
+                    var trail = getActiveTrail(node.parentNode());
+                    trail.push(node);
+                    return trail;
+                })(activeNode);
+                //return (activeNode) ? [activeNode] : [];
             });
             self.activeNodeComments = ko.computed(function() {
                 var activeNode = self.activeNode();
