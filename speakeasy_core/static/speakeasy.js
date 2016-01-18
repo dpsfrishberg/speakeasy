@@ -45,123 +45,73 @@ var speakeasy = function(){};
         return '';
     }
 
-    function showNode(nodeID, text, xpath, offset, parentID) {
-        var element = $(document).xpathEvaluate(xpath);
-        console.info(xpath);
-        console.info(element);
-        element.html(
-            jQuery(element).html().replace(
-                text, '<span class="node" data-node-id="' + nodeID + '">' + text + '</span>'
-            )
-        );
-    }
-
-    function createNode(element, text, xpath, offset, parentID) {
-        $.ajax({
-            url: "/article/create-node.json",
-            data: {
-                text: text,
-                xpath: xpath,
-                offset: offset,
-                articleID: articleID,
-                parentID: parentID
-            },
-            type: "get",
-            crossDomain: "true",
-            success: function(data, textStatus, jqXHR) {
-                var nodeID = data.nodeID;
-                showNode(nodeID, text, xpath, offset, parentID);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error(errorThrown);
-            },
-            jsonpCallback: "jsonp123",
-            dataType: "json"
-        });
-    }
-
-
-    $(document).on("mouseup", "body > p", function(e) {
-        var element = e.target;
-        var text = getSelectedText();
-        console.info(e.target);
-        var xpath = getXPath(e.target);
-        console.info(xpath);
-        var offset = jQuery(e.target).text().indexOf(text);
-        console.info(offset);
-        jQuery(document).tooltip({
-        items: "body",
-        content: function(element) {
-            console.info(element);
-            return '<p><a href="#" id="create-node">Add a comment</a></p><p><a id="cancel-node">Cancel</a></p>';
-        },
-        position: {
-            of: e,
-            my: "right+3 bottom-3"
-        }
-        });
-        jQuery(document).tooltip("open");
-        $(document.body).on( "click", "#create-node", function(e){
-            e.preventDefault();
-            $(document).tooltip("destroy");
-            createNode(element, text, xpath, offset, null);
-         });
-         $(document.body).on("click", "#cancel-node", function(e){
-            e.preventDefault();
-            $(document).tooltip("destroy");
-         });
-    });
-
 
     $(function(){
-        var getIDCall = $.ajax({
-            url: "/article/id.json",
-            data: {
-                url: window.location.href
-            },
-            type: "get",
-            crossDomain: "true",
-            success: function(data, textStatus, jqXHR) {
-                console.info("data");
-                console.info(data);
-                articleID = data.id;
-                console.info(articleID);
-
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                articleID = null;
-                console.error(errorThrown);
-            },
-            jsonpCallback: "jsonp123",
-            dataType: "json"
+        /*$(document).tooltip({
+            items: "",
+            content: function(element) {
+                return '<p><a href="#" id="create-node">Add a comment</a></p><p><a id="cancel-node">Cancel</a></p>';
+            }
         });
 
-        var getNodes = getIDCall.done(function() {
-           $.ajax({
-            url: "/article/nodes.json",
-            data: {
-                articleID: articleID
-            },
-            type: "get",
-            crossDomain: "true",
-            success: function(data, textStatus, jqXHR) {
-                console.info("data");
-                console.info(data);
-                var nodes = data.nodes;
-                for (var i = 0; i < nodes.length; i++) {
-                    var node = nodes[i];
-                    showNode(node.nodeID, node.text, node.xpath, node.offset, null);
-                    vm.nodes[node.nodeID] = {
-                        nodeID: node.nodeID,
-                        text: node.text,
-                        parentID: null
-                    };
+
+        $(document).on("mouseup", "body > p", function(e) {
+            console.info("mouseup");
+            console.info(e.target);
+            var element = e.target;
+            var text = getSelectedText();
+            console.info(text);
+            var xpath = getXPath(e.target);
+            var offset = jQuery(e.target).text().indexOf(text);
+            $(document).tooltip("option", "position",
+                {
+                    of: e,
+                    my: "right+3 bottom-3"
+                }
+            );
+            $(document).tooltip("open");
+            $("#create-node").on("click", function(e){
+                e.preventDefault();
+                createNode(element, text, xpath, offset, null);
+                $(this).off("click");
+             });
+        });
+*/
+
+        var lastClickEvent;
+        $.contextMenu({
+            selector: "body",
+            trigger: "none",
+            callback: function(key, options) {
+                if (key == "add-comment") {
+                    var element = lastClickEvent.target;
+                    var text = getSelectedText();
+                    var xpath = getXPath(element);
+                    var offset = $(element).text().indexOf(text);
+                    createNode(element, text, xpath, offset, null);
                 }
             },
-            jsonpCallback: "jsonp123",
-            dataType: "json"
-           });
-       });
+            items: {
+                "add-comment": {
+                    name: "Add a comment..."
+                },
+                "cancel": {
+                    name: "Cancel"
+                }
+            },
+            position: function(opt, x, y) {
+                opt.$menu.position({my: "left top", at: "right bottom", of: lastClickEvent})
+            }
+        });
+
+        $(document).on("mouseup", "body > p", function(e) {
+            lastClickEvent = e;
+            var selectedText = getSelectedText();
+            if (selectedText && selectedText != "") {
+                $("body").contextMenu();
+            }
+        });
+
 
         function setActiveNode(nodeID) {
             getNodes.complete(function(){
@@ -201,7 +151,72 @@ var speakeasy = function(){};
         '            </div>' +
         '        </div>' +
         '    </div>' +
+        '    <div id="comments" data-bind="foreach: activeNodeChildren">' +
+        '        <div class="node" data-bind="attr: {\'data-node-id\': nodeID}">' +
+        '            <p class="node-content" data-bind="text: content">' +
+        '            </p>' +
+        '            <div class="clear">' +
+        '            </div>' +
+        '        </div>' +
+        '    </div>' +
         '</div>');
+
+        function SpeakeasyNode(nodeID, text, parentID) {
+            var self = this;
+            self.nodeID = ko.observable(nodeID);
+            self.text = ko.observable(text);
+            self.parentNode = ko.observable(null);
+            var parentNode = vm.nodes[parentID] || null;
+            self.parentNode = ko.observable(parentNode);
+
+            self.children = ko.observable([]);
+
+            if (parentNode) {
+                parentNode.children.push(self);
+            }
+        }
+
+        function showNode(nodeID, text, xpath, offset, parentID) {
+            var element = $(document).xpathEvaluate(xpath);
+            element.html(
+                jQuery(element).html().replace(
+                    text, '<span class="node" data-node-id="' + nodeID + '">' + text + '</span>'
+                )
+            );
+        }
+
+        function createNode(element, text, xpath, offset, parentID) {
+            console.info("creating node")
+            console.info(element);
+            console.info(text);
+            console.info(xpath);
+            console.info(offset);
+            console.info(parentID);
+            $.ajax({
+                url: "/article/create-node.json",
+                data: {
+                    text: text,
+                    xpath: xpath,
+                    offset: offset,
+                    articleID: articleID,
+                    parentID: parentID
+                },
+                type: "get",
+                crossDomain: "true",
+                success: function(data, textStatus, jqXHR) {
+                    var nodeID = data.nodeID;
+                    showNode(nodeID, text, xpath, offset, parentID);
+                    speakeasy.vm.nodes[nodeID] = new SpeakeasyNode(nodeID, text, parentID);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(errorThrown);
+                },
+                jsonpCallback: "jsonp123",
+                dataType: "json"
+            });
+        }
+
+
 
         function viewModel () {
             var self = this;
@@ -211,20 +226,55 @@ var speakeasy = function(){};
                 var activeNode = self.activeNode();
                 return (activeNode) ? [activeNode] : [];
             });
+            self.activeNodeChildren = ko.computed(function() {
+                var activeNode = self.activeNode();
+                return (activeNode) ? activeNode.children() : [];
+            });
         }
 
-
-        /*speakeasy.viewModel = viewModel = ko.mapping.fromJS({
-            activeNode: null,
-            nodes: {},
-            activeTrail: function(){
-                var activeNode = viewModel.activeNode;
-                return (activeNode) ? [activeNode] : [];
-            }
-            }
-        );*/
         speakeasy.vm = vm = new viewModel();
         ko.applyBindings(vm);
+
+        var getIDCall = $.ajax({
+            url: "/article/id.json",
+            data: {
+                url: window.location.href
+            },
+            type: "get",
+            crossDomain: "true",
+            success: function(data, textStatus, jqXHR) {
+                articleID = data.id;
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                articleID = null;
+                console.error(errorThrown);
+            },
+            jsonpCallback: "jsonp123",
+            dataType: "json"
+        });
+
+        var getNodes = getIDCall.done(function() {
+           $.ajax({
+            url: "/article/nodes.json",
+            data: {
+                articleID: articleID
+            },
+            type: "get",
+            crossDomain: "true",
+            success: function(data, textStatus, jqXHR) {
+                var nodes = data.nodes;
+                for (var i = 0; i < nodes.length; i++) {
+                    var node = nodes[i];
+                    showNode(node.nodeID, node.text, node.xpath, node.offset, null);
+                    vm.nodes[node.nodeID] = new SpeakeasyNode(node.nodeID, node.text, null);
+                }
+            },
+            jsonpCallback: "jsonp123",
+            dataType: "json"
+           });
+       });
+
+
 
 	    $(document).on('click', '.node', function(e) {
 			setActiveNode($(e.target).closest('.node').data("node-id"));
