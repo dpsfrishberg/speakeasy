@@ -47,37 +47,6 @@ var speakeasy = function(){};
 
 
     $(function(){
-        /*$(document).tooltip({
-            items: "",
-            content: function(element) {
-                return '<p><a href="#" id="create-node">Add a comment</a></p><p><a id="cancel-node">Cancel</a></p>';
-            }
-        });
-
-
-        $(document).on("mouseup", "body > p", function(e) {
-            console.info("mouseup");
-            console.info(e.target);
-            var element = e.target;
-            var text = getSelectedText();
-            console.info(text);
-            var xpath = getXPath(e.target);
-            var offset = jQuery(e.target).text().indexOf(text);
-            $(document).tooltip("option", "position",
-                {
-                    of: e,
-                    my: "right+3 bottom-3"
-                }
-            );
-            $(document).tooltip("open");
-            $("#create-node").on("click", function(e){
-                e.preventDefault();
-                createNode(element, text, xpath, offset, null);
-                $(this).off("click");
-             });
-        });
-*/
-
         var lastClickEvent;
         $.contextMenu({
             selector: "body",
@@ -86,9 +55,16 @@ var speakeasy = function(){};
                 if (key == "add-comment") {
                     var element = lastClickEvent.target;
                     var text = getSelectedText();
-                    var xpath = getXPath(element);
+
+                    var comment = element.closest(".comment");
+
+                    var isComment = !!comment;
+
+                    var xpath = (isComment) ? "." : getXPath(element);
                     var offset = $(element).text().indexOf(text);
-                    createNode(element, text, xpath, offset, null);
+
+                    var commentID = (isComment) ? $(comment).data("commentId") : null;
+                    createNode(element, text, xpath, offset, commentID);
                 }
             },
             items: {
@@ -99,15 +75,19 @@ var speakeasy = function(){};
                     name: "Cancel"
                 }
             },
+            zIndex: function(){return 999999999;},
             position: function(opt, x, y) {
-                opt.$menu.position({my: "left top", at: "right bottom", of: lastClickEvent})
+            console.info(lastClickEvent);
+                opt.$menu.position({my: "left top", at: "right bottom", of: lastClickEvent});
             }
         });
 
-        $(document).on("mouseup", "body > p", function(e) {
+        $(document).on("mouseup", "body > p, .comment > p", function(e) {
             lastClickEvent = e;
             var selectedText = getSelectedText();
+            console.info("hmm");
             if (selectedText && selectedText != "") {
+                console.info("fooey");
                 $("body").contextMenu();
             }
         });
@@ -171,14 +151,13 @@ var speakeasy = function(){};
             var self = this;
             self.nodeID = ko.observable(nodeID);
             self.text = ko.observable(text);
-            self.parentNode = ko.observable(null);
             var parentComment = vm.comments[parentID] || null;
             self.parentComment = ko.observable(parentComment);
 
             self.comments = ko.observableArray([]);
 
             if (parentComment) {
-                parentComment.children.push(self);
+                parentComment.nodes.push(self);
             }
         }
 
@@ -197,7 +176,12 @@ var speakeasy = function(){};
         }
 
         function showNode(nodeID, text, xpath, offset, parentID) {
-            var element = $(document).xpathEvaluate(xpath);
+            if (parentID == null) {
+                var element = $(document).xpathEvaluate(xpath);
+            }
+            else {
+                var element = $(".comment[data-comment-id='"+parentID+"'] > p");
+            }
             element.html(
                 jQuery(element).html().replace(
                     text, '<span class="node" data-node-id="' + nodeID + '">' + text + '</span>'
@@ -225,7 +209,16 @@ var speakeasy = function(){};
                 crossDomain: "true",
                 success: function(data, textStatus, jqXHR) {
                     var nodeID = data.nodeID;
-                    showNode(nodeID, text, xpath, offset, parentID);
+                    var showNow = false;
+                    if (parentID == null) {
+                        showNow = true;
+                    }
+                    else if (vm.comments[parentID].parentNode() === vm.activeNode()) {
+                        showNow = true;
+                    }
+                    if (showNow) {
+                        showNode(nodeID, text, xpath, offset, parentID);
+                    }
                     speakeasy.vm.nodes[nodeID] = new SpeakeasyNode(nodeID, text, parentID);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -287,8 +280,10 @@ var speakeasy = function(){};
                 var comments = data.comments;
                 for (var i = 0; i < nodes.length; i++) {
                     var node = nodes[i];
-                    showNode(node.nodeID, node.text, node.xpath, node.offset, null);
-                    vm.nodes[node.nodeID] = new SpeakeasyNode(node.nodeID, node.text, null);
+                    if (node.parentID == null) {
+                        showNode(node.nodeID, node.text, node.xpath, node.offset, null);
+                    }
+                    vm.nodes[node.nodeID] = new SpeakeasyNode(node.nodeID, node.text, node.parentID);
                 }
                 for (var i = 0; i < comments.length; i++) {
                     var comment = comments[i];
@@ -330,7 +325,7 @@ var speakeasy = function(){};
                     crossDomain: "true",
                     success: function(data, textStatus, jqXHR) {
                         var commentID = data.commentID;
-                        var newComment = SpeakeasyComment(commentID, data.content, data.parentID);
+                        var newComment = new SpeakeasyComment(commentID, data.content, data.parentID);
 
                         vm.comments[commentID] = newComment;
                     },

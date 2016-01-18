@@ -7,6 +7,10 @@
     box-shadow: 0 0 40px 5px rgba(0,0,0,0.2) inset;
 
 }*/
+.context-menu-root {
+    z-index: 999999999 !important;
+}
+
 html.inactive, html.inactive body {
     overflow: hidden;
 }
